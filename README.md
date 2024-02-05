@@ -10,22 +10,29 @@ Kulunseuranta, josta näkee missä työntekijä on liikkunut.
 user:  
 userId: int  
 role: admin - boss - employee  
-company: string  
+companyId: int  
 name: string  
-securityLevel: int
+securityLevel: int  
+  
+company:  
+companyId: int  
+companyName: string  
+ownerId: userId  
   
 shift:  
-date: Date  
+shiftId: int  
+company: companyId  
+date: Date.toJSON().split('T')[0]  
 start: int  
 end: int  
-employeeName: string  
+employeeId: userId  
   
 door:  
 doorId: int  
 doorName: string  
 securityLevel: int  
   
-doorEvents:
+doorEvents:  
 timeStamp: Date  
 doorId: int  
 userId: int  
