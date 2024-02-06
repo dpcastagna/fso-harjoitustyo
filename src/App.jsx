@@ -5,6 +5,11 @@ import './App.css'
 import companyList from './mock/companies'
 import userList from './mock/users'
 import shiftList from './mock/shifts'
+import TopBar from './components/TopBar'
+import AdminBox from './components/AdminBox'
+import UserBox from './components/UserBox'
+import BossBox from './components/BossBox'
+import DoorButtons from './components/DoorButtons'
 
 console.log('companies', companyList, 'users', userList, 'shifts', shiftList)
 
@@ -23,54 +28,46 @@ function App() {
 
   return (
     <> 
-    <div>
-    <button style={{margin:5}} onClick={(e) => {
-          e.preventDefault() 
-          setUser('admin')
-        }
-        }>
-          Admin
-      </button>
-      <button style={{margin:5}} onClick={(e) => {
-          e.preventDefault() 
-          setUser('boss')
-        }
-        }>
-          Boss
-      </button>
-      <button style={{margin:5}} onClick={(e) => {
-          e.preventDefault() 
-          setUser('employee')
-        }
-        }>
-          Employee
-      </button> <br/>
-      {
-        user === 'admin'
-        ? <>
-            Admin <br/>
-            Companies: {companies.length}<br/>
-            Users: {users.length}<br/>
-            Shifts: {shifts.length}
-          </>
-        : user === 'boss'
-          ? <>
-              Jepen korjaamo<br/>
-              Employees: 3
-            </>
-          : user === 'employee'
+      <div>
+        
+        <button style={{margin:5}} onClick={(e) => {
+            e.preventDefault() 
+            setUser('admin')
+          }
+          }>
+            Admin
+        </button>
+        <button style={{margin:5}} onClick={(e) => {
+            e.preventDefault() 
+            setUser('boss')
+          }
+          }>
+            Boss
+        </button>
+        <button style={{margin:5}} onClick={(e) => {
+            e.preventDefault() 
+            setUser('employee')
+          }
+          }>
+            Employee
+        </button> <br/>
+        <TopBar user={user} /><br/><br/>
+        {
+          user === 'admin'
+          ? <AdminBox companies={companies} users={users} shifts={shifts} />
+          : user === 'boss'
             ? <>
-                Next shifts:<br/>
-                {
-                  shifts.map((shift) => {
-                    return <div key={shift.shiftId}>{shift.start}-{shift.end} {shift.date}<br/></div> 
-                  })
-                }
+                <BossBox companies={companies} users={users} shifts={shifts} /><br/><br/>
+                <DoorButtons user={'boss'} />
               </>
-            : <>Choose a user!</>
-      }
-    </div>
-
+            : user === 'employee'
+              ? <>
+                  <UserBox shifts={shifts} /><br/><br/>
+                  <DoorButtons user={'employee'} />
+                </>
+              : <></>
+        }
+      </div>
     <br/><br/><br/><br/>
     Makke
 
