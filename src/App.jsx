@@ -10,6 +10,7 @@ import AdminBox from './components/AdminBox'
 import UserBox from './components/UserBox'
 import BossBox from './components/BossBox'
 import DoorButtons from './components/DoorButtons'
+import AddShift from './components/AddShift'
 
 console.log('companies', companyList, 'users', userList, 'shifts', shiftList)
 
@@ -50,23 +51,33 @@ function App() {
           }
           }>
             Employee
+        </button>
+        <button style={{margin:5}} onClick={(e) => {
+            e.preventDefault() 
+            setUser('')
+          }
+          }>
+            Logout
         </button> <br/>
         <TopBar user={user} /><br/><br/>
-        {
-          user === 'admin'
-          ? <AdminBox companies={companies} users={users} shifts={shifts} />
-          : user === 'boss'
-            ? <>
-                <BossBox companies={companies} users={users} shifts={shifts} /><br/><br/>
-                <DoorButtons user={'boss'} />
-              </>
-            : user === 'employee'
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
+          {
+            user === 'admin'
+            ? <AdminBox companies={companies} users={users} shifts={shifts} />
+            : user === 'boss'
               ? <>
-                  <UserBox shifts={shifts} /><br/><br/>
-                  <DoorButtons user={'employee'} />
+                  <BossBox companies={companies} users={users} shifts={shifts} /><br/><br/>
+                  <DoorButtons user={'boss'} />
+                  <AddShift shifts={shifts} setShifts={setShifts} />
                 </>
-              : <></>
-        }
+              : user === 'employee'
+                ? <>
+                    <UserBox shifts={shifts} /><br/><br/>
+                    <DoorButtons user={'employee'} />
+                  </>
+                : <></>
+          }
+        </div>
       </div>
     <br/><br/><br/><br/>
     Makke
@@ -96,7 +107,7 @@ function App() {
           <div className="card">
           <button style={{margin:5}} onClick={(e) => {
             e.preventDefault() 
-            console.log('Pääovi avattu', Date())
+            console.log('Pääovi avattu', new Date().toJSON())
           }
           }>
             Pääovi

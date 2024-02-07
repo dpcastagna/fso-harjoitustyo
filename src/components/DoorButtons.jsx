@@ -10,10 +10,10 @@ const DoorButtons = (props) => {
           ? <div className="card">
               <button style={{margin:5}} onClick={(e) => {
                 e.preventDefault() 
-                console.log('Tj-toimisto avattu', Date())
+                console.log('CEO office opened', Date())
               }
               }>
-                Tj-toimisto
+                CEO office
               </button> <br/>
             </div>
           : <></>
@@ -21,28 +21,28 @@ const DoorButtons = (props) => {
         <div className="card">
           <button style={{margin:5}} onClick={(e) => {
             e.preventDefault() 
-            console.log('Pääovi avattu', Date())
+            console.log('Main door opened', Date())
           }
           }>
-            Pääovi
+            Main door
           </button> <br/>
         </div>
         <div className="card">
           <button style={{margin:5}} onClick={(e) => {
             e.preventDefault() 
-            console.log('Varasto avattu', Date())
+            console.log('Storage room opened', Date())
           }
           }>
-            Varasto
+            Storage room
           </button> <br/>
         </div>
         <div className="card">
           <button style={{margin:5}} onClick={(e) => {
             e.preventDefault() 
-            console.log('Takaovi avattu', Date())
+            console.log('Back door opened', Date())
           }
           }>
-            Takaovi
+            Back door
           </button> <br/>
         </div>
       </div>

@@ -4,6 +4,7 @@ Ohjelma, jolla pomo voi luoda työntekijöille työvuorolistoja ja laskea tietyl
 Kellokortti, jolla työntekijät voivat kirjata itsensä sisään ja ulos töistä.  
 Työntekijät voivat avata ovia tiloihin, joihin heillä oikeus mennä, näyttää vain ovet joihin oikeudet.  
 Kulunseuranta, josta näkee missä työntekijä on liikkunut.  
+Viestien lähettäminen pomon ja työntekijän välillä.  
   
 ## Mongodb models
 
