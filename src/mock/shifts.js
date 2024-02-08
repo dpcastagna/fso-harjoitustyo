@@ -5,7 +5,7 @@ const shifts = [
     date: '2024-02-05',  
     start: 8,  
     end: 16,  
-    employeeId: 2  
+    employeeId: 3  
   },
   {
     shiftId: 2,
@@ -13,7 +13,7 @@ const shifts = [
     date: '2024-02-06',  
     start: 8,  
     end: 16,  
-    employeeId: 2  
+    employeeId: 3  
   },
   {
     shiftId: 3,
@@ -21,7 +21,7 @@ const shifts = [
     date: '2024-02-07',  
     start: 8,  
     end: 16,  
-    employeeId: 2  
+    employeeId: 3  
   },
 ]
 

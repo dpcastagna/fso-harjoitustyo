@@ -1,10 +1,17 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const AddShift = (props) => {
   const [newDate, setNewDate] = useState('')
   const [newStart, setNewStart] = useState('')
   const [newEnd, setNewEnd] = useState('')
+  const [newShiftFor, setNewShiftFor] = useState(0)
+  const [employeeList, setEmployeeList] = useState([])
 
+  useEffect(() => {
+    setEmployeeList(props.users.filter(user => user.companyId === 1 && user.role === 'employee'))
+  }, [props.users])
+
+  console.log(employeeList, props.users)
   const handleDateChange = (event) => {
     setNewDate(event.target.value)
   }
@@ -13,6 +20,11 @@ const AddShift = (props) => {
   }
   const handleEndChange = (event) => {
     setNewEnd(event.target.value)
+  }
+  const handleShiftChange = (event) => {
+    // event.preventDefault()
+    // console.log(event)
+    setNewShiftFor(event.target.value)
   }
 
   const addShift = (event) => {
@@ -23,7 +35,7 @@ const AddShift = (props) => {
       end: newEnd,
       company: 1,
       shiftId: props.shifts.length + 1,
-      employeeId: 2,
+      employeeId: Number(newShiftFor),
     }
     props.setShifts(props.shifts.concat(shiftObject))
 
@@ -31,39 +43,52 @@ const AddShift = (props) => {
     setNewStart('')
     setNewEnd('')
   }
-  console.log(newDate)
+  console.log(newShiftFor)
   return (
     <div className="formDiv">
       <form onSubmit={addShift}>
-      New shift<br/>
-      date:
-        <input
-          id='date'
-          type='date'
-          value={newDate}
-          onChange={handleDateChange}
-          placeholder='blog title'
-        /> <br />
-      start:
-        <input
-          id='start'
-          type='number'
-          value={newStart}
-          onChange={handleStartChange}
-          placeholder='8'
-          min='0'
-          max='23'
-        /> <br />
-      end:
-        <input
-          id='end'
-          type='number'
-          value={newEnd}
-          onChange={handleEndChange}
-          placeholder='16'
-          min='0'
-          max='23'
-        /> <br />
+        New shift<br/>
+        date:
+          <input
+            id='date'
+            type='date'
+            value={newDate}
+            onChange={handleDateChange}
+            placeholder='blog title'
+          /> <br />
+        start:
+          <input
+            id='start'
+            type='number'
+            value={newStart}
+            onChange={handleStartChange}
+            placeholder='8'
+            min='0'
+            max='23'
+          /> <br />
+        end:
+          <input
+            id='end'
+            type='number'
+            value={newEnd}
+            onChange={handleEndChange}
+            placeholder='16'
+            min='0'
+            max='23'
+          /> <br />
+        employee:
+          <select onChange={handleShiftChange}>
+            <option>Select...</option>
+            {
+              employeeList.map(employee => {
+                // console.log(employee)
+                return(
+                  <option key={employee.userId} value={employee.userId}>{employee.name}</option>
+                )
+              }
+              )
+            }
+          </select> <br />
         <button id='create' type="submit">add</button>
       </form>
     </div>

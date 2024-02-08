@@ -19,6 +19,7 @@ function App() {
   const [users, setUsers] = useState([])
   const [shifts, setShifts] = useState([])
   const [user, setUser] = useState('')
+  const [userId, setUserId] = useState('')
 
   useEffect(() => {
     setCompanies(companyList)
@@ -31,7 +32,7 @@ function App() {
     <> 
       <div>
         
-        <button style={{margin:5}} onClick={(e) => {
+        {/* <button style={{margin:5}} onClick={(e) => {
             e.preventDefault() 
             setUser('admin')
           }
@@ -58,7 +59,47 @@ function App() {
           }
           }>
             Logout
-        </button> <br/>
+        </button> */}
+        {
+          users.map(user => {
+            return user.role === 'admin'
+                  ? <button style={{margin:5}} onClick={(e) => {
+                        e.preventDefault() 
+                        setUser('admin')
+                        setUserId(user.userId)
+                      }
+                      }>
+                        Admin
+                    </button>
+                  : user.role === 'boss'
+                    ? <button style={{margin:5}} onClick={(e) => {
+                          e.preventDefault() 
+                          setUser('boss')
+                          setUserId(user.userId)
+                        }
+                        }>
+                          Boss
+                      </button>
+                    : user.role === 'employee'
+                      ? <button style={{margin:5}} onClick={(e) => {
+                            e.preventDefault() 
+                            setUser('employee')
+                            setUserId(user.userId)
+                          }
+                          }>
+                            {user.name}
+                        </button>
+                      : <></>
+          })
+        }
+        <button style={{margin:5}} onClick={(e) => {
+            e.preventDefault() 
+            setUser('')
+          }
+          }>
+            Logout
+        </button>
+        <br/>
         <TopBar user={user} /><br/><br/>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
           {
@@ -66,13 +107,13 @@ function App() {
             ? <AdminBox companies={companies} users={users} shifts={shifts} />
             : user === 'boss'
               ? <>
-                  <BossBox companies={companies} users={users} shifts={shifts} /><br/><br/>
+                  <BossBox companies={companies} users={users} shifts={shifts} userId={userId} /><br/><br/>
                   <DoorButtons user={'boss'} />
-                  <AddShift shifts={shifts} setShifts={setShifts} />
+                  <AddShift shifts={shifts} setShifts={setShifts} users={users} />
                 </>
               : user === 'employee'
                 ? <>
-                    <UserBox shifts={shifts} /><br/><br/>
+                    <UserBox shifts={shifts} userId={userId} /><br/><br/>
                     <DoorButtons user={'employee'} />
                   </>
                 : <></>
