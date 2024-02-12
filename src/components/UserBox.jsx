@@ -13,7 +13,7 @@ const UserBox = (props) => {
     )
     )
   }, [props])
-  console.log(shifts,props)
+  
   return(
     <>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'}} >

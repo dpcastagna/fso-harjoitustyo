@@ -22,8 +22,6 @@ const AddShift = (props) => {
     setNewEnd(event.target.value)
   }
   const handleShiftChange = (event) => {
-    // event.preventDefault()
-    // console.log(event)
     setNewShiftFor(event.target.value)
   }
 

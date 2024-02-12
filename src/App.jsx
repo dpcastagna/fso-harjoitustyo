@@ -11,6 +11,8 @@ import UserBox from './components/UserBox'
 import BossBox from './components/BossBox'
 import DoorButtons from './components/DoorButtons'
 import AddShift from './components/AddShift'
+import AddUser from './components/AddUser'
+import RemoveUser from './components/RemoveUser'
 
 console.log('companies', companyList, 'users', userList, 'shifts', shiftList)
 
@@ -110,6 +112,8 @@ function App() {
                   <BossBox companies={companies} users={users} shifts={shifts} userId={userId} /><br/><br/>
                   <DoorButtons user={'boss'} />
                   <AddShift shifts={shifts} setShifts={setShifts} users={users} />
+                  <AddUser users={users} setUsers={setUsers} />
+                  <RemoveUser users={users} setUsers={setUsers} />
                 </>
               : user === 'employee'
                 ? <>
