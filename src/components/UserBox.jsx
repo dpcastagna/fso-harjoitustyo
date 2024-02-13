@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-
+import '../App.css'
 
 const UserBox = (props) => {
   const [shifts, setShifts] = useState([])
 
   useEffect(() => {
     setShifts(props.shifts.filter(shift => {
-      console.log(shift)
+      // console.log(shift)
       return(
         shift.employeeId === props.userId)
       }
@@ -15,7 +15,7 @@ const UserBox = (props) => {
   }, [props])
   
   return(
-    <>
+    <div id='palikka'>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'}} >
         Next shifts:<br/>
         {
@@ -24,7 +24,7 @@ const UserBox = (props) => {
           })
         }
       </div>
-    </>
+    </div>
   )
 }
 

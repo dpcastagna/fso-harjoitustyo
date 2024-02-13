@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import '../App.css'
 
 const TopBar = (props) => {
   const [user, setUser] = useState('')
@@ -6,16 +7,16 @@ const TopBar = (props) => {
   useEffect(() => {
     setUser(props.user)
   }, [props])
-  console.log(user)
+  // console.log(user)
 
   if (user === '') {
-    return <>Choose a user!</>
+    return <div id='palikka'>Choose a user!</div>
   }
 
   return (
-    <>
+    <div id='palikka'>
       {user} logged in
-    </>
+    </div>
   )
 }
 

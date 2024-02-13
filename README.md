@@ -6,6 +6,13 @@ Työntekijät voivat avata ovia tiloihin, joihin heillä oikeus mennä, näyttä
 Kulunseuranta, josta näkee missä työntekijä on liikkunut.  
 Viestien lähettäminen pomon ja työntekijän välillä.  
   
+
+# node commands
+node version used 16.19  
+  
+npm install  
+npm run dev  
+
 ## Mongodb models
 
 user:  

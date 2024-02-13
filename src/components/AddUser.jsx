@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import '../App.css'
 
 const AddUser = (props) => {
   const [newName, setNewName] = useState('')
@@ -40,7 +41,7 @@ const AddUser = (props) => {
   }
   
   return (
-    <div className="formDiv">
+    <div id='palikka'>
       <form onSubmit={addUser}>
         New employee<br/>
         name:

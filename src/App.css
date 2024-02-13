@@ -7,6 +7,14 @@
   color: black;
 }
 
+#palikka {
+  border: solid;
+  border-width: 3px;
+  border-radius: 6px;
+  margin: 3px;
+  padding: 6px;
+}
+
 /* .logo {
   height: 6em;
   padding: 1.5em;

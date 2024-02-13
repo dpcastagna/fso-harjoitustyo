@@ -11,7 +11,7 @@ const RemoveUser = (props) => {
     setEmployeeList(props.users.filter(user => user.companyId === 1 && user.role === 'employee'))
   }, [props.users])
 
-  console.log(employeeList, props.users)
+  // console.log(employeeList, props.users)
   const handleNameChange = (event) => {
     setOldName(event.target.value)
   }
@@ -34,14 +34,17 @@ const RemoveUser = (props) => {
     //   companyId: 1,
     //   securityLevel: 3,
     // }
-    console.log('oldname', oldName)
-    props.setUsers(props.users.filter(user => user.id !== Number(oldName)))
+    // console.log('oldname', oldName, typeof oldName)
+    props.setUsers(props.users.filter(user => {
+      // console.log(user.userId, props.users)
+      return user.userId !== Number(oldName)
+    }))
 
     setOldName('')
   }
   
   return (
-    <div className="formDiv">
+    <div id='palikka'>
       <form onSubmit={deleteUser}>
         Delete employee<br/>
         {/* name:

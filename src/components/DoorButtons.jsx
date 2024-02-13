@@ -1,10 +1,10 @@
-
+import '../App.css'
 
 const DoorButtons = (props) => {
 
   return(
     <>
-      <div>
+      <div id='palikka'>
         {
           props.user === 'boss'
           ? <div className="card">

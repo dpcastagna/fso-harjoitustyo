@@ -14,7 +14,7 @@ import AddShift from './components/AddShift'
 import AddUser from './components/AddUser'
 import RemoveUser from './components/RemoveUser'
 
-console.log('companies', companyList, 'users', userList, 'shifts', shiftList)
+// console.log('companies', companyList, 'users', userList, 'shifts', shiftList)
 
 function App() {
   const [companies, setCompanies] = useState([])
@@ -28,44 +28,15 @@ function App() {
     setUsers(userList)
     setShifts(shiftList)
   }, [])
-  console.log(companies, users, shifts, user)
+  // console.log(companies, users, shifts, user)
 
   return (
     <> 
       <div>
-        
-        {/* <button style={{margin:5}} onClick={(e) => {
-            e.preventDefault() 
-            setUser('admin')
-          }
-          }>
-            Admin
-        </button>
-        <button style={{margin:5}} onClick={(e) => {
-            e.preventDefault() 
-            setUser('boss')
-          }
-          }>
-            Boss
-        </button>
-        <button style={{margin:5}} onClick={(e) => {
-            e.preventDefault() 
-            setUser('employee')
-          }
-          }>
-            Employee
-        </button>
-        <button style={{margin:5}} onClick={(e) => {
-            e.preventDefault() 
-            setUser('')
-          }
-          }>
-            Logout
-        </button> */}
         {
           users.map(user => {
             return user.role === 'admin'
-                  ? <button style={{margin:5}} onClick={(e) => {
+                  ? <button key={user.userId} style={{margin:5}} onClick={(e) => {
                         e.preventDefault() 
                         setUser('admin')
                         setUserId(user.userId)
@@ -74,7 +45,7 @@ function App() {
                         Admin
                     </button>
                   : user.role === 'boss'
-                    ? <button style={{margin:5}} onClick={(e) => {
+                    ? <button key={user.userId} style={{margin:5}} onClick={(e) => {
                           e.preventDefault() 
                           setUser('boss')
                           setUserId(user.userId)
@@ -83,7 +54,7 @@ function App() {
                           Boss
                       </button>
                     : user.role === 'employee'
-                      ? <button style={{margin:5}} onClick={(e) => {
+                      ? <button key={user.userId} style={{margin:5}} onClick={(e) => {
                             e.preventDefault() 
                             setUser('employee')
                             setUserId(user.userId)
@@ -108,13 +79,18 @@ function App() {
             user === 'admin'
             ? <AdminBox companies={companies} users={users} shifts={shifts} />
             : user === 'boss'
-              ? <>
-                  <BossBox companies={companies} users={users} shifts={shifts} userId={userId} /><br/><br/>
-                  <DoorButtons user={'boss'} />
-                  <AddShift shifts={shifts} setShifts={setShifts} users={users} />
-                  <AddUser users={users} setUsers={setUsers} />
-                  <RemoveUser users={users} setUsers={setUsers} />
-                </>
+              ? <div style={{display: 'flex', flexDirection: 'column'}}>
+                  <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <BossBox companies={companies} users={users} shifts={shifts} userId={userId} />
+                    <DoorButtons user={'boss'} />
+                    <AddShift shifts={shifts} setShifts={setShifts} users={users} />
+                    <AddUser users={users} setUsers={setUsers} />
+                    <RemoveUser users={users} setUsers={setUsers} />
+                  </div>
+                  <div>
+                    Move shifts
+                  </div>
+                </div>
               : user === 'employee'
                 ? <>
                     <UserBox shifts={shifts} userId={userId} /><br/><br/>
@@ -122,60 +98,6 @@ function App() {
                   </>
                 : <></>
           }
-        </div>
-      </div>
-    <br/><br/><br/><br/>
-    Makke
-
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
-        <div style={{margin:5}} >
-          Viikon vuorot:<br/>
-          Ma: 8-16<br/>
-          Ti: 8-16<br/>
-          Ke: 8-16<br/>
-          To: 8-16<br/>
-          Pe: 8-16<br/>
-          La: Vapaa<br/>
-          Su: Vapaa<br/>
-        </div>
-        <div style={{margin:5}} >
-          Ensi viikon vuorot:<br/>
-          Ma: 8-16<br/>
-          Ti: 8-16<br/>
-          Ke: 8-16<br/>
-          To: 8-16<br/>
-          Pe: 8-16<br/>
-          La: Vapaa<br/>
-          Su: Vapaa<br/>
-        </div>
-        <div>
-          <div className="card">
-          <button style={{margin:5}} onClick={(e) => {
-            e.preventDefault() 
-            console.log('Pääovi avattu', new Date().toJSON())
-          }
-          }>
-            Pääovi
-          </button> <br/>
-          </div>
-          <div className="card">
-          <button style={{margin:5}} onClick={(e) => {
-            e.preventDefault() 
-            console.log('Varasto avattu', Date())
-          }
-          }>
-            Varasto
-          </button> <br/>
-          </div>
-          <div className="card">
-          <button style={{margin:5}} onClick={(e) => {
-            e.preventDefault() 
-            console.log('Takaovi avattu', Date())
-          }
-          }>
-            Takaovi
-          </button> <br/>
-          </div>
         </div>
       </div>
     </>

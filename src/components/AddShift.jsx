@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import '../App.css'
 
 const AddShift = (props) => {
   const [newDate, setNewDate] = useState('')
@@ -11,7 +12,7 @@ const AddShift = (props) => {
     setEmployeeList(props.users.filter(user => user.companyId === 1 && user.role === 'employee'))
   }, [props.users])
 
-  console.log(employeeList, props.users)
+  // console.log(employeeList, props.users)
   const handleDateChange = (event) => {
     setNewDate(event.target.value)
   }
@@ -41,9 +42,9 @@ const AddShift = (props) => {
     setNewStart('')
     setNewEnd('')
   }
-  console.log(newShiftFor)
+  // console.log(newShiftFor)
   return (
-    <div className="formDiv">
+    <div id='palikka'>
       <form onSubmit={addShift}>
         New shift<br/>
         date:
