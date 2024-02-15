@@ -15,6 +15,12 @@
   padding: 6px;
 }
 
+#vaaka {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 /* .logo {
   height: 6em;
   padding: 1.5em;

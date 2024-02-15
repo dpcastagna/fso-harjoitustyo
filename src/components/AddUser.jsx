@@ -1,4 +1,6 @@
+import { connect } from "react-redux"
 import { useState, useEffect } from "react"
+import { setNotification } from '../reducers/notificationReducer'
 import '../App.css'
 
 const AddUser = (props) => {
@@ -36,6 +38,7 @@ const AddUser = (props) => {
       securityLevel: 3,
     }
     props.setUsers(props.users.concat(userObject))
+    props.setNotification(`new user '${newName}' created`, 5)
 
     setNewName('')
   }
@@ -52,43 +55,25 @@ const AddUser = (props) => {
             onChange={handleNameChange}
             placeholder='name'
           /> <br />
-        {/* start:
-          <input
-            id='start'
-            type='number'
-            value={newStart}
-            onChange={handleStartChange}
-            placeholder='8'
-            min='0'
-            max='23'
-          /> <br />
-        end:
-          <input
-            id='end'
-            type='number'
-            value={newEnd}
-            onChange={handleEndChange}
-            placeholder='16'
-            min='0'
-            max='23'
-          /> <br />
-        employee:
-          <select onChange={handleShiftChange}>
-            <option>Select...</option>
-            {
-              employeeList.map(employee => {
-                // console.log(employee)
-                return(
-                  <option key={employee.userId} value={employee.userId}>{employee.name}</option>
-                )
-              }
-              )
-            }
-          </select> <br /> */}
         <button id='create' type="submit">add user</button>
       </form>
     </div>
   )
 }
 
-export default AddUser
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = {
+  setNotification,
+}
+
+const ConnectedAddUser= connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddUser)
+
+export default ConnectedAddUser
+// export default AddUser

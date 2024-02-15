@@ -13,6 +13,8 @@ import DoorButtons from './components/DoorButtons'
 import AddShift from './components/AddShift'
 import AddUser from './components/AddUser'
 import RemoveUser from './components/RemoveUser'
+import AllShifts from './components/AllShifts'
+import Notification from './components/Notification'
 
 // console.log('companies', companyList, 'users', userList, 'shifts', shiftList)
 
@@ -31,7 +33,8 @@ function App() {
   // console.log(companies, users, shifts, user)
 
   return (
-    <> 
+    <>
+      <Notification />
       <div>
         {
           users.map(user => {
@@ -73,7 +76,7 @@ function App() {
             Logout
         </button>
         <br/>
-        <TopBar user={user} /><br/><br/>
+        <TopBar user={user} /><br/>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
           {
             user === 'admin'
@@ -88,7 +91,7 @@ function App() {
                     <RemoveUser users={users} setUsers={setUsers} />
                   </div>
                   <div>
-                    Move shifts
+                    <AllShifts shifts={shifts} setShifts={setShifts} users={users} />
                   </div>
                 </div>
               : user === 'employee'
