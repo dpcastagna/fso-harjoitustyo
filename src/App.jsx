@@ -5,6 +5,7 @@ import './App.css'
 import companyList from './mock/companies'
 import userList from './mock/users'
 import shiftList from './mock/shifts'
+
 import TopBar from './components/TopBar'
 import AdminBox from './components/AdminBox'
 import UserBox from './components/UserBox'
@@ -15,6 +16,7 @@ import AddUser from './components/AddUser'
 import RemoveUser from './components/RemoveUser'
 import AllShifts from './components/AllShifts'
 import Notification from './components/Notification'
+import ConnectedFilter from './components/FilterUsers'
 
 // console.log('companies', companyList, 'users', userList, 'shifts', shiftList)
 
@@ -92,6 +94,9 @@ function App() {
                   </div>
                   <div>
                     <AllShifts shifts={shifts} setShifts={setShifts} users={users} />
+                  </div>
+                  <div>
+                    <ConnectedFilter users={users} />
                   </div>
                 </div>
               : user === 'employee'

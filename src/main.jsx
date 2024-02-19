@@ -6,11 +6,13 @@ import { Provider } from 'react-redux'
 
 import App from './App.jsx'
 import notificationReducer from './reducers/notificationReducer'
+import filterReducer from './reducers/filterReducer'
 // import './index.css'
 
 const store = configureStore({
   reducer: {
     notification: notificationReducer,
+    filteredUsers: filterReducer
   }
 })
 

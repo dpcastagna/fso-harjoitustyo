@@ -32,10 +32,10 @@ const AddUser = (props) => {
     event.preventDefault()
     const userObject = {
       name: newName,
-      userId: props.users.length + 1,
       role: 'employee',
       companyId: 1,
       securityLevel: 3,
+      userId: Math.round(Math.random() * 1000000),
     }
     props.setUsers(props.users.concat(userObject))
     props.setNotification(`new user '${newName}' created`, 5)

@@ -33,8 +33,8 @@ const AddShift = (props) => {
       start: newStart,
       end: newEnd,
       company: 1,
-      shiftId: props.shifts.length + 1,
       employeeId: Number(newShiftFor),
+      shiftId: Math.round(Math.random() * 1000000),
     }
     props.setShifts(props.shifts.concat(shiftObject))
 
