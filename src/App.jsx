@@ -16,7 +16,7 @@ import AddUser from './components/AddUser'
 import RemoveUser from './components/RemoveUser'
 import AllShifts from './components/AllShifts'
 import Notification from './components/Notification'
-import ConnectedFilter from './components/FilterUsers'
+import Filter from './components/FilterUsers'
 
 // console.log('companies', companyList, 'users', userList, 'shifts', shiftList)
 
@@ -96,7 +96,7 @@ function App() {
                     <AllShifts shifts={shifts} setShifts={setShifts} users={users} />
                   </div>
                   <div>
-                    <ConnectedFilter users={users} />
+                    <Filter users={users} shifts={shifts} />
                   </div>
                 </div>
               : user === 'employee'
