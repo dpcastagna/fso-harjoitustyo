@@ -18,7 +18,7 @@ const AllShifts = (props) => {
             // console.log(employeeShifts)
             return (
               <div key={user.userId}>
-                {user.name}<br />
+                {user.name} { user.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> } <br />
                 {
                   employeeShifts.length > 0
                   ? employeeShifts.map(shift => <div key={shift.shiftId }>{shift.start}-{shift.end} {shift.date} <br /></div>)

@@ -16,14 +16,14 @@ npm run dev
 ## Mongodb models
 
 user:  
-userId: int  
+id: id  
 role: admin - boss - employee  
 companyId: int  
 name: string  
 securityLevel: int  
   
 company:  
-companyId: int  
+id: id  
 companyName: string  
 ownerId: userId  
   
@@ -36,15 +36,20 @@ end: int
 employeeId: userId  
   
 door:  
-doorId: int  
+id: id  
 doorName: string  
 securityLevel: int  
   
 doorEvents:  
+id: id  
 timeStamp: Date  
-doorId: int  
-userId: int  
-
+doorId: id  
+userId: id  
+  
+logins:  
+id: id  
+userId: id  
+timeStamp: Date  
   
 # React + Vite
 

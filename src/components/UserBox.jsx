@@ -16,7 +16,7 @@ const UserBox = (props) => {
   
   return(
     <div id='palikka'>
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'}} >
+      <div /* style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'}} */ >
         Next shifts:<br/>
         {
           shifts.map((shift) => {

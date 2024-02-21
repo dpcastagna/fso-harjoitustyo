@@ -36,6 +36,7 @@ const AddUser = (props) => {
       companyId: 1,
       securityLevel: 3,
       userId: Math.round(Math.random() * 1000000),
+      working: false
     }
     props.setUsers(props.users.concat(userObject))
     props.setNotification(`new user '${newName}' created`, 5)

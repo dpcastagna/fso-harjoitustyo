@@ -17,8 +17,7 @@ import RemoveUser from './components/RemoveUser'
 import AllShifts from './components/AllShifts'
 import Notification from './components/Notification'
 import Filter from './components/FilterUsers'
-
-// console.log('companies', companyList, 'users', userList, 'shifts', shiftList)
+import CheckInAndOut from './components/CheckInAndOut'
 
 function App() {
   const [companies, setCompanies] = useState([])
@@ -32,8 +31,7 @@ function App() {
     setUsers(userList)
     setShifts(shiftList)
   }, [])
-  // console.log(companies, users, shifts, user)
-
+  console.log(users)
   return (
     <>
       <Notification />
@@ -103,6 +101,7 @@ function App() {
                 ? <>
                     <UserBox shifts={shifts} userId={userId} /><br/><br/>
                     <DoorButtons user={'employee'} />
+                    <CheckInAndOut userId={userId} users={users} setUsers={setUsers} />
                   </>
                 : <></>
           }

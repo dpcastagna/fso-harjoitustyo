@@ -27,6 +27,13 @@
   justify-content: space-evenly;
 }
 
+#working {
+  background-color: green;
+}
+
+#notWorking {
+  background-color: red;
+}
 /* .logo {
   height: 6em;
   padding: 1.5em;
