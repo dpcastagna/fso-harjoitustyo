@@ -3,14 +3,14 @@ import '../App.css'
 
 const CheckInAndOut = (props) => {
   const [user, setUser] = useState({})
-  const otherUsers = props.users.filter(user => user.userId !== props.userId)
+  const otherUsers = props.users.filter(user => user.id !== props.userId)
   
 
   useEffect(() => {
-    setUser(props.users.find(user => user.userId === props.userId))
+    setUser(props.users.find(user => user.id === props.userId))
   },[props.userId])
 
-  console.log(user, otherUsers)
+  // console.log(user, otherUsers)
 
   return (
     <>
@@ -21,7 +21,8 @@ const CheckInAndOut = (props) => {
           <button style={{margin:5}} onClick={(e) => {
             e.preventDefault() 
             setUser({ ...user, working: !user.working })
-            props.setUsers(props.users.filter(user => user.userId !== props.userId).concat(user))
+            // props.setUsers(props.users.filter(user => user.userId !== props.userId).concat(user))
+            props.setWorking(user.id)
           }
           }>
             Leave work
@@ -32,9 +33,10 @@ const CheckInAndOut = (props) => {
           <button style={{margin:5}} onClick={(e) => {
             e.preventDefault() 
             setUser({ ...user, working: !user.working })
-            console.log(user)
+            // console.log(user)
             props.setUsers([...otherUsers, user])
-            console.log(props.users)
+            // console.log(props.users)
+            props.setWorking(user.id)
           }
           }>
             Start work

@@ -82,13 +82,13 @@ const AddShift = (props) => {
               employeeList.map(employee => {
                 // console.log(employee)
                 return(
-                  <option key={employee.userId} value={employee.userId}>{employee.name}</option>
+                  <option key={employee.id} value={employee.userId}>{employee.name}</option>
                 )
               }
               )
             }
           </select> <br />
-        <button id='create' type="submit">add</button>
+        <button id='create' type="submit">add shift</button>
       </form>
     </div>
   )

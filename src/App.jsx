@@ -19,7 +19,7 @@ import Notification from './components/Notification'
 import Filter from './components/FilterUsers'
 import CheckInAndOut from './components/CheckInAndOut'
 
-function App() {
+const App = () => {
   const [companies, setCompanies] = useState([])
   const [users, setUsers] = useState([])
   const [shifts, setShifts] = useState([])
@@ -31,7 +31,14 @@ function App() {
     setUsers(userList)
     setShifts(shiftList)
   }, [])
-  console.log(users)
+  // console.log(users)
+
+  const setWorking = (id) => {
+    const userToChange = users.find(user => user.id === id)
+    setUsers(users.filter(user => user.id !== id).concat({ ...userToChange, working: !userToChange.working}))
+    console.log(userToChange, users)
+  }
+
   return (
     <>
       <Notification />
@@ -39,28 +46,28 @@ function App() {
         {
           users.map(user => {
             return user.role === 'admin'
-                  ? <button key={user.userId} style={{margin:5}} onClick={(e) => {
+                  ? <button key={user.id} style={{margin:5}} onClick={(e) => {
                         e.preventDefault() 
                         setUser('admin')
-                        setUserId(user.userId)
+                        setUserId(user.id)
                       }
                       }>
                         Admin
                     </button>
                   : user.role === 'boss'
-                    ? <button key={user.userId} style={{margin:5}} onClick={(e) => {
+                    ? <button key={user.id} style={{margin:5}} onClick={(e) => {
                           e.preventDefault() 
                           setUser('boss')
-                          setUserId(user.userId)
+                          setUserId(user.id)
                         }
                         }>
                           Boss
                       </button>
                     : user.role === 'employee'
-                      ? <button key={user.userId} style={{margin:5}} onClick={(e) => {
+                      ? <button key={user.id} style={{margin:5}} onClick={(e) => {
                             e.preventDefault() 
                             setUser('employee')
-                            setUserId(user.userId)
+                            setUserId(user.id)
                           }
                           }>
                             {user.name}
@@ -101,7 +108,7 @@ function App() {
                 ? <>
                     <UserBox shifts={shifts} userId={userId} /><br/><br/>
                     <DoorButtons user={'employee'} />
-                    <CheckInAndOut userId={userId} users={users} setUsers={setUsers} />
+                    <CheckInAndOut userId={userId} users={users} setUsers={setUsers} setWorking={setWorking} />
                   </>
                 : <></>
           }

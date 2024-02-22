@@ -8,10 +8,19 @@ Viestien lähettäminen pomon ja työntekijän välillä.
   
 
 # node commands
-node version used 16.19  
+node version used: 16.19  
   
+Asentaa node paketit  
 npm install  
+  
+Käynnistää vite dev-serverin osoitteessa http://localhost:5173/  
 npm run dev  
+  
+Tekee src-hakemiston sisällöstä production buildin dist-hakemistoon  
+npm run build  
+  
+Production buildin tekemisen jälkeen käynnistää express serverin production moodissa dist-hakemiston sisällöllä osoitteessa http://localhost:5000/  
+npm run start-prod  
 
 ## Mongodb models
 
@@ -28,7 +37,7 @@ companyName: string
 ownerId: userId  
   
 shift:  
-shiftId: int  
+id: id  
 company: companyId  
 date: Date.toJSON().split('T')[0]  
 start: int  

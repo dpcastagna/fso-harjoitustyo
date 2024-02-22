@@ -17,7 +17,7 @@ const AllShifts = (props) => {
             const employeeShifts = props.shifts.filter(shift => shift.employeeId === user.userId)
             // console.log(employeeShifts)
             return (
-              <div key={user.userId}>
+              <div key={user.id}>
                 {user.name} { user.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> } <br />
                 {
                   employeeShifts.length > 0

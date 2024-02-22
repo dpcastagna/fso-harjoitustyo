@@ -1,32 +1,14 @@
 import { connect } from "react-redux"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { setNotification } from '../reducers/notificationReducer'
 import '../App.css'
 
 const AddUser = (props) => {
   const [newName, setNewName] = useState('')
-  // const [newStart, setNewStart] = useState('')
-  // const [newEnd, setNewEnd] = useState('')
-  // const [newShiftFor, setNewShiftFor] = useState(0)
-  // const [employeeList, setEmployeeList] = useState([])
 
-  // useEffect(() => {
-  //   setEmployeeList(props.users.filter(user => user.companyId === 1 && user.role === 'employee'))
-  // }, [props.users])
-
-  // console.log(employeeList, props.users)
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
-  // const handleStartChange = (event) => {
-  //   setNewStart(event.target.value)
-  // }
-  // const handleEndChange = (event) => {
-  //   setNewEnd(event.target.value)
-  // }
-  // const handleShiftChange = (event) => {
-  //   setNewShiftFor(event.target.value)
-  // }
 
   const addUser = (event) => {
     event.preventDefault()
@@ -35,7 +17,7 @@ const AddUser = (props) => {
       role: 'employee',
       companyId: 1,
       securityLevel: 3,
-      userId: Math.round(Math.random() * 1000000),
+      id: Math.round(Math.random() * 1000000),
       working: false
     }
     props.setUsers(props.users.concat(userObject))
@@ -56,7 +38,7 @@ const AddUser = (props) => {
             onChange={handleNameChange}
             placeholder='name'
           /> <br />
-        <button id='create' type="submit">add user</button>
+        <button id='create' type="submit">add employee</button>
       </form>
     </div>
   )
@@ -77,4 +59,3 @@ const ConnectedAddUser= connect(
 )(AddUser)
 
 export default ConnectedAddUser
-// export default AddUser

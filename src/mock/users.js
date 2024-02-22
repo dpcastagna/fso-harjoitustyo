@@ -1,7 +1,7 @@
 const users = [
   {
     name: 'admin',
-    userId: 1,
+    id: 1,
     role: 'admin',
     companyId: 0,
     securityLevel: 5,
@@ -9,7 +9,7 @@ const users = [
   },
   {
     name: 'Jeppe',
-    userId: 2,
+    id: 2,
     role: 'boss',
     companyId: 1,
     securityLevel: 5,
@@ -17,7 +17,7 @@ const users = [
   },
   {
     name: 'Makke',
-    userId: 3,
+    id: 3,
     role: 'employee',
     companyId: 1,
     securityLevel: 3,
@@ -25,7 +25,7 @@ const users = [
   },
   {
     name: 'Mikke',
-    userId: 4,
+    id: 4,
     role: 'employee',
     companyId: 1,
     securityLevel: 3,
@@ -33,7 +33,7 @@ const users = [
   },
   {
     name: 'Mokke',
-    userId: 5,
+    id: 5,
     role: 'employee',
     companyId: 1,
     securityLevel: 3,
