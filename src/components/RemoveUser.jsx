@@ -35,7 +35,7 @@ const RemoveUser = (props) => {
               employeeList.map(employee => {
                 // console.log(employee)
                 return(
-                  <option key={employee.id} value={employee.userId}>{employee.name}</option>
+                  <option key={employee.id} value={employee.id}>{employee.name}</option>
                 )
               }
               )

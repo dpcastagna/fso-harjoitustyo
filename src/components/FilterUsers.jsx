@@ -44,7 +44,7 @@ const Filter = (props) => {
             !employeeList
             ? <>Loading...</>
             : employeeList.filter(user => user.companyId === 1 && user.role === 'employee').map(user => {
-                const employeeShifts = props.shifts.filter(shift => shift.employeeId === user.userId)
+                const employeeShifts = props.shifts.filter(shift => shift.employeeId === user.id)
                 // console.log(employeeShifts)
                 return (
                   <div key={user.id}>

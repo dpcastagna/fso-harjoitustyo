@@ -1,5 +1,7 @@
 # Työvuorolistat
-
+  
+https://dc-fso-harjoitustyo.onrender.com/  
+  
 Ohjelma, jolla pomo voi luoda työntekijöille työvuorolistoja ja laskea tietyltä ajalta tehdyt työtunnit.  
 Kellokortti, jolla työntekijät voivat kirjata itsensä sisään ja ulos töistä.  
 Työntekijät voivat avata ovia tiloihin, joihin heillä oikeus mennä, näyttää vain ovet joihin oikeudet.  
@@ -7,7 +9,7 @@ Kulunseuranta, josta näkee missä työntekijä on liikkunut.
 Viestien lähettäminen pomon ja työntekijän välillä.  
   
 
-# node commands
+## node commands
 node version used: 16.19  
   
 Asentaa node paketit  
@@ -22,6 +24,11 @@ npm run build
 Production buildin tekemisen jälkeen käynnistää express serverin production moodissa dist-hakemiston sisällöllä osoitteessa http://localhost:5000/  
 npm run start-prod  
 
+## .env-tiedosto tarvitsee seuraavat muuttujat
+MONGODB_URI=mongodb+srv://?????????  
+PORT=5000  
+JWT_SECRET=?????????  
+  
 ## Mongodb models
 
 user:  
