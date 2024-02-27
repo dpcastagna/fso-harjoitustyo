@@ -1,9 +1,22 @@
 import bcrypt from 'bcrypt'
 import express from 'express'
-// const Company = require('../models/company')
+// import jwt from 'jsonwebtoken'
+// import Company from '../models/company.js'
 import User from '../models/user.js'
+import Shift from '../models/shift.js'
 
 const usersRouter = express.Router();
+
+usersRouter.get('/', async (request, response) => {
+    const users = await User.find().populate({path: 'shifts'/* , { id: 1, date: 1, start: 1, end: 1 } */})
+    response.json(users)
+})
+
+usersRouter.get('/:id', async (request, response) => {
+  const user = await User
+    .findById(request.params.id).populate('shifts')
+  response.json(user)
+})
 
 usersRouter.post('/', async (request, response) => {
   const { username, name, password, role } = request.body
@@ -39,10 +52,33 @@ usersRouter.post('/', async (request, response) => {
   response.status(201).json(savedUser)
 })
 
-usersRouter.get('/', async (request, response) => {
-    const users = await User
-      .find({})//.populate('company', { id: 1 })
-    response.json(users)
+usersRouter.put('/:id', async (request, response, next) => {
+  // const body = request.body
+  // const token = getTokenFrom(request)
+  // const decodedToken = jwt.verify(token, process.env.SECRET)
+  // if (!token || !decodedToken.id) {
+  //   return response.status(401).json({ error: 'token missing or invalid' })
+  // }
+  // const user = await User.findById(decodedToken.id)
+  // console.log(user)
+  const userToUpdate = await User.findById(request.params.id)
+  const user = { ...userToUpdate, working: !userToUpdate.working }
+
+  const updatedUser = await User.findByIdAndUpdate(request.params.id, user, { new: true })
+  
+  response.json(updatedUser)
+})
+
+usersRouter.delete('/:id', async (request, response) => {
+  //const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  const user = await User.findById(request.params.id)
+  // console.log('user: ', user)
+  if (user) {
+    await User.findByIdAndDelete(request.params.id)
+    response.status(204).end()
+  } else {
+    response.status(401).json({ error: 'invalid user or token missing/invalid' })
+  }
 })
 
 export default usersRouter
