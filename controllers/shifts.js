@@ -67,11 +67,30 @@ shiftsRouter.put('/:id', async (request, response, next) => {
   // const user = await User.findById(decodedToken.id)
   // console.log(user)
   const shiftToUpdate = await Shift.findById(request.params.id)
-  const shift = { ...shiftToUpdate, user: request.body.id }
+  const userToDeleteShift = await User.findById(shiftToUpdate.user)
+  const userToAddShift = await User.findById(request.body.id)
 
-  const updatedShift = await Shift.findByIdAndUpdate(request.params.id, shift, { new: true })
+  // console.log(shiftToUpdate)
+  shiftToUpdate.user = request.body.id
+  console.log(userToDeleteShift)
+
+  userToDeleteShift.shifts = userToDeleteShift.shifts.filter(shift => {
+    console.log(JSON.stringify(shift._id), request.params.id, typeof JSON.stringify(shift._id), typeof request.params.id, shift._id != request.params.id)
+    return shift._id != request.params.id
+  })
+  userToAddShift.shifts = userToAddShift.shifts.concat(request.params.id)
+  console.log(userToDeleteShift, userToAddShift)
+  try {
+    await shiftToUpdate.save()
+    await userToDeleteShift.save()
+    await userToAddShift.save()
+  } catch (error) {
+    console.log(error)
+  }
+
+
   
-  response.json(updatedShift)
+  response.json(shiftToUpdate)
 })
 
 shiftsRouter.delete('/:id', async (request, response) => {
