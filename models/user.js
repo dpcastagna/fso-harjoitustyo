@@ -14,6 +14,12 @@ const userSchema = mongoose.Schema({
       ref: 'Shift'
     }
   ],
+  messages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Message'
+    }
+  ],
   company: Number,/* {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Company'
