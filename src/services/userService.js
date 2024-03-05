@@ -1,6 +1,6 @@
 // import axios from 'axios'
 
-// const baseUrl = 'http://localhost:3001/users'
+// const baseUrl = 'http://localhost:5000/api/users'
 import users from "../mock/users"
 
 export const getAll = () => {
@@ -15,7 +15,6 @@ export const getAll = () => {
 //   console.log(response.data)
 //   return response.data
 // }
-
 
 
 

@@ -18,6 +18,7 @@ import AllShifts from './components/AllShifts'
 import Notification from './components/Notification'
 import Filter from './components/FilterUsers'
 import CheckInAndOut from './components/CheckInAndOut'
+import Login from './components/Login'
 
 const App = () => {
   const [companies, setCompanies] = useState([])
@@ -114,6 +115,7 @@ const App = () => {
           }
         </div>
       </div>
+      <Login />
     </>
   )
 }

@@ -6,6 +6,7 @@ dotenv.config()
 import usersRouter from './controllers/users.js'
 import shiftsRouter from './controllers/shifts.js'
 import messagesRouter from './controllers/messages.js'
+import loginRouter from './controllers/login.js'
 import mongoose from 'mongoose'
 
 const app = express()
@@ -37,6 +38,7 @@ app.get('/health', (req, res) => {
 app.use('/api/users', usersRouter)
 app.use('/api/shifts', shiftsRouter)
 app.use('/api/messages', messagesRouter)
+app.use('/api/login', loginRouter)
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
