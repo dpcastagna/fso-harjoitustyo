@@ -14,7 +14,7 @@ usersRouter.get('/', async (request, response) => {
 
 usersRouter.get('/:id', async (request, response) => {
   const user = await User
-    .findById(request.params.id).populate('shifts')
+    .findById(request.params.id).populate('shifts', { id:1, start: 1, end: 1, date: 1 })
   response.json(user)
 })
 

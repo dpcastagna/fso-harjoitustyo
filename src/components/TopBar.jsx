@@ -2,20 +2,20 @@ import { useEffect, useState } from "react"
 import '../App.css'
 
 const TopBar = (props) => {
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     setUser(props.user)
   }, [props])
   // console.log(user)
 
-  if (user === '') {
+  if (user === null) {
     return <div id='palikka'>Choose a user!</div>
   }
 
   return (
     <div id='palikka'>
-      {user} logged in
+      {user.name} logged in as {user.role}
     </div>
   )
 }

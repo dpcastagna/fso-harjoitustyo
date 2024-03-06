@@ -10,7 +10,7 @@ const Filter = (props) => {
   const filteredUsers = useSelector(state => {
     console.log(state)
     if (employeeList !== state.filteredUsers.filteredUsers) {
-    setEmployeeList(state.filteredUsers.filteredUsers)
+      setEmployeeList(state.filteredUsers.filteredUsers)
     }
     return state.filteredUsers.filteredUsers
   })

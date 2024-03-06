@@ -1,20 +1,36 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import loginService from '../services/loginService.js'
+import { getAll } from '../services/userService'
+import AllShifts from './AllShifts.jsx'
 
-const Login = () => {
+const Login = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [employeeList, setEmployeeList] = useState([])
+
+  useEffect(() => {
+    getEmployees()
+    setUser(props.user)
+  }, [])
+
+  const getEmployees = async () => {
+    setEmployeeList(await getAll())
+    
+  }
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    console.log('logging in with', username, password)
 
     try {
       const user = await loginService.login({
         username, password,
       })
       console.log(user)
+      window.localStorage.setItem(
+        'loggedInUser', JSON.stringify(user)
+      )
+      props.setUser(user)
       setUser(user)
       setUsername('')
       setPassword('')
@@ -26,13 +42,23 @@ const Login = () => {
       // }, 5000)
     }
   }
-  if (user) {
+  console.log(props.user, employeeList)
+  if (user !== null) {
     return (
       <>
-        Current user: {user.name}
+        Current user: {user.name} &nbsp;
+        <button onClick={(event) => {
+          event.preventDefault()
+          window.localStorage.removeItem('loggedInUser')
+          setUser(null)
+        }}>
+          logout
+        </button>
+        <AllShifts employees={employeeList} />
       </>
     )
   }
+
   return (
     <div>
       <h1>Login</h1>

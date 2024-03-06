@@ -5,7 +5,7 @@ const AllShifts = (props) => {
   const [employeeList, setEmployeeList] = useState([])
 
   useEffect(() => {
-    setEmployeeList(props.users.filter(user => user.companyId === 1 && user.role === 'employee'))
+    setEmployeeList(props.employees.filter(user => user.role === 'employee'))
   }, [props.users])
   // console.log(props)
   return (
@@ -14,7 +14,7 @@ const AllShifts = (props) => {
       <div id='vaaka' >
         {
           employeeList.map(user => {
-            const employeeShifts = props.shifts.filter(shift => shift.employeeId === user.id)
+            const employeeShifts = user.shifts
             // console.log(employeeShifts)
             return (
               <div key={user.id}>

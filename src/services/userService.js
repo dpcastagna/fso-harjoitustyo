@@ -1,12 +1,12 @@
-// import axios from 'axios'
+import axios from 'axios'
+const baseUrl = '/api/users'
 
-// const baseUrl = 'http://localhost:5000/api/users'
-import users from "../mock/users"
+// import users from "../mock/users"
 
-export const getAll = () => {
-  return users
-  // const response = await axios.get(baseUrl)
-  // return response.data
+export const getAll = async () => {
+  // return users
+  const response = await axios.get(baseUrl)
+  return response.data
 }
 
 // const createNew = async (content) => {
