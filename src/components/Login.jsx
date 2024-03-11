@@ -12,7 +12,8 @@ const Login = (props) => {
   useEffect(() => {
     getEmployees()
     setUser(props.user)
-  }, [])
+    console.log('useEffect', props.user)
+  }, [props.user])
 
   const getEmployees = async () => {
     setEmployeeList(await getAll())
@@ -43,21 +44,21 @@ const Login = (props) => {
     }
   }
   console.log(props.user, employeeList)
-  if (user !== null) {
-    return (
-      <>
-        Current user: {user.name} &nbsp;
-        <button onClick={(event) => {
-          event.preventDefault()
-          window.localStorage.removeItem('loggedInUser')
-          setUser(null)
-        }}>
-          logout
-        </button>
-        <AllShifts employees={employeeList} />
-      </>
-    )
-  }
+  // if (user !== null) {
+  //   return (
+  //     <>
+  //       Current user: {user.name} &nbsp;
+  //       <button onClick={(event) => {
+  //         event.preventDefault()
+  //         window.localStorage.removeItem('loggedInUser')
+  //         setUser(null)
+  //       }}>
+  //         logout
+  //       </button>
+  //       <AllShifts employees={employeeList} />
+  //     </>
+  //   )
+  // }
 
   return (
     <div>
@@ -65,7 +66,7 @@ const Login = (props) => {
 
       <form onSubmit={handleLogin}>
         <div>
-          username
+          username &nbsp;
             <input
             type="text"
             value={username}
@@ -74,7 +75,7 @@ const Login = (props) => {
           />
         </div>
         <div>
-          password
+          password &nbsp;
             <input
             type="password"
             value={password}

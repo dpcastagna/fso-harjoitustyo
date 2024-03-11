@@ -26,10 +26,19 @@ loginRouter.post('/', async (request, response) => {
   }
 
   const token = jwt.sign(userForToken, process.env.JWT_SECRET)
-
+  
   response
     .status(200)
-    .send({ token, username: user.username, name: user.name })
+    .send({ 
+      token,
+      username: user.username,
+      name: user.name,
+      role: user.role,
+      shifts: user.shifts,
+      messages: user.messages,
+      company: user.company,
+      working: user.working
+     })
 })
 
 export default loginRouter

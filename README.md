@@ -28,6 +28,8 @@ npm run start-prod
 MONGODB_URI=mongodb+srv://?????????  
 PORT=5000  
 JWT_SECRET=?????????  
+DEV=true/false  
+MONGODB_URI_DEV=mongodb://127.0.0.1:27017/fsoHarjoitustyoApp  
   
 ## Mongodb models
 

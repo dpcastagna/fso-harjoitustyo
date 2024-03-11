@@ -19,6 +19,7 @@ import Notification from './components/Notification'
 import Filter from './components/FilterUsers'
 import CheckInAndOut from './components/CheckInAndOut'
 import Login from './components/Login'
+import LoggedIn from './components/LoggedIn'
 
 const App = () => {
   const [companies, setCompanies] = useState([])
@@ -126,7 +127,21 @@ const App = () => {
         // } 
       //   </div>
       // </div>*/}
-      <Login user={user} setUser={setUser} />
+      { user !== null
+        ? <LoggedIn user={user} setUser={setUser} />
+          // <>
+          //   Current user: {user.name} &nbsp;
+          //   <button onClick={(event) => {
+          //     event.preventDefault()
+          //     window.localStorage.removeItem('loggedInUser')
+          //     setUser(null)
+          //   }}>
+          //     logout
+          //   </button>
+          //   {/* <AllShifts employees={employeeList} /> */}
+          // </>
+        : <Login user={user} setUser={setUser} />
+      }
     </>
   )
 }
