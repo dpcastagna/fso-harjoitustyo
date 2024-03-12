@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import '../App.css'
+import AddUser from "./AddUser"
 
 const BossBox = (props) => {
   
@@ -7,6 +8,7 @@ const BossBox = (props) => {
     <div id='palikka'>
       Jepen korjaamo<br/>
       Employees: ??? {/* {props.users.filter(user => user.role === 'employee').length} */}
+      <AddUser />
     </div>
   )
 }

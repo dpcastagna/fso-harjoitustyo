@@ -1,29 +1,52 @@
+import '../App.css'
 import { connect } from "react-redux"
 import { useState } from "react"
 import { setNotification } from '../reducers/notificationReducer'
-import '../App.css'
+
+import { createNew } from '../services/userService.js'
 
 const AddUser = (props) => {
   const [newName, setNewName] = useState('')
+  const [newUsername, setNewUsername] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [newRole, setNewRole] = useState('')
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
+  const handleUsernameChange = (event) => {
+    setNewUsername(event.target.value)
+  }
+  const handlePasswordChange = (event) => {
+    setNewPassword(event.target.value)
+  }
+  const handleRoleChange = (event) => {
+    setNewRole(event.target.value)
+  }
 
-  const addUser = (event) => {
+  const addUser = async (event) => {
     event.preventDefault()
     const userObject = {
       name: newName,
+      username: newUsername,
+      password: newPassword,
       role: 'employee',
-      companyId: 1,
+      companyId: 2134,
       securityLevel: 3,
-      id: Math.round(Math.random() * 1000000),
+      // id: Math.round(Math.random() * 1000000),
       working: false
     }
-    props.setUsers(props.users.concat(userObject))
-    props.setNotification(`new user '${newName}' created`, 5)
-
-    setNewName('')
+    // props.setUsers(props.users.concat(userObject))
+    try {
+      props.setNotification(`new user '${newName}' created`, 5)
+      await createNew(userObject)
+      setNewName('')
+      setNewUsername('')
+      setNewPassword('')
+      setNewRole('')
+    } catch (e) {
+      console.log(e)
+    }
   }
   
   return (
@@ -37,6 +60,30 @@ const AddUser = (props) => {
             value={newName}
             onChange={handleNameChange}
             placeholder='name'
+          /> <br />
+        username:
+          <input
+            id='username'
+            type='test'
+            value={newUsername}
+            onChange={handleUsernameChange}
+            placeholder='username'
+          /> <br />
+        password:
+          <input
+            id='password'
+            type='test'
+            value={newPassword}
+            onChange={handlePasswordChange}
+            placeholder='password'
+          /> <br />
+        role:
+          <input
+            id='role'
+            type='test'
+            value={newRole}
+            onChange={handleRoleChange}
+            placeholder='role'
           /> <br />
         <button id='create' type="submit">add employee</button>
       </form>

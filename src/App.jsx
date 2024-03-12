@@ -129,17 +129,6 @@ const App = () => {
       // </div>*/}
       { user !== null
         ? <LoggedIn user={user} setUser={setUser} />
-          // <>
-          //   Current user: {user.name} &nbsp;
-          //   <button onClick={(event) => {
-          //     event.preventDefault()
-          //     window.localStorage.removeItem('loggedInUser')
-          //     setUser(null)
-          //   }}>
-          //     logout
-          //   </button>
-          //   {/* <AllShifts employees={employeeList} /> */}
-          // </>
         : <Login user={user} setUser={setUser} />
       }
     </>

@@ -9,13 +9,18 @@ export const getAll = async () => {
   return response.data
 }
 
-// const createNew = async (content) => {
-//   const object = { content, votes: 0 }
-//   const response = await axios.post(baseUrl, object)
-//   console.log(response.data)
-//   return response.data
-// }
+export const createNew = async (newObj) => {
+  const object = { 
+    name: newObj.name,
+    username: newObj.username,
+    password: newObj.password,
+    role: newObj.role
+  }
+  const response = await axios.post(baseUrl, object)
+  console.log(response.data)
+  return response.data
+}
 
 
 
-export default getAll
+export default { getAll, createNew }

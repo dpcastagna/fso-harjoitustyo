@@ -43,8 +43,10 @@ usersRouter.post('/', async (request, response) => {
     passwordHash,
     role,
     shifts: [],
+    messages: [],
     company: 2134,
-    working: false
+    working: false,
+    securityLevel: 1
   })
 
   const savedUser = await user.save()
