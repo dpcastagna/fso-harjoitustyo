@@ -1,15 +1,14 @@
 import '../App.css'
 import { connect } from "react-redux"
 import { useState } from "react"
-import { setNotification } from '../reducers/notificationReducer'
 
+import { setNotification } from '../reducers/notificationReducer'
 import { createNew } from '../services/userService.js'
 
 const AddUser = (props) => {
   const [newName, setNewName] = useState('')
   const [newUsername, setNewUsername] = useState('')
   const [newPassword, setNewPassword] = useState('')
-  const [newRole, setNewRole] = useState('')
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -20,17 +19,14 @@ const AddUser = (props) => {
   const handlePasswordChange = (event) => {
     setNewPassword(event.target.value)
   }
-  const handleRoleChange = (event) => {
-    setNewRole(event.target.value)
-  }
-
+  
   const addUser = async (event) => {
     event.preventDefault()
     const userObject = {
       name: newName,
       username: newUsername,
       password: newPassword,
-      role: 'employee',
+      role: props.createUser,
       companyId: 2134,
       securityLevel: 3,
       // id: Math.round(Math.random() * 1000000),
@@ -43,7 +39,6 @@ const AddUser = (props) => {
       setNewName('')
       setNewUsername('')
       setNewPassword('')
-      setNewRole('')
     } catch (e) {
       console.log(e)
     }
@@ -76,14 +71,6 @@ const AddUser = (props) => {
             value={newPassword}
             onChange={handlePasswordChange}
             placeholder='password'
-          /> <br />
-        role:
-          <input
-            id='role'
-            type='test'
-            value={newRole}
-            onChange={handleRoleChange}
-            placeholder='role'
           /> <br />
         <button id='create' type="submit">add employee</button>
       </form>

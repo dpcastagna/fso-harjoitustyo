@@ -13,9 +13,8 @@ import mongoose from 'mongoose'
 const app = express()
 
 const PORT = process.env.PORT || 5000
-// console.log(dotenv.config())
 const DEV = process.env.DEV || false
-console.log(DEV, process.env.MONGODB_URI_DEV)
+
 mongoose.connect(eval(DEV) === true ? process.env.MONGODB_URI_DEV : process.env.MONGODB_URI)
   .then(() => {
     console.log('connected to MongoDB')

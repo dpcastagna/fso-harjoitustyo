@@ -8,7 +8,7 @@ const BossBox = (props) => {
     <div id='palikka'>
       Jepen korjaamo<br/>
       Employees: ??? {/* {props.users.filter(user => user.role === 'employee').length} */}
-      <AddUser />
+      <AddUser createUser='employee' />
     </div>
   )
 }

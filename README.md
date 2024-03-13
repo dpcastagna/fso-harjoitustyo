@@ -18,6 +18,9 @@ npm install
 Käynnistää vite dev-serverin osoitteessa http://localhost:5173/  
 npm run dev  
   
+Käynnistää express dev-serverin nodemonin kanssa osoitteessa http://localhost:5000/  
+npm run start-dev  
+  
 Tekee src-hakemiston sisällöstä production buildin dist-hakemistoon  
 npm run build  
   
@@ -29,6 +32,7 @@ MONGODB_URI=mongodb+srv://?????????
 PORT=5000  
 JWT_SECRET=?????????  
 DEV=true/false  
+VITE_DEV=true/false  
 MONGODB_URI_DEV=mongodb://127.0.0.1:27017/fsoHarjoitustyoApp  
   
 ## Mongodb models

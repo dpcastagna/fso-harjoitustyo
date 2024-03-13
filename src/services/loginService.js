@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/login'
+const baseUrl = eval(import.meta.env.VITE_DEV) ? 'http://localhost:5000/api/login' : '/api/login'
 
 const login = async credentials => {
   const response = await axios.post(baseUrl, credentials)

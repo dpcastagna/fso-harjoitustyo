@@ -7,7 +7,7 @@ const LoggedIn = (props) => {
   if (!props.user) {
     return <>Loading...</>
   }
-  console.log(props.user)
+  
   return (
     <>
       Current user: {props.user.name} &nbsp;

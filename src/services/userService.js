@@ -1,7 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/users'
-
-// import users from "../mock/users"
+const baseUrl = eval(import.meta.env.VITE_DEV) ? 'http://localhost:5000/api/users' : '/api/users'
 
 export const getAll = async () => {
   // return users

@@ -21,6 +21,7 @@ import CheckInAndOut from './components/CheckInAndOut'
 import Login from './components/Login'
 import LoggedIn from './components/LoggedIn'
 
+
 const App = () => {
   const [companies, setCompanies] = useState([])
   const [users, setUsers] = useState([])
