@@ -67,7 +67,7 @@ const AddUser = (props) => {
         password:
           <input
             id='password'
-            type='test'
+            type='password'
             value={newPassword}
             onChange={handlePasswordChange}
             placeholder='password'
