@@ -19,7 +19,7 @@ usersRouter.get('/:id', async (request, response) => {
 })
 
 usersRouter.post('/', async (request, response) => {
-  const { username, name, password, role } = request.body
+  const { username, name, password, role, company } = request.body
 
   const existingUser = await User.findOne({ username })
   if (existingUser) {
@@ -28,6 +28,13 @@ usersRouter.post('/', async (request, response) => {
     })
   }
 
+  //https://www.tuomas.salste.net/doc/tunnus/y-tunnus.html#muoto
+  const existingCompany = await User.findOne({ company })
+  if (existingCompany && role === 'boss') {
+    return response.status(400).json({
+      error: 'business id must be unique'
+    })
+  }
   if (password.length < 3) {
     return response.status(400).json({
       error: 'password not entered or it is too short(minimum length 3)'
@@ -42,16 +49,20 @@ usersRouter.post('/', async (request, response) => {
     name,
     passwordHash,
     role,
+    company,
     shifts: [],
     messages: [],
-    company: 2134,
     working: false,
-    securityLevel: 1
+    securityLevel: role === 'boss' ? 5 : 1
   })
+  try {
+    const savedUser = await user.save()
 
-  const savedUser = await user.save()
-
-  response.status(201).json(savedUser)
+    response.status(201).json(savedUser)
+  } catch (error) {
+    console.log(error)
+  }
+  
 })
 
 usersRouter.put('/:id', async (request, response, next) => {

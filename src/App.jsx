@@ -20,6 +20,7 @@ import Filter from './components/FilterUsers'
 import CheckInAndOut from './components/CheckInAndOut'
 import Login from './components/Login'
 import LoggedIn from './components/LoggedIn'
+import RegisterCompany from './components/RegisterCompany'
 
 
 const App = () => {
@@ -130,7 +131,14 @@ const App = () => {
       // </div>*/}
       { user !== null
         ? <LoggedIn user={user} setUser={setUser} />
-        : <Login user={user} setUser={setUser} />
+        : <>
+            <Login user={user} setUser={setUser} />
+            <br/>
+            or
+            <br/>
+            <br/>
+            <RegisterCompany />
+          </>
       }
     </>
   )

@@ -17,11 +17,17 @@ export const createNew = async (newObj) => {
     name: newObj.name,
     username: newObj.username,
     password: newObj.password,
-    role: newObj.role
+    role: newObj.role,
+    company: newObj.company
   }
-  const response = await axios.post(baseUrl, object)
-  
-  return response.data
+  try {
+    const response = await axios.post(baseUrl, object)
+    
+    return response.data
+  } catch (error) {
+    console.log(error.message)
+    return error
+  }
 }
 
 export default { getAll, createNew, getMyEmployees }

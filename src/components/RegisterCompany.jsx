@@ -5,10 +5,11 @@ import { useState } from "react"
 import { setNotification } from '../reducers/notificationReducer'
 import { createNew } from '../services/userService.js'
 
-const AddUser = (props) => {
+const RegisterCompany = (props) => {
   const [newName, setNewName] = useState('')
   const [newUsername, setNewUsername] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  const [businessId, setBusinessId] = useState('')
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -19,35 +20,38 @@ const AddUser = (props) => {
   const handlePasswordChange = (event) => {
     setNewPassword(event.target.value)
   }
+  const handleBusinessIdChange = (event) => {
+    setBusinessId(event.target.value)
+  }
   
-  const addUser = async (event) => {
+  const addCompany = async (event) => {
     event.preventDefault()
     const userObject = {
       name: newName,
       username: newUsername,
       password: newPassword,
-      role: props.createUser,
-      companyId: 2134,
-      securityLevel: 3,
-      // id: Math.round(Math.random() * 1000000),
+      role: 'boss',
+      company: businessId,
+      securityLevel: 5,
       working: false
     }
-    // props.setUsers(props.users.concat(userObject))
+    
     try {
-      props.setNotification(`new user '${newName}' created`, 5)
+      props.setNotification(`new company '${newName}' created`, 5)
       await createNew(userObject)
       setNewName('')
       setNewUsername('')
       setNewPassword('')
-    } catch (e) {
-      console.log(e)
+      setBusinessId('')
+    } catch (error) {
+      console.log(error)
     }
   }
   
   return (
     <div id='palikka'>
-      <form onSubmit={addUser}>
-        New employee<br/>
+      <form onSubmit={addCompany}>
+        <h1>Create company account</h1>
         name:
           <input
             id='name'
@@ -55,7 +59,7 @@ const AddUser = (props) => {
             value={newName}
             onChange={handleNameChange}
             placeholder='name'
-          /> <br />
+          /> <br/>
         username:
           <input
             id='username'
@@ -63,7 +67,7 @@ const AddUser = (props) => {
             value={newUsername}
             onChange={handleUsernameChange}
             placeholder='username'
-          /> <br />
+          /> <br/>
         password:
           <input
             id='password'
@@ -71,8 +75,16 @@ const AddUser = (props) => {
             value={newPassword}
             onChange={handlePasswordChange}
             placeholder='password'
-          /> <br />
-        <button id='create' type="submit">add employee</button>
+          /> <br/>
+        business id:
+          <input
+            id='businessid'
+            type='test'
+            value={businessId}
+            onChange={handleBusinessIdChange}
+            placeholder='business id'
+          /> <br/>
+        <button id='create' type="submit">create account</button>
       </form>
     </div>
   )
@@ -87,9 +99,9 @@ const mapDispatchToProps = {
   setNotification,
 }
 
-const ConnectedAddUser = connect(
+const ConnectedRegisterCompany = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddUser)
+)(RegisterCompany)
 
-export default ConnectedAddUser
+export default ConnectedRegisterCompany
