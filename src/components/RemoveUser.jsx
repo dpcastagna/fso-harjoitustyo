@@ -5,8 +5,8 @@ const RemoveUser = (props) => {
   const [employeeList, setEmployeeList] = useState([])
 
   useEffect(() => {
-    setEmployeeList(props.users.filter(user => user.companyId === 1 && user.role === 'employee'))
-  }, [props.users])
+    setEmployeeList(props.employees)//.filter(user => user.companyId === 1 && user.role === 'employee'))
+  }, [props.employees])
 
   const handleNameChange = (event) => {
     setOldName(event.target.value)
@@ -14,11 +14,12 @@ const RemoveUser = (props) => {
   
   const deleteUser = (event) => {
     event.preventDefault()
-    
-    props.setUsers(props.users.filter(user => {
-      // console.log(user.userId, props.users)
-      return user.id !== Number(oldName)
-    }))
+    console.log(oldName)
+    props.deleteEmployee(oldName)
+    // props.setUsers(props.users.filter(user => {
+    //   // console.log(user.userId, props.users)
+    //   return user.id !== Number(oldName)
+    // }))
 
     setOldName('')
   }

@@ -37,8 +37,8 @@ const RegisterCompany = (props) => {
     }
     
     try {
-      props.setNotification(`new company '${newName}' created`, 5)
       await createNew(userObject)
+      props.setNotification(`new company '${newName}' created`, 5)
       setNewName('')
       setNewUsername('')
       setNewPassword('')

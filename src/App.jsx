@@ -1,23 +1,23 @@
-import { useState, useEffect } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import './App.css'
-import companyList from './mock/companies'
-import userList from './mock/users'
-import shiftList from './mock/shifts'
+// import companyList from './mock/companies'
+// import userList from './mock/users'
+// import shiftList from './mock/shifts'
+// import TopBar from './components/TopBar'
+// import AdminBox from './components/AdminBox'
+// import UserBox from './components/UserBox'
+// import BossBox from './components/BossBox'
+// import DoorButtons from './components/DoorButtons'
+// import AddShift from './components/AddShift'
+// import AddUser from './components/AddUser'
+// import RemoveUser from './components/RemoveUser'
+// import AllShifts from './components/AllShifts'
+// import Filter from './components/FilterUsers'
+// import CheckInAndOut from './components/CheckInAndOut'
 
-import TopBar from './components/TopBar'
-import AdminBox from './components/AdminBox'
-import UserBox from './components/UserBox'
-import BossBox from './components/BossBox'
-import DoorButtons from './components/DoorButtons'
-import AddShift from './components/AddShift'
-import AddUser from './components/AddUser'
-import RemoveUser from './components/RemoveUser'
-import AllShifts from './components/AllShifts'
+import { useState, useEffect } from 'react'
+import './App.css'
 import Notification from './components/Notification'
-import Filter from './components/FilterUsers'
-import CheckInAndOut from './components/CheckInAndOut'
 import Login from './components/Login'
 import LoggedIn from './components/LoggedIn'
 import RegisterCompany from './components/RegisterCompany'
@@ -30,12 +30,11 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [userId, setUserId] = useState('')
 
-  useEffect(() => {
-    setCompanies(companyList)
-    setUsers(userList)
-    setShifts(shiftList)
-  }, [])
-  // console.log(users)
+  // useEffect(() => {
+  //   setCompanies(companyList)
+  //   setUsers(userList)
+  //   setShifts(shiftList)
+  // }, [])
 
   useEffect(() => {
     const loggedInUserJSON = window.localStorage.getItem('loggedInUser')

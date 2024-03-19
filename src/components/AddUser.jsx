@@ -26,16 +26,18 @@ const AddUser = (props) => {
       name: newName,
       username: newUsername,
       password: newPassword,
-      role: props.createUser,
-      companyId: 2134,
-      securityLevel: 3,
-      // id: Math.round(Math.random() * 1000000),
+      role: props.role,
+      company: props.company,
+      shifts: [],
+      messages: [],
+      securityLevel: 1,
       working: false
     }
     // props.setUsers(props.users.concat(userObject))
     try {
-      props.setNotification(`new user '${newName}' created`, 5)
+      await props.addEmployee(userObject)
       await createNew(userObject)
+      props.setNotification(`new user '${newName}' created`, 5)
       setNewName('')
       setNewUsername('')
       setNewPassword('')

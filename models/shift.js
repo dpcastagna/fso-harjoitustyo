@@ -8,7 +8,7 @@ const shiftSchema = mongoose.Schema({
   },
   start: Number,
   end: Number,
-  user: {
+  employeeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
   },
