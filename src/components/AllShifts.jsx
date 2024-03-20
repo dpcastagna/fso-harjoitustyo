@@ -10,7 +10,7 @@ const AllShifts = (props) => {
   // console.log(props)
   return (
     <div id='palikka'>
-      <div style={{ paddingBottom: 3, borderBottom: 'solid', borderBottomWidth: 3 }}>Employee shifts <br /></div>
+      <div style={{ paddingBottom: 3, borderBottom: 'solid', borderBottomWidth: 3 }}>Employee shifts <br/></div>
       <div id='vaaka' >
         {
           employeeList.map(user => {
@@ -18,10 +18,10 @@ const AllShifts = (props) => {
             // console.log(employeeShifts)
             return (
               <div key={user.id}>
-                {user.name} { user.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> } <br />
+                {user.name} { user.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> } <br/>
                 {
                   employeeShifts.length > 0
-                  ? employeeShifts.map(shift => <div key={shift.shiftId }>{shift.start}-{shift.end} {shift.date} <br /></div>)
+                  ? employeeShifts.map(shift => <div key={shift.shiftId }>{shift.start}-{shift.end} {shift.date} <br/></div>)
                   : <>No shifts</>
                 }
               </div>

@@ -1,27 +1,28 @@
 import { useState, useEffect } from "react"
+import { removeOld } from "../services/userService"
 
 const RemoveUser = (props) => {
   const [oldName, setOldName] = useState('')
   const [employeeList, setEmployeeList] = useState([])
 
   useEffect(() => {
-    setEmployeeList(props.employees)//.filter(user => user.companyId === 1 && user.role === 'employee'))
+    setEmployeeList(props.employees)
   }, [props.employees])
 
   const handleNameChange = (event) => {
     setOldName(event.target.value)
   }
   
-  const deleteUser = (event) => {
+  const deleteUser = async (event) => {
     event.preventDefault()
     console.log(oldName)
-    props.deleteEmployee(oldName)
-    // props.setUsers(props.users.filter(user => {
-    //   // console.log(user.userId, props.users)
-    //   return user.id !== Number(oldName)
-    // }))
-
-    setOldName('')
+    try {
+      await removeOld(oldName)
+      props.deleteEmployee(oldName)
+      setOldName('')
+    } catch (error) {
+      console.log(error)
+    }
   }
   
   return (
@@ -34,7 +35,7 @@ const RemoveUser = (props) => {
             <option>Select...</option>
             {
               employeeList.map(employee => {
-                // console.log(employee)
+                
                 return(
                   <option key={employee.id} value={employee.id}>{employee.name}</option>
                 )

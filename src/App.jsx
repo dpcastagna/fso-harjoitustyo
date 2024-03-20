@@ -24,11 +24,11 @@ import RegisterCompany from './components/RegisterCompany'
 
 
 const App = () => {
-  const [companies, setCompanies] = useState([])
-  const [users, setUsers] = useState([])
-  const [shifts, setShifts] = useState([])
   const [user, setUser] = useState(null)
-  const [userId, setUserId] = useState('')
+  const [users, setUsers] = useState([])
+  // const [companies, setCompanies] = useState([])
+  // const [shifts, setShifts] = useState([])
+  // const [userId, setUserId] = useState('')
 
   // useEffect(() => {
   //   setCompanies(companyList)

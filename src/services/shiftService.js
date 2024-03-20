@@ -1,13 +1,13 @@
 import axios from 'axios'
-const baseUrl = eval(import.meta.env.VITE_DEV) ? 'http://localhost:5000/api/users' : '/api/users'
+const baseUrl = eval(import.meta.env.VITE_DEV) ? 'http://localhost:5000/api/shifts' : '/api/shifts'
 
 export const getAll = async () => {
   const response = await axios.get(baseUrl)
   return response.data
 }
 
-export const getMyEmployees = async (companyId) => {
-  const response = (await axios.get(baseUrl)).data.filter(employee => employee.role === 'employee' && employee.company === companyId)
+export const getMyCompanyShifts = async (companyId) => {
+  const response = (await axios.get(baseUrl)).data.filter(shift => shift.company === companyId)
   
   return response
 }
@@ -41,4 +41,4 @@ export const removeOld = async (id) => {
   }
 }
 
-export default { getAll, createNew, getMyEmployees, removeOld }
+export default { getAll, createNew, getMyCompanyShifts, removeOld }

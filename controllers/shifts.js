@@ -9,7 +9,7 @@ const shiftsRouter = express.Router();
 
 shiftsRouter.get('/', async (request, response) => {
     const shifts = await Shift
-      .find({}).populate('user', { id: 1, name: 1 })
+      .find({}).populate('employeeId', { id: 1, name: 1 })
     response.json(shifts)
 })
 
@@ -20,7 +20,7 @@ shiftsRouter.get('/:id', async (request, response) => {
 })
 
 shiftsRouter.post('/', async (request, response) => {
-  const { date, start, end, user, company } = request.body
+  const { date, start, end, employeeId, company } = request.body
 
   // const existingUser = await User.findOne({ username })
   // if (existingUser) {
@@ -42,13 +42,13 @@ shiftsRouter.post('/', async (request, response) => {
     date,
     start,
     end,
-    user,
-    company: 2134,
+    employeeId,
+    company,
   })
 
   const savedShift = await shift.save()
 
-  const userToUpdate = await User.findById(user)
+  const userToUpdate = await User.findById(employeeId)
   
   userToUpdate.shifts = userToUpdate.shifts.concat(savedShift._id)
   
@@ -88,8 +88,6 @@ shiftsRouter.put('/:id', async (request, response, next) => {
     console.log(error)
   }
 
-
-  
   response.json(shiftToUpdate)
 })
 
