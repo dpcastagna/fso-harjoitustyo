@@ -17,7 +17,7 @@ const CheckInAndOut = (props) => {
     {
       user.working
       ? <div id='palikka' >
-          You are working! <br />
+          You are working! <br/>
           <button style={{margin:5}} onClick={(e) => {
             e.preventDefault() 
             setUser({ ...user, working: !user.working })
@@ -29,7 +29,7 @@ const CheckInAndOut = (props) => {
         </button>
         </div>
       : <div id='palikka' >
-          You are not working! <br />
+          You are not working! <br/>
           <button style={{margin:5}} onClick={(e) => {
             e.preventDefault() 
             setUser({ ...user, working: !user.working })

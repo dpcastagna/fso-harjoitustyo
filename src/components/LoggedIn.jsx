@@ -18,7 +18,6 @@ const LoggedIn = (props) => {
       }}>
         logout
       </button>
-      {/* <AllShifts employees={employeeList} /> */}
           
     { props.user.role === 'admin'
       ? <AdminBox user={props.user} />

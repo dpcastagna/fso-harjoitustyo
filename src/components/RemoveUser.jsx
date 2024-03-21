@@ -42,7 +42,7 @@ const RemoveUser = (props) => {
               }
               )
             }
-          </select> <br />
+          </select> <br/>
         <button id='delete' type="submit">delete employee</button>
       </form>
     </div>

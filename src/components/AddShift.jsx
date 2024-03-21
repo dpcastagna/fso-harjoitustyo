@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react"
 import '../App.css'
+import { createNewShift } from "../services/shiftService"
 
 const AddShift = (props) => {
   const [newDate, setNewDate] = useState('')
   const [newStart, setNewStart] = useState('')
   const [newEnd, setNewEnd] = useState('')
-  const [newShiftFor, setNewShiftFor] = useState(0)
+  const [newShiftFor, setNewShiftFor] = useState('')
   const [employeeList, setEmployeeList] = useState([])
 
   useEffect(() => {
-    setEmployeeList(props.users.filter(user => user.companyId === 1 && user.role === 'employee'))
-  }, [props.users])
+    setEmployeeList(props.employees)
+  }, [props.employees])
 
   // console.log(employeeList, props.users)
   const handleDateChange = (event) => {
@@ -26,7 +27,7 @@ const AddShift = (props) => {
     setNewShiftFor(event.target.value)
   }
 
-  const addShift = (event) => {
+  const addShift = async (event) => {
     event.preventDefault()
     const shiftObject = {
       date: newDate,
@@ -34,9 +35,10 @@ const AddShift = (props) => {
       end: newEnd,
       company: props.company,
       employeeId: newShiftFor,
-      // shiftId: Math.round(Math.random() * 1000000),
     }
-    props.setShifts(props.shifts.concat(shiftObject))
+    
+    const newShift = await createNewShift(shiftObject)
+    props.addShift(newShift)
 
     setNewDate('')
     setNewStart('')
@@ -54,7 +56,7 @@ const AddShift = (props) => {
             value={newDate}
             onChange={handleDateChange}
             placeholder='blog title'
-          /> <br />
+          /> <br/>
         start:
           <input
             id='start'
@@ -64,7 +66,7 @@ const AddShift = (props) => {
             placeholder='8'
             min='0'
             max='23'
-          /> <br />
+          /> <br/>
         end:
           <input
             id='end'
@@ -74,7 +76,7 @@ const AddShift = (props) => {
             placeholder='16'
             min='0'
             max='23'
-          /> <br />
+          /> <br/>
         employee:
           <select onChange={handleShiftChange}>
             <option>Select...</option>
@@ -87,8 +89,8 @@ const AddShift = (props) => {
               }
               )
             }
-          </select> <br />
-        <button id='create' type="submit">add shift</button>
+          </select> <br/>
+        <button id='createShift' type="submit">add shift</button>
       </form>
     </div>
   )

@@ -35,8 +35,8 @@ const AddUser = (props) => {
     }
     // props.setUsers(props.users.concat(userObject))
     try {
-      await props.addEmployee(userObject)
-      await createNew(userObject)
+      const newUser = await createNew(userObject)
+      await props.addEmployee(newUser)
       props.setNotification(`new user '${newName}' created`, 5)
       setNewName('')
       setNewUsername('')
@@ -57,7 +57,7 @@ const AddUser = (props) => {
             value={newName}
             onChange={handleNameChange}
             placeholder='name'
-          /> <br />
+          /> <br/>
         username:
           <input
             id='username'
@@ -65,7 +65,7 @@ const AddUser = (props) => {
             value={newUsername}
             onChange={handleUsernameChange}
             placeholder='username'
-          /> <br />
+          /> <br/>
         password:
           <input
             id='password'
@@ -73,8 +73,8 @@ const AddUser = (props) => {
             value={newPassword}
             onChange={handlePasswordChange}
             placeholder='password'
-          /> <br />
-        <button id='create' type="submit">add employee</button>
+          /> <br/>
+        <button id='createUser' type="submit">add employee</button>
       </form>
     </div>
   )

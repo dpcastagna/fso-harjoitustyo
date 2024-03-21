@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react"
 import '../App.css'
+
+import { getMyEmployees } from "../services/userService"
+import { getMyCompanyShifts } from "../services/shiftService"
+
 import AllEmployees from "./AllEmployees"
 import AddUser from "./AddUser"
 import RemoveUser from "./RemoveUser"
-import { getMyEmployees } from "../services/userService"
-import { getMyCompanyShifts } from "../services/shiftService"
+import AddShift from "./AddShift"
 
 const BossBox = (props) => {
   const [employees, setEmployees] = useState([])
@@ -28,7 +31,9 @@ const BossBox = (props) => {
   const getShifts = async () => {
     setShifts(await getMyCompanyShifts(props.user.company))
   }
-  console.log(shifts)
+  const addShift = (obj) => {
+    setShifts(shifts.concat(obj))
+  }
 
   return(
     <div id='palikka'>
@@ -37,8 +42,9 @@ const BossBox = (props) => {
       <div id="vaaka" >
         <AddUser role='employee' company={props.user.company} addEmployee={addEmployee} />
         <RemoveUser employees={employees} deleteEmployee={deleteEmployee} />
+        <AddShift company={props.user.company} employees={employees} addShift={addShift} />
       </div>
-      <AllEmployees companyId={props.user.company} employees={employees} />
+      <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
     </div>
   )
 }

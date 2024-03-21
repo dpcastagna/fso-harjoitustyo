@@ -12,12 +12,12 @@ export const getMyCompanyShifts = async (companyId) => {
   return response
 }
 
-export const createNew = async (newObj) => {
+export const createNewShift = async (newObj) => {
   const object = { 
-    name: newObj.name,
-    username: newObj.username,
-    password: newObj.password,
-    role: newObj.role,
+    date: newObj.date,
+    start: newObj.start,
+    end: newObj.end,
+    employeeId: newObj.employeeId,
     company: newObj.company
   }
   try {
@@ -30,7 +30,7 @@ export const createNew = async (newObj) => {
   }
 }
 
-export const removeOld = async (id) => {
+export const removeOldShift = async (id) => {
   try {
     const response = await axios.delete(`${baseUrl}/${id}`)
     
@@ -41,4 +41,4 @@ export const removeOld = async (id) => {
   }
 }
 
-export default { getAll, createNew, getMyCompanyShifts, removeOld }
+export default { getAll, createNewShift, getMyCompanyShifts, removeOldShift }

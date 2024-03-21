@@ -8,24 +8,23 @@ const AllEmployees = (props) => {
   useEffect(() => {
     setEmployees(props.employees)
   }, [props.employees])
-  // const getEmployees = async () => {
-  //   setEmployees(await getMyEmployees(props.companyId))
-  // }
-  
-  // if (employees == []) {
-  //   return <>Loading...</>
-  // }
+  console.log(employees)
   return (
     <div id="vaaka">
       {
         employees.map(employee => {
           return (
-            <div key={employee.name} id="palikka">
+            <div key={employee.id} id="palikka">
               Name: {employee.name}<br/>
-              Working: {String(employee.working)}<br/>
-              Shifts: {employee.shifts.length}<br/>
               Messages: {employee.messages.length}<br/>
               Securitylevel: {employee.securityLevel}<br/>
+              Shifts: {employee.shifts.length}<br/>
+              { employee.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> } {/* <br/> */}
+              {
+                employee.shifts.length > 0
+                ? employee.shifts.map(shift => <div key={shift.id }>{shift.start}-{shift.end} {shift.date} <br/></div>)
+                : <>No shifts</>
+              }
             </div>
           )
         })
