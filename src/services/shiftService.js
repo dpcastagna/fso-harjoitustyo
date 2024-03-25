@@ -22,7 +22,6 @@ export const createNewShift = async (newObj) => {
   }
   try {
     const response = await axios.post(baseUrl, object)
-    
     return response.data
   } catch (error) {
     console.log(error.message)

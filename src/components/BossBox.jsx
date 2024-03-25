@@ -33,6 +33,17 @@ const BossBox = (props) => {
   }
   const addShift = (obj) => {
     setShifts(shifts.concat(obj))
+    const employeeToAddShift = employees.find(employee => employee.id === obj.employeeId)
+    employeeToAddShift.shifts = employeeToAddShift.shifts.concat(obj)
+    
+    const otherEmployees = employees.filter(employee => employee.id !== obj.employeeId)
+    
+    setEmployees(otherEmployees.concat(employeeToAddShift).sort((a, b) => {
+      if(a.id < b.id) {
+        return -1
+      }
+      return 1
+    }))
   }
 
   return(
