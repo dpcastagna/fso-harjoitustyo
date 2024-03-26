@@ -13,7 +13,6 @@ const AddShift = (props) => {
     setEmployeeList(props.employees)
   }, [props.employees])
 
-  // console.log(employeeList, props.users)
   const handleDateChange = (event) => {
     setNewDate(event.target.value)
   }
@@ -44,7 +43,7 @@ const AddShift = (props) => {
     setNewStart('')
     setNewEnd('')
   }
-  // console.log(newShiftFor)
+  
   return (
     <div id='palikka'>
       <form onSubmit={addShift}>
@@ -82,8 +81,8 @@ const AddShift = (props) => {
             <option>Select...</option>
             {
               employeeList.map(employee => {
-                // console.log(employee)
-                return(
+                
+                return (
                   <option key={employee.id} value={employee.id}>{employee.name}</option>
                 )
               }

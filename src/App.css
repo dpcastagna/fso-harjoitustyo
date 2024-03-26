@@ -1,9 +1,9 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  background-color: white;
+  /* max-width: 1280px; */
+  /* margin: 0 auto; */
+  /* padding: 2rem; */
+  /* text-align: center; */
+  /* background-color: white; */
   color: black;
 }
 
@@ -33,6 +33,26 @@
 
 #notWorking {
   background-color: red;
+}
+
+#singleEmpBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+#singleEmpLeft {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+}
+
+#singleEmpRight {
+  display: flex;
+  flex: 10;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
 }
 /* .logo {
   height: 6em;

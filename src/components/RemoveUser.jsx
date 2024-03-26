@@ -15,7 +15,6 @@ const RemoveUser = (props) => {
   
   const deleteUser = async (event) => {
     event.preventDefault()
-    console.log(oldName)
     try {
       await removeOld(oldName)
       props.deleteEmployee(oldName)

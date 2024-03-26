@@ -8,6 +8,8 @@ import AllEmployees from "./AllEmployees"
 import AddUser from "./AddUser"
 import RemoveUser from "./RemoveUser"
 import AddShift from "./AddShift"
+import SingleEmployee from "./SingleEmployee"
+import ShiftsMonth from "./ShiftsMonth"
 
 const BossBox = (props) => {
   const [employees, setEmployees] = useState([])
@@ -38,7 +40,7 @@ const BossBox = (props) => {
     
     const otherEmployees = employees.filter(employee => employee.id !== obj.employeeId)
     
-    setEmployees(otherEmployees.concat(employeeToAddShift).sort((a, b) => {
+    setEmployees(otherEmployees.concat(employeeToAddShift).sort((a, b) => {  //sorting employees to prevent their order changing
       if(a.id < b.id) {
         return -1
       }
@@ -56,6 +58,8 @@ const BossBox = (props) => {
         <AddShift company={props.user.company} employees={employees} addShift={addShift} />
       </div>
       <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
+      <SingleEmployee employees={employees} />
+      <ShiftsMonth />
     </div>
   )
 }
