@@ -54,6 +54,14 @@
   flex-direction: column;
   /* justify-content: space-evenly; */
 }
+
+table, th, td {
+  border:1px solid black;
+}
+
+th, td {
+  text-align: "center";
+}
 /* .logo {
   height: 6em;
   padding: 1.5em;

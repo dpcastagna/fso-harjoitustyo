@@ -59,7 +59,7 @@ const BossBox = (props) => {
       </div>
       <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
       <SingleEmployee employees={employees} />
-      <ShiftsMonth />
+      <ShiftsMonth employees={employees} />
     </div>
   )
 }
