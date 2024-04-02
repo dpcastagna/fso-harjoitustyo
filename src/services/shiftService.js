@@ -32,7 +32,6 @@ export const createNewShift = async (newObj) => {
 export const removeOldShift = async (id) => {
   try {
     const response = await axios.delete(`${baseUrl}/${id}`)
-    
     return response.data
   } catch (error) {
     console.log(error.message)

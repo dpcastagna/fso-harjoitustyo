@@ -82,9 +82,9 @@ const ShiftsMonth = (props) => {
                       const monthIndex = months.indexOf(month)
                       const d = new Date(year, monthIndex, day)
                       const date = dayjs(d)
-                      console.log(d)
+                      // console.log(emp.shifts)
                       return (
-                        <td key={emp.id}>{date.year()}</td>
+                        <td key={emp.id}>{`${date.day()} ${date.month()} ${date.year()}`}</td>
                       )
                     })
                   }

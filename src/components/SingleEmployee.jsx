@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+import { removeOldShift } from "../services/shiftService"
 
 const SingleEmployee = (props) => {
   const [employee, setEmployee] = useState(null)
@@ -8,6 +8,15 @@ const SingleEmployee = (props) => {
   useEffect(() => {
     setEmployees(props.employees)
   }, [props.employees])
+
+  const removeShift = async (id) => {
+    try {
+      await removeOldShift(id)
+      props.deleteShift(id)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 
   return (
     <div id="singleEmpBox">
@@ -32,7 +41,14 @@ const SingleEmployee = (props) => {
                 { employee.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> } {/* <br/> */}
                 {
                   employee.shifts.length > 0
-                  ? employee.shifts.map(shift => <div key={shift.id }>{shift.start}-{shift.end} {shift.date} <br/></div>)
+                  ? employee.shifts.map(shift => {
+                    return (
+                      <div key={shift.id}>
+                        {shift.start}-{shift.end} {shift.date} &nbsp;
+                        <button onClick={() => {removeShift(shift.id)}}>delete</button> <br/>
+                      </div>
+                    )
+                  })
                   : <>No shifts</>
                 }
               </div>
