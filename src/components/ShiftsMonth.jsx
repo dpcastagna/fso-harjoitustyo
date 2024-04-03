@@ -17,12 +17,6 @@ const ShiftsMonth = (props) => {
   const years = Array.from({ length: 16 }, (_, i) => /* new Date().getFullYear() */ 2020 + i)
   const days = Array.from({ length: dayjs(`${year}-${month}-15`).daysInMonth() }, (_, i) => 1 + i)
 
-
-
-  // const daysOfMonth = (y, m) => {
-  //   return new Date(y, m, 0).getDate()
-  // }
-
   const handleMonthChange = (event) => {
     setMonth(event.target.value)
   }
@@ -74,15 +68,18 @@ const ShiftsMonth = (props) => {
         <tbody>
           {
             days.map(day => {
+              const monthIndex = months.indexOf(month)
+              const d = new Date(year, monthIndex, day)
+              const date = dayjs(d)
               return (
                 <tr key={day}>
                   <td>{`${month} ${day}`}</td>
                   {
                     props.employees.map(emp => {
-                      const monthIndex = months.indexOf(month)
-                      const d = new Date(year, monthIndex, day)
-                      const date = dayjs(d)
-                      // console.log(emp.shifts)
+                      emp.shifts.map(shift => {
+                        console.log(shift.date)
+                        return (<></>)
+                      })
                       return (
                         <td key={emp.id}>{`${date.day()} ${date.month()} ${date.year()}`}</td>
                       )

@@ -52,13 +52,14 @@ const BossBox = (props) => {
   }
 
   const deleteShift = (id) => {
-    const employeeToDeleteShift = shifts.find(shift => shift.id === id).employeeId.id
+    const employeeToDeleteShiftId = shifts.find(shift => shift.id === id).employeeId.id
+    const employeeToDeleteShift = employees.find(employee => employee.id === employeeToDeleteShiftId)
     setShifts(shifts.filter(shift => shift.id !== id))
-    console.log(id, employeeToDeleteShift, shifts)
+    // console.log('id', id, 'emp id', employeeToDeleteShift, shifts)
     employeeToDeleteShift.shifts = employeeToDeleteShift.shifts.filter(shift => shift.id !== id)
-    
-    const otherEmployees = employees.filter(employee => employee.id !== employeeToDeleteShift.Id)
-    
+    // console.log('employeeToDeleteShift', employeeToDeleteShift)
+    const otherEmployees = employees.filter(employee => employee.id !== employeeToDeleteShiftId)
+    // console.log('otherEmployees', otherEmployees)
     setEmployees(otherEmployees.concat(employeeToDeleteShift).sort((a, b) => {  //sorting employees to prevent their order changing
       if(a.id < b.id) {
         return -1

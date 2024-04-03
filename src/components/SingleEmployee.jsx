@@ -8,7 +8,7 @@ const SingleEmployee = (props) => {
   useEffect(() => {
     setEmployees(props.employees)
   }, [props.employees])
-
+  
   const removeShift = async (id) => {
     try {
       await removeOldShift(id)
@@ -38,7 +38,7 @@ const SingleEmployee = (props) => {
                 Messages: {employee.messages.length}<br/>
                 Securitylevel: {employee.securityLevel}<br/>
                 Shifts: {employee.shifts.length}<br/>
-                { employee.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> } {/* <br/> */}
+                { employee.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> }
                 {
                   employee.shifts.length > 0
                   ? employee.shifts.map(shift => {
