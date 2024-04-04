@@ -59,7 +59,11 @@ table, th, td {
   border:1px solid black;
 }
 
-th, td {
+th {
+  text-align: "center";
+}
+
+td {
   text-align: "center";
 }
 /* .logo {

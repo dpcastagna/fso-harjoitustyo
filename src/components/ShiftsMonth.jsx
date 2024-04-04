@@ -1,5 +1,5 @@
 import '../App.css'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import dayjs from "dayjs"
 import localeData from "dayjs/plugin/localeData"
 dayjs.extend(localeData)
@@ -14,8 +14,13 @@ const ShiftsMonth = (props) => {
 
   const [month, setMonth] = useState(months[dayjs().month()])
   const [year, setYear] = useState(dayjs().year())
-  const years = Array.from({ length: 16 }, (_, i) => /* new Date().getFullYear() */ 2020 + i)
+  const years = Array.from({ length: 16 }, (_, i) => 2020 + i)
   const days = Array.from({ length: dayjs(`${year}-${month}-15`).daysInMonth() }, (_, i) => 1 + i)
+  const [shifts, setShifts] = useState([])
+
+  useEffect(() => {
+    setShifts(props.shifts)
+  }, [props.shifts])
 
   const handleMonthChange = (event) => {
     setMonth(event.target.value)
@@ -24,8 +29,6 @@ const ShiftsMonth = (props) => {
     setYear(event.target.value)
   }
 
-  console.log(year, month, monthsNumbers, days, years, dayjs(`${year}-${month}-15`), dayjs().month())
-  
   return (
     <div id="palikka">
       <select 
@@ -76,12 +79,18 @@ const ShiftsMonth = (props) => {
                   <td>{`${month} ${day}`}</td>
                   {
                     props.employees.map(emp => {
-                      emp.shifts.map(shift => {
-                        console.log(shift.date)
-                        return (<></>)
-                      })
+                      const shiftFound = shifts.find(shift => shift.employeeId.id === emp.id)
+                      console.log(shiftFound)
                       return (
-                        <td key={emp.id}>{`${date.day()} ${date.month()} ${date.year()}`}</td>
+                        <>
+                        { shiftFound === undefined
+                          ? <td>Free</td>
+                          : shiftFound.date.split('T')[0] === date.format().split('T')[0]
+                            ? <td>{shiftFound.start}-{shiftFound.end}</td>
+                            : <td>Free</td>
+                        }
+                        </>
+                        // <td key={emp.id}>{`${date.year()}-${date.month() + 1}-${date.date()}`}</td>
                       )
                     })
                   }
