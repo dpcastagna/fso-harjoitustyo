@@ -17,10 +17,12 @@ const ShiftsMonth = (props) => {
   const years = Array.from({ length: 16 }, (_, i) => 2020 + i)
   const days = Array.from({ length: dayjs(`${year}-${month}-15`).daysInMonth() }, (_, i) => 1 + i)
   const [shifts, setShifts] = useState([])
+  const [employees, setEmployees] = useState([])
 
   useEffect(() => {
     setShifts(props.shifts)
-  }, [props.shifts])
+    setEmployees(props.employees)
+  }, [props.shifts, props.employees])
 
   const handleMonthChange = (event) => {
     setMonth(event.target.value)
@@ -28,7 +30,7 @@ const ShiftsMonth = (props) => {
   const handleYearChange = (event) => {
     setYear(event.target.value)
   }
-
+  console.log(shifts)
   return (
     <div id="palikka">
       <select 
@@ -64,7 +66,7 @@ const ShiftsMonth = (props) => {
           <tr>
             <th>------</th>
             {
-              props.employees.map(emp => <th key={emp.id}>{emp.name}</th>)
+              employees.map(emp => <th key={emp.id}>{emp.name}</th>)
             }
           </tr>
         </thead>
@@ -78,19 +80,16 @@ const ShiftsMonth = (props) => {
                 <tr key={day}>
                   <td>{`${month} ${day}`}</td>
                   {
-                    props.employees.map(emp => {
-                      const shiftFound = shifts.find(shift => shift.employeeId.id === emp.id)
-                      console.log(shiftFound)
+                    employees.map(emp => {
+                      const shiftFound = shifts.find(shift => shift.employeeId.id === emp.id && shift.date.split('T')[0] === date.format().split('T')[0])
+                      
                       return (
-                        <>
+                        <td key={emp.id}>
                         { shiftFound === undefined
-                          ? <td>Free</td>
-                          : shiftFound.date.split('T')[0] === date.format().split('T')[0]
-                            ? <td>{shiftFound.start}-{shiftFound.end}</td>
-                            : <td>Free</td>
+                          ? `Free`
+                          : `${shiftFound.start}-${shiftFound.end}`
                         }
-                        </>
-                        // <td key={emp.id}>{`${date.year()}-${date.month() + 1}-${date.date()}`}</td>
+                        </td>
                       )
                     })
                   }
