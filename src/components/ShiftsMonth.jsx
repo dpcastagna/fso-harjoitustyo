@@ -30,7 +30,7 @@ const ShiftsMonth = (props) => {
   const handleYearChange = (event) => {
     setYear(event.target.value)
   }
-  console.log(shifts)
+  
   return (
     <div id="palikka">
       <select 
@@ -87,7 +87,7 @@ const ShiftsMonth = (props) => {
                         <td key={emp.id}>
                         { shiftFound === undefined
                           ? `Free`
-                          : `${shiftFound.start}-${shiftFound.end}`
+                          : <b>{`${shiftFound.start}-${shiftFound.end}`}</b>
                         }
                         </td>
                       )

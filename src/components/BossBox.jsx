@@ -37,9 +37,10 @@ const BossBox = (props) => {
   }
 
   const addShift = (obj) => {
-    setShifts(shifts.concat(obj))
     const employeeToAddShift = employees.find(employee => employee.id === obj.employeeId)
     employeeToAddShift.shifts = employeeToAddShift.shifts.concat(obj)
+    
+    setShifts(shifts.concat({...obj, employeeId: { name: employeeToAddShift.name, id: employeeToAddShift.id }}))
     
     const otherEmployees = employees.filter(employee => employee.id !== obj.employeeId)
     
@@ -55,11 +56,11 @@ const BossBox = (props) => {
     const employeeToDeleteShiftId = shifts.find(shift => shift.id === id).employeeId.id
     const employeeToDeleteShift = employees.find(employee => employee.id === employeeToDeleteShiftId)
     setShifts(shifts.filter(shift => shift.id !== id))
-    // console.log('id', id, 'emp id', employeeToDeleteShift, shifts)
+    
     employeeToDeleteShift.shifts = employeeToDeleteShift.shifts.filter(shift => shift.id !== id)
-    // console.log('employeeToDeleteShift', employeeToDeleteShift)
+    
     const otherEmployees = employees.filter(employee => employee.id !== employeeToDeleteShiftId)
-    // console.log('otherEmployees', otherEmployees)
+    
     setEmployees(otherEmployees.concat(employeeToDeleteShift).sort((a, b) => {  //sorting employees to prevent their order changing
       if(a.id < b.id) {
         return -1
@@ -70,7 +71,7 @@ const BossBox = (props) => {
 
   return(
     <div id='palikka'>
-      Jepen korjaamo<br/>
+      Company name: {props.user.name} <br/>
       Employees: {employees.length}
       <div id="vaaka" >
         <AddUser role='employee' company={props.user.company} addEmployee={addEmployee} />

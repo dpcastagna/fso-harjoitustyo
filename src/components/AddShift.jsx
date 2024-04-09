@@ -8,6 +8,7 @@ const AddShift = (props) => {
   const [newEnd, setNewEnd] = useState('')
   const [newShiftFor, setNewShiftFor] = useState('')
   const [employeeList, setEmployeeList] = useState([])
+  const [shiftWarning, setShiftWarning] = useState('')
 
   useEffect(() => {
     setEmployeeList(props.employees)
@@ -22,8 +23,9 @@ const AddShift = (props) => {
   const handleEndChange = (event) => {
     setNewEnd(event.target.value)
   }
-  const handleShiftChange = (event) => {
+  const handleEmployeeChange = (event) => {
     setNewShiftFor(event.target.value)
+    const employeeShiftFound = ''
   }
 
   const addShift = async (event) => {
@@ -42,8 +44,11 @@ const AddShift = (props) => {
     setNewDate('')
     setNewStart('')
     setNewEnd('')
+    const element = document.getElementById("employeeSelect")
+    element.value = "default"
+    setShiftWarning('')
   }
-  
+  console.log(newDate)
   return (
     <div id='palikka'>
       <form onSubmit={addShift}>
@@ -77,8 +82,8 @@ const AddShift = (props) => {
             max='23'
           /> <br/>
         employee:
-          <select onChange={handleShiftChange}>
-            <option>Select...</option>
+          <select name="employeeSelect" id="employeeSelect" onChange={handleEmployeeChange}>
+            <option value="default">Select...</option>
             {
               employeeList.map(employee => {
                 
@@ -88,7 +93,7 @@ const AddShift = (props) => {
               }
               )
             }
-          </select> <br/>
+          </select> {shiftWarning} <br/>
         <button id='createShift' type="submit">add shift</button>
       </form>
     </div>
