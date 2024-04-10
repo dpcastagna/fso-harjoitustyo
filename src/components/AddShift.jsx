@@ -9,6 +9,7 @@ const AddShift = (props) => {
   const [newShiftFor, setNewShiftFor] = useState('')
   const [employeeList, setEmployeeList] = useState([])
   const [shiftWarning, setShiftWarning] = useState('')
+  const [valid, setValid] = useState(false)
 
   useEffect(() => {
     setEmployeeList(props.employees)
@@ -25,9 +26,13 @@ const AddShift = (props) => {
   }
   const handleEmployeeChange = (event) => {
     setNewShiftFor(event.target.value)
-    const employeeShiftFound = ''
+    console.log('newShiftFor', newShiftFor, 'event', event.target.value)
+    const employeeFound = props.employees.find(emp => emp.id === event.target.value)
+    console.log(employeeFound, newDate)
+    const employeeShiftFound = employeeFound.shifts.find(shift => shift.date.split('T')[0] === newDate)
+    console.log(employeeShiftFound)
   }
-
+  
   const addShift = async (event) => {
     event.preventDefault()
     const shiftObject = {
@@ -41,14 +46,22 @@ const AddShift = (props) => {
     const newShift = await createNewShift(shiftObject)
     props.addShift(newShift)
 
-    setNewDate('')
-    setNewStart('')
-    setNewEnd('')
+    setNewDate(null)
+    setNewStart(null)
+    setNewEnd(null)
+    setNewShiftFor(null)
     const element = document.getElementById("employeeSelect")
     element.value = "default"
     setShiftWarning('')
+    setValid(false)
   }
-  console.log(newDate)
+
+  const checkValid = () => {
+    newDate && newStart && newEnd && newShiftFor
+    ? setValid(true)
+    : null
+  }
+  
   return (
     <div id='palikka'>
       <form onSubmit={addShift}>
