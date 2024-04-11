@@ -26,11 +26,11 @@ const AddShift = (props) => {
   }
   const handleEmployeeChange = (event) => {
     setNewShiftFor(event.target.value)
-    console.log('newShiftFor', newShiftFor, 'event', event.target.value)
-    const employeeFound = props.employees.find(emp => emp.id === event.target.value)
-    console.log(employeeFound, newDate)
-    const employeeShiftFound = employeeFound.shifts.find(shift => shift.date.split('T')[0] === newDate)
-    console.log(employeeShiftFound)
+    // console.log('newShiftFor', newShiftFor, 'event', event.target.value)
+    // const employeeFound = props.employees.find(emp => emp.id === event.target.value)
+    // console.log(employeeFound, newDate)
+    // const employeeShiftFound = employeeFound.shifts.find(shift => shift.date.split('T')[0] === newDate)
+    // console.log(employeeShiftFound)
   }
   
   const addShift = async (event) => {
@@ -46,20 +46,32 @@ const AddShift = (props) => {
     const newShift = await createNewShift(shiftObject)
     props.addShift(newShift)
 
-    setNewDate(null)
-    setNewStart(null)
-    setNewEnd(null)
-    setNewShiftFor(null)
+    setNewDate('')
+    setNewStart('')
+    setNewEnd('')
+    setNewShiftFor('')
     const element = document.getElementById("employeeSelect")
     element.value = "default"
     setShiftWarning('')
     setValid(false)
   }
 
+  const checkShift = () => {
+    console.log('newShiftFor', newShiftFor)
+    const employeeFound = props.employees.find(emp => emp.id === newShiftFor)
+    console.log(employeeFound, newDate)
+    if (employeeFound) {
+      const employeeShiftFound = employeeFound.shifts.find(shift => shift.date.split('T')[0] === newDate)
+      console.log(employeeShiftFound)
+      // employeeShiftFound ? setShiftWarning('apuva') : null
+    }
+    
+  }
+
   const checkValid = () => {
-    newDate && newStart && newEnd && newShiftFor
-    ? setValid(true)
-    : null
+    return newDate !== '' && newStart !== '' && newEnd !== '' && newShiftFor !== '' && shiftWarning === ''
+    ? <button id='createShift' type="submit">add shift</button>
+    : <button id='createShift' type="submit" disabled>add shift</button>
   }
   
   return (
@@ -107,7 +119,9 @@ const AddShift = (props) => {
               )
             }
           </select> {shiftWarning} <br/>
-        <button id='createShift' type="submit">add shift</button>
+        { checkShift() }
+        { checkValid() }
+        
       </form>
     </div>
   )
