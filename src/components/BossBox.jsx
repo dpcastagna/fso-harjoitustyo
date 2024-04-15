@@ -10,10 +10,12 @@ import RemoveUser from "./RemoveUser"
 import AddShift from "./AddShift"
 import SingleEmployee from "./SingleEmployee"
 import ShiftsMonth from "./ShiftsMonth"
+import TopMenu from "./TopMenu"
 
 const BossBox = (props) => {
   const [employees, setEmployees] = useState([])
   const [shifts, setShifts] = useState([])
+  const menuItems = ['Month', 'Messages', 'All employees', 'Add/remove employee']
 
   useEffect(() => {
     getEmployees()
@@ -73,6 +75,7 @@ const BossBox = (props) => {
     <div id='palikka'>
       Company name: {props.user.name} <br/>
       Employees: {employees.length}
+      <TopMenu items={menuItems} />
       <div id="vaaka" >
         <AddUser role='employee' company={props.user.company} addEmployee={addEmployee} />
         <RemoveUser employees={employees} deleteEmployee={deleteEmployee} />

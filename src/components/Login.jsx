@@ -1,3 +1,4 @@
+import '../App.css'
 import { useState, useEffect } from 'react'
 import loginService from '../services/loginService.js'
 
@@ -29,7 +30,7 @@ const Login = (props) => {
   }
   
   return (
-    <div>
+    <div id="palikka">
       <h1>Login</h1>
 
       <form onSubmit={handleLogin}>

@@ -30,14 +30,14 @@ const App = () => {
       <Notification />
       { user !== null
         ? <LoggedIn user={user} setUser={setUser} />
-        : <>
+        : <div id="vaaka">
             <Login user={user} setUser={setUser} />
             <br/>
             or
             <br/>
             <br/>
             <RegisterCompany />
-          </>
+          </div>
       }
     </>
   )
