@@ -20,15 +20,16 @@ messagesRouter.get('/:id', async (request, response) => {
 })
 
 messagesRouter.post('/', async (request, response) => {
-  const { content, sender, receiver } = request.body
+  const { subject, content, sender, receiver, company } = request.body
 
   const message = new Message({
+    subject,
     content,
     timeSent: new Date(),
     read: false,
     sender,
     receiver,
-    company: 2134,
+    company,
   })
 
   const savedMessage = await message.save()

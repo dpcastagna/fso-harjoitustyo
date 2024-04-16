@@ -15,7 +15,8 @@ import TopMenu from "./TopMenu"
 const BossBox = (props) => {
   const [employees, setEmployees] = useState([])
   const [shifts, setShifts] = useState([])
-  const menuItems = ['Month', 'Messages', 'All employees', 'Add/remove employee']
+  const menuItems = ['Month', 'Messages', 'All employees', 'Add/remove employee/shift', 'All tabs']
+  const [menuTab, setMenuTab] = useState(menuItems[0])
 
   useEffect(() => {
     getEmployees()
@@ -71,19 +72,44 @@ const BossBox = (props) => {
     }))
   }
 
-  return(
+  const changeMenuTab = (tabName) => {
+    setMenuTab(tabName)
+  }
+
+  return (
     <div id='palikka'>
       Company name: {props.user.name} <br/>
       Employees: {employees.length}
-      <TopMenu items={menuItems} />
-      <div id="vaaka" >
-        <AddUser role='employee' company={props.user.company} addEmployee={addEmployee} />
-        <RemoveUser employees={employees} deleteEmployee={deleteEmployee} />
-        <AddShift company={props.user.company} employees={employees} addShift={addShift} />
-      </div>
-      <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
-      <SingleEmployee employees={employees} deleteShift={deleteShift} />
-      <ShiftsMonth employees={employees} shifts={shifts} />
+      <TopMenu items={menuItems} changeMenuTab={changeMenuTab} />
+      {
+        menuTab === 'Month'
+        ? <ShiftsMonth employees={employees} shifts={shifts} />
+        : menuTab === 'Messages'
+          ? <>Messages here</>
+          : menuTab === 'All employees'
+            ? <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
+            : menuTab === 'Add/remove employee/shift'
+              ? <> 
+                  <div id="vaaka" >
+                    <AddUser role='employee' company={props.user.company} addEmployee={addEmployee} />
+                    <RemoveUser employees={employees} deleteEmployee={deleteEmployee} />
+                    <AddShift company={props.user.company} employees={employees} addShift={addShift} />
+                  </div>
+                  <SingleEmployee employees={employees} deleteShift={deleteShift} />
+                </>
+              : menuTab === 'All tabs'
+                ? <>
+                    <div id="vaaka" >
+                      <AddUser role='employee' company={props.user.company} addEmployee={addEmployee} />
+                      <RemoveUser employees={employees} deleteEmployee={deleteEmployee} />
+                      <AddShift company={props.user.company} employees={employees} addShift={addShift} />
+                    </div>
+                    <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
+                    <SingleEmployee employees={employees} deleteShift={deleteShift} />
+                    <ShiftsMonth employees={employees} shifts={shifts} />
+                  </>
+                : null
+      }
     </div>
   )
 }

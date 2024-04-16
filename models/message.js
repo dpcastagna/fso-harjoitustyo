@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
 const messageSchema = mongoose.Schema({
+  subject: String,
   content: String,
   timeSent: Date,
   read: Boolean,
@@ -12,10 +13,7 @@ const messageSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  company: Number,/* {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Company'
-  }, */
+  company: Number,
 })
 
 messageSchema.set('toJSON', {
