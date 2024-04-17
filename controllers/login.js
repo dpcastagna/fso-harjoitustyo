@@ -1,10 +1,9 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import express from 'express'
-// const loginRouter = require('express').Router()
 import User from '../models/user.js'
 
-const loginRouter = express.Router();
+const loginRouter = express.Router()
 
 loginRouter.post('/', async (request, response) => {
   const { username, password } = request.body

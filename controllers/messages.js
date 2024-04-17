@@ -1,7 +1,6 @@
-import bcrypt from 'bcrypt'
-import express from 'express'
+// import bcrypt from 'bcrypt'
 // import jwt from 'jsonwebtoken'
-// import Company from '../models/company.js'
+import express from 'express'
 import User from '../models/user.js'
 import Message from '../models/message.js'
 
@@ -9,7 +8,7 @@ const messagesRouter = express.Router();
 
 messagesRouter.get('/', async (request, response) => {
     const messages = await Message
-      .find({}).populate('sender', { id: 1, name: 1 }).populate('receiver', { id: 1, name: 1 })
+      .find({}).populate('sender', { id: 1, username: 1 }).populate('receiver', { id: 1, username: 1 })
     response.json(messages)
 })
 

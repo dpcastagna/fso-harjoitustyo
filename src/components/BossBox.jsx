@@ -11,6 +11,7 @@ import AddShift from "./AddShift"
 import SingleEmployee from "./SingleEmployee"
 import ShiftsMonth from "./ShiftsMonth"
 import TopMenu from "./TopMenu"
+import Messages from "./Messages"
 
 const BossBox = (props) => {
   const [employees, setEmployees] = useState([])
@@ -85,7 +86,7 @@ const BossBox = (props) => {
         menuTab === 'Month'
         ? <ShiftsMonth employees={employees} shifts={shifts} />
         : menuTab === 'Messages'
-          ? <>Messages here</>
+          ? <Messages user={props.user} />
           : menuTab === 'All employees'
             ? <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
             : menuTab === 'Add/remove employee/shift'

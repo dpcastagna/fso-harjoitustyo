@@ -20,10 +20,7 @@ const userSchema = mongoose.Schema({
       ref: 'Message'
     }
   ],
-  company: Number,/* {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Company'
-  }, */
+  company: Number,
   securityLevel: Number,
   working: Boolean,
 })
