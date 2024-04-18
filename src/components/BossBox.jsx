@@ -81,7 +81,7 @@ const BossBox = (props) => {
     <div id='palikka'>
       Company name: {props.user.name} <br/>
       Employees: {employees.length}
-      <TopMenu items={menuItems} changeMenuTab={changeMenuTab} />
+      <TopMenu items={menuItems} changeMenuTab={changeMenuTab} currentTab={menuTab} />
       {
         menuTab === 'Month'
         ? <ShiftsMonth employees={employees} shifts={shifts} />
@@ -108,6 +108,7 @@ const BossBox = (props) => {
                     <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
                     <SingleEmployee employees={employees} deleteShift={deleteShift} />
                     <ShiftsMonth employees={employees} shifts={shifts} />
+                    <Messages user={props.user} />
                   </>
                 : null
       }

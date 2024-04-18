@@ -12,12 +12,25 @@ const TopMenu = (props) => {
     <div id="palikka">
       <div id="vaaka">
         {
-          items.map(item => 
-          <button key={item} onClick={() => {
-            props.changeMenuTab(item)}}
-          >
-            {item}
-          </button>)
+          items.map(item => {
+            return (
+              item === props.currentTab
+              ? <div key={item}>
+                  <button onClick={() => {
+                    props.changeMenuTab(item)}}
+                  id="palikka">
+                    {item}
+                  </button>
+                </div>
+              : <div key={item}>
+                  <button onClick={() => {
+                    props.changeMenuTab(item)}}
+                  >
+                    {item}
+                  </button>
+                </div>
+            )
+          })
         }
       </div>
     </div>
