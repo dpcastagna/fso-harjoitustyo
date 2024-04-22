@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../App.css'
 import { getMySentMessages, getMyReceivedMessages } from '../services/messageService'
+import SingleMessage from './SingleMessage'
 
 const Messages = (props) => {
   const [sentMessages, setSentMessages] = useState(null)
@@ -22,16 +23,16 @@ const Messages = (props) => {
   return (
     <div id="palikka">
       <div id="vaaka">
-        <div id="pysty">
+        <div id="pysty" key="sentMessages">
           <u>Sent messages</u>
           {
-            sentMessages.map(message => <div key={message.id}>{message.content}</div>)
+            sentMessages.map(message => <SingleMessage key={message.id} message={message} />)
           }
         </div>
-        <div id="pysty">
+        <div id="pysty" key="receivedMessages">
           <u>Received messages</u>
           {
-            receivedMessages.map(message => <div key={message.id}>{message.content}</div>)
+            receivedMessages.map(message => <SingleMessage key={message.id} message={message} />)
           }
         </div>
       </div>

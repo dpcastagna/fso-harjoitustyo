@@ -8,7 +8,7 @@ const messagesRouter = express.Router();
 
 messagesRouter.get('/', async (request, response) => {
     const messages = await Message
-      .find({}).populate('sender', { id: 1, username: 1 }).populate('receiver', { id: 1, username: 1 })
+      .find({}).populate('sender', { id: 1, username: 1, name: 1 }).populate('receiver', { id: 1, username: 1, name: 1 })
     response.json(messages)
 })
 
