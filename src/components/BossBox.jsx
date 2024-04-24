@@ -86,7 +86,7 @@ const BossBox = (props) => {
         menuTab === 'Month'
         ? <ShiftsMonth employees={employees} shifts={shifts} />
         : menuTab === 'Messages'
-          ? <Messages user={props.user} />
+          ? <Messages user={props.user} employees={employees} />
           : menuTab === 'All employees'
             ? <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
             : menuTab === 'Add/remove employee/shift'
@@ -108,7 +108,7 @@ const BossBox = (props) => {
                     <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
                     <SingleEmployee employees={employees} deleteShift={deleteShift} />
                     <ShiftsMonth employees={employees} shifts={shifts} />
-                    <Messages user={props.user} />
+                    <Messages user={props.user} employees={employees} />
                   </>
                 : null
       }
