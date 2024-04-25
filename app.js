@@ -7,6 +7,7 @@ import usersRouter from './controllers/users.js'
 import shiftsRouter from './controllers/shifts.js'
 import messagesRouter from './controllers/messages.js'
 import loginRouter from './controllers/login.js'
+import { tokenExtractor, userExtractor } from './utils/middleware.js'
 
 import mongoose from 'mongoose'
 
@@ -26,6 +27,8 @@ mongoose.connect(eval(DEV) === true ? process.env.MONGODB_URI_DEV : process.env.
 app.use(cors())
 app.use(express.json())
 app.use(express.static('dist'))
+app.use(tokenExtractor)
+app.use(userExtractor)
 
 app.get('/version', (req, res) => {
   res.send('11 tag action toimii?') // change this string to ensure a new version deployed

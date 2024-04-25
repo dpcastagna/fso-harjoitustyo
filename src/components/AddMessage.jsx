@@ -3,17 +3,15 @@ import '../App.css'
 import { createNewShift } from "../services/shiftService"
 
 const AddMessage = (props) => {
-  // const [newDate, setNewDate] = useState('')
-  const [newStart, setNewStart] = useState('')
-  const [newEnd, setNewEnd] = useState('')
-  const [newShiftFor, setNewShiftFor] = useState('')
+  const [subject, setSubject] = useState('')
+  const [content, setContent] = useState('')
+  const [messageFor, setMessageFor] = useState('')
   const [employeeList, setEmployeeList] = useState([])
-  // const [shiftWarning, setShiftWarning] = useState('')
 
   useEffect(() => {
     setEmployeeList(props.employees)
   }, [props.employees])
-  
+  console.log(props)
   // useEffect(() => {
   //   const employeeFound = props.employees.find(emp => emp.id === newShiftFor)
   //   if (employeeFound) {
@@ -22,83 +20,64 @@ const AddMessage = (props) => {
   //   }
   // }, [newDate, newShiftFor])
 
-
-  // const handleDateChange = (event) => {
-  //   setNewDate(event.target.value)
-  // }
-  const handleStartChange = (event) => {
-    setNewStart(event.target.value)
+  const handleSubjectChange = (event) => {
+    setSubject(event.target.value)
   }
-  const handleEndChange = (event) => {
-    setNewEnd(event.target.value)
+  const handleContentChange = (event) => {
+    setContent(event.target.value)
   }
   const handleEmployeeChange = (event) => {
-    setNewShiftFor(event.target.value)
+    setMessageFor(event.target.value)
   }
   
-  const addShift = async (event) => {
+  const addMessage = async (event) => {
     event.preventDefault()
-    const shiftObject = {
-      date: newDate,
-      start: newStart,
-      end: newEnd,
+    const messageObject = {
+      subject: subject,
+      content: content,
       company: props.company,
-      employeeId: newShiftFor,
+      employeeId: messageFor,
     }
     
-    const newShift = await createNewShift(shiftObject)
-    props.addShift(newShift)
+    const newMessage = await createNewShift(messageObject)
+    props.addShift(newMessage)
 
-    setNewDate('')
-    setNewStart('')
-    setNewEnd('')
-    setNewShiftFor('')
+    setSubject('')
+    setContent('')
+    setMessageFor('')
     const element = document.getElementById("employeeSelect")
     element.value = "default"
-    setShiftWarning('')
   }
 
   const checkValid = () => {
-    return /* newDate !== '' && */ newStart !== '' && newEnd !== '' && newShiftFor !== '' && shiftWarning === ''
-    ? <button id='createShift' type="submit">send message</button>
-    : <button id='createShift' type="submit" disabled>send message</button>
+    return subject !== '' && newEnd !== '' && newShiftFor !== ''
+    ? <button id='createMessage' type="submit">send message</button>
+    : <button id='createMessage' type="submit" disabled>send message</button>
   }
 
   return (
     <div>
       <center>
         <h2>New Message</h2>
-        <form onSubmit={addShift}>
-          {/* date:
-            <input
-              id='date'
-              type='date'
-              value={newDate}
-              onChange={handleDateChange}
-              placeholder='blog title'
-            /> <br/> */}
+        <form onSubmit={addMessage}>
           subject:
             <input
-              id='start'
+              id='subject'
               type='text'
-              value={newStart}
-              onChange={handleStartChange}
+              value={subject}
+              onChange={handleSubjectChange}
               // placeholder='8'
-              min='0'
-              max='23'
             /> <br/>
           message:
             <input
-              id='end'
+              id='content'
               type='text'
-              value={newEnd}
-              onChange={handleEndChange}
+              value={content}
+              onChange={handleContentChange}
               // placeholder='16'
-              min='0'
-              max='23'
             /> <br/>
           To employee:
-            <select name="employeeSelect" id="employeeSelect" onChange={handleEmployeeChange}>
+            <select name="employeeSelect" id="employeeSelectMessage" onChange={handleEmployeeChange}>
               <option value="default">Select...</option>
               {
                 employeeList.map(employee => {
@@ -111,7 +90,6 @@ const AddMessage = (props) => {
               }
             </select> <br/>
           { checkValid() } <br/>
-          {/* {shiftWarning} */}
         </form>
       </center>
     </div>
