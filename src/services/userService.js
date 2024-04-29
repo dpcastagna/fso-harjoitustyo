@@ -7,7 +7,15 @@ export const getAll = async () => {
 }
 
 export const getMyEmployees = async (companyId) => {
-  const response = (await axios.get(baseUrl)).data.filter(employee => employee.role === 'employee' && employee.company === companyId)
+  const token = `Bearer ${JSON.parse(localStorage.loggedInUser).token}`
+  // console.log(JSON.parse(localStorage.loggedInUser).token)
+  // console.log(token)
+
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  const response = (await axios.get(baseUrl, config)).data//.filter(employee => employee.role === 'employee' && employee.company === companyId)
   
   return response
 }
@@ -22,7 +30,6 @@ export const createNew = async (newObj) => {
   }
   try {
     const response = await axios.post(baseUrl, object)
-    
     return response.data
   } catch (error) {
     console.log(error.message)
