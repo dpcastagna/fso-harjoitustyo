@@ -44,6 +44,7 @@ export const userExtractor = async (request, response, next) => {
     // console.log('auth:', authorization.substring(7))
     const decodedToken = jwt.verify(request.token, process.env.JWT_SECRET)
     const user = await User.findById(decodedToken.id)
+    user.passwordHash = ''
     request.user = user
   } else {
     request.user = null

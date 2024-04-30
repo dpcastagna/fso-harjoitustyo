@@ -8,8 +8,15 @@ import Shift from '../models/shift.js'
 const usersRouter = express.Router();
 
 usersRouter.get('/', async (request, response) => {
-    const users = await User.find().populate({path: 'shifts'/* , { id: 1, date: 1, start: 1, end: 1 } */})
-    response.json(users)
+  // console.log(request.user)
+  if(!request.user) {
+    return response.status(400).json({
+      error: 'must be logged in to view users'
+    })
+  }
+  request.user.role === 'admin'
+  ? response.json(await User.find().populate({path: 'shifts'}))
+  : response.json(await User.find({ company: request.user.company, role: 'employee' }).populate({path: 'shifts'}))
 })
 
 usersRouter.get('/:id', async (request, response) => {
