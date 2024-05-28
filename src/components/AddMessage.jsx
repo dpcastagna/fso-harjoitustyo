@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import '../App.css'
-import { createNewShift } from "../services/shiftService"
+// import { createNewShift } from "../services/shiftService"
+import { createNew } from "../services/messageService"
 
 const AddMessage = (props) => {
   const [subject, setSubject] = useState('')
@@ -30,27 +31,28 @@ const AddMessage = (props) => {
     setMessageFor(event.target.value)
   }
   
-  const addMessage = async (event) => {
+  const newMessage = async (event) => {
     event.preventDefault()
     const messageObject = {
       subject: subject,
       content: content,
-      company: props.company,
-      employeeId: messageFor,
+      company: props.user.company,
+      receiver: messageFor,
+      // senderToken: props.user.token,
     }
-    
-    const newMessage = await createNewShift(messageObject)
-    props.addShift(newMessage)
+    console.log(messageObject)
+    const newMessage = await createNew(messageObject)
+    props.addMessage(newMessage)
 
     setSubject('')
     setContent('')
     setMessageFor('')
-    const element = document.getElementById("employeeSelect")
+    const element = document.getElementById("employeeSelectMessage")
     element.value = "default"
   }
 
   const checkValid = () => {
-    return subject !== '' && newEnd !== '' && newShiftFor !== ''
+    return subject !== '' && content !== '' && messageFor !== ''
     ? <button id='createMessage' type="submit">send message</button>
     : <button id='createMessage' type="submit" disabled>send message</button>
   }
@@ -59,7 +61,7 @@ const AddMessage = (props) => {
     <div>
       <center>
         <h2>New Message</h2>
-        <form onSubmit={addMessage}>
+        <form onSubmit={newMessage}>
           subject:
             <input
               id='subject'

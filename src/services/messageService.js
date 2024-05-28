@@ -9,6 +9,7 @@ export const getAll = async () => {
 
 export const getMySentMessages = async ( companyId, username ) => {
   const response = (await axios.get(baseUrl)).data.filter(message => message.sender.username === username && message.company === companyId)
+  console.log(response)
   return response
 }
 
@@ -18,15 +19,21 @@ export const getMyReceivedMessages = async (companyId, username) => {
 }
 
 export const createNew = async (newObj) => {
+  const token = `Bearer ${JSON.parse(localStorage.loggedInUser).token}`
+  const config = {
+    headers: { Authorization: token },
+  }
+
   const object = { 
     subject: newObj.subject,
     content: newObj.content,
-    sender: newObj.sender,
+    // senderToken: newObj.senderToken,
     receiver: newObj.receiver,
     company: newObj.company
   }
+  console.log(object, newObj)
   try {
-    const response = await axios.post(baseUrl, object)
+    const response = await axios.post(baseUrl, object, config)
     return response.data
   } catch (error) {
     console.log(error.message)
