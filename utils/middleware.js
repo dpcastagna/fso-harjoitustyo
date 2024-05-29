@@ -12,7 +12,6 @@ import User from '../models/user.js'
 
 export const tokenExtractor = (request, response, next) => {
   const authorization = request.get('authorization')
-  // console.log('tokenExtractorissa', authorization)
   if ( authorization && authorization.toLowerCase().startsWith('bearer ') ) {
     request.token = authorization.substring(7)
   } else {
@@ -39,7 +38,6 @@ export const tokenExtractor = (request, response, next) => {
 
 export const userExtractor = async (request, response, next) => {
   const authorization = request.get('authorization')
-  // console.log('userExtractorissa', authorization)
   if ( authorization && authorization.toLowerCase().startsWith('bearer ')) {
     // console.log('auth:', authorization.substring(7))
     const decodedToken = jwt.verify(request.token, process.env.JWT_SECRET)
@@ -49,8 +47,6 @@ export const userExtractor = async (request, response, next) => {
   } else {
     request.user = null
   }
-
-  //console.log(request.token)
 
   next()
 }

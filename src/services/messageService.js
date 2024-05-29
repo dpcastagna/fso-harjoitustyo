@@ -1,4 +1,5 @@
 import axios from 'axios'
+import axiosConfig from '../utils/axiosConfig'
 
 const baseUrl = eval(import.meta.env.VITE_DEV) ? 'http://localhost:5000/api/messages' : '/api/messages'
 
@@ -9,7 +10,6 @@ export const getAll = async () => {
 
 export const getMySentMessages = async ( companyId, username ) => {
   const response = (await axios.get(baseUrl)).data.filter(message => message.sender.username === username && message.company === companyId)
-  console.log(response)
   return response
 }
 
@@ -19,21 +19,20 @@ export const getMyReceivedMessages = async (companyId, username) => {
 }
 
 export const createNew = async (newObj) => {
-  const token = `Bearer ${JSON.parse(localStorage.loggedInUser).token}`
-  const config = {
-    headers: { Authorization: token },
-  }
+  // const token = `Bearer ${JSON.parse(localStorage.loggedInUser).token}`
+  // const config = {
+  //   headers: { Authorization: token },
+  // }
 
   const object = { 
     subject: newObj.subject,
     content: newObj.content,
-    // senderToken: newObj.senderToken,
     receiver: newObj.receiver,
     company: newObj.company
   }
-  console.log(object, newObj)
+  
   try {
-    const response = await axios.post(baseUrl, object, config)
+    const response = await axios.post(baseUrl, object, axiosConfig)
     return response.data
   } catch (error) {
     console.log(error.message)

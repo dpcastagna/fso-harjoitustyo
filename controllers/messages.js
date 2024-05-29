@@ -19,14 +19,14 @@ messagesRouter.get('/:id', async (request, response) => {
 })
 
 messagesRouter.post('/', async (request, response) => {
-  console.log(request.user)
+  // console.log(request.user)
   if(!request.user) {
     return response.status(400).json({
       error: 'must be logged in to send a message'
     })
   }
 
-  const { subject, content, /* sender, */ receiver, company } = request.body
+  const { subject, content, receiver, company } = request.body
 
   const message = new Message({
     subject,
@@ -37,20 +37,19 @@ messagesRouter.post('/', async (request, response) => {
     receiver,
     company,
   })
-  console.log(message, request.body)
 
-  // const savedMessage = await message.save()
+  const savedMessage = await message.save()
 
-  // const senderToUpdate = await User.findById(sender)
-  // const receiverToUpdate = await User.findById(receiver)
+  const senderToUpdate = await User.findById(request.user._id)
+  const receiverToUpdate = await User.findById(receiver)
   
-  // senderToUpdate.messages = senderToUpdate.messages.concat(savedMessage._id)
-  // receiverToUpdate.messages = receiverToUpdate.messages.concat(savedMessage._id)
+  senderToUpdate.messages = senderToUpdate.messages.concat(savedMessage._id)
+  receiverToUpdate.messages = receiverToUpdate.messages.concat(savedMessage._id)
   
-  // await senderToUpdate.save()
-  // await receiverToUpdate.save()
+  await senderToUpdate.save()
+  await receiverToUpdate.save()
 
-  // response.status(201).json(savedMessage)
+  response.status(201).json(savedMessage)
 })
 
 messagesRouter.put('/:id', async (request, response, next) => {

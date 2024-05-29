@@ -12,7 +12,7 @@ const AddMessage = (props) => {
   useEffect(() => {
     setEmployeeList(props.employees)
   }, [props.employees])
-  console.log(props)
+  // console.log(props)
   // useEffect(() => {
   //   const employeeFound = props.employees.find(emp => emp.id === newShiftFor)
   //   if (employeeFound) {
@@ -38,9 +38,8 @@ const AddMessage = (props) => {
       content: content,
       company: props.user.company,
       receiver: messageFor,
-      // senderToken: props.user.token,
     }
-    console.log(messageObject)
+    // console.log(messageObject)
     const newMessage = await createNew(messageObject)
     props.addMessage(newMessage)
 
