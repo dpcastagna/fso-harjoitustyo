@@ -19,11 +19,6 @@ export const getMyReceivedMessages = async (companyId, username) => {
 }
 
 export const createNew = async (newObj) => {
-  // const token = `Bearer ${JSON.parse(localStorage.loggedInUser).token}`
-  // const config = {
-  //   headers: { Authorization: token },
-  // }
-
   const object = { 
     subject: newObj.subject,
     content: newObj.content,
@@ -42,7 +37,7 @@ export const createNew = async (newObj) => {
 
 export const removeOld = async (id) => {
   try {
-    const response = await axios.delete(`${baseUrl}/${id}`)
+    const response = await axios.delete(`${baseUrl}/${id}`, axiosConfig)
     return response.data
   } catch (error) {
     console.log(error.message)

@@ -19,20 +19,19 @@ const Messages = (props) => {
 
   const addMessage = (obj) => {
     const employeeToAddMessage = props.employees.find(employee => employee.id === obj.receiver)
-    employeeToAddMessage.messages = employeeToAddMessage.messages.concat(obj)
-    console.log(employeeToAddMessage)
+    // employeeToAddMessage.messages = employeeToAddMessage.messages.concat(obj)
     
-    setSentMessages(sentMessages.concat({...obj, employeeId: { name: employeeToAddMessage.name, id: employeeToAddMessage.id }}))
+    setSentMessages(sentMessages.concat({...obj, sender: { name: props.user.name }, receiver: { name: employeeToAddMessage.name}}))
   }
 
   const deleteMessage = (id) => {
-    const employeeToDeleteMessageId = props.employees.find(message => message.id === id).employeeId.id
-    const employeeToDeleteMessage = employees.find(employee => employee.id === employeeToDeleteMessageId)
-    setSentMessages(shifts.filter(shift => shift.id !== id))
+    // const employeeToDeleteMessageId = props.employees.find(message => message.id === id).employeeId.id
+    // const employeeToDeleteMessage = employees.find(employee => employee.id === employeeToDeleteMessageId)
+    setSentMessages(sentMessages.filter(message => message.id !== id))
     
-    employeeToDeleteMessage.messages = employeeToDeleteMessage.messages.filter(message => message.id !== id)
+    // employeeToDeleteMessage.messages = employeeToDeleteMessage.messages.filter(message => message.id !== id)
   }
-
+  console.log(props.user)
   if (sentMessages === null || receivedMessages === null) {
     return (<>Loading...</>)
   }
@@ -46,7 +45,7 @@ const Messages = (props) => {
             <u>Sent messages</u>
             {
               sentMessages.length > 0
-              ? sentMessages.map(message => <SingleMessage key={message.id} message={message} />)
+              ? sentMessages.map(message => <SingleMessage key={message.id} message={message} user={props.user} deleteMessage={deleteMessage} />)
               : <>No sent messages</>
             }
           </div>
@@ -54,7 +53,7 @@ const Messages = (props) => {
             <u>Received messages</u>
             {
               receivedMessages.length > 0
-              ? receivedMessages.map(message => <SingleMessage key={message.id} message={message} />)
+              ? receivedMessages.map(message => <SingleMessage key={message.id} message={message} /* user={props.user} deleteMessage={deleteMessage} */ />)
               : <>No received messages</>
             }
           </div>
