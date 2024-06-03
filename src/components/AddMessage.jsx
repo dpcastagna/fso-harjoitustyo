@@ -39,9 +39,8 @@ const AddMessage = (props) => {
       company: props.user.company,
       receiver: messageFor,
     }
-    // console.log(messageObject)
-    const newMessage = await createNew(messageObject)
-    props.addMessage(newMessage)
+    
+    props.addMessage(messageObject)
 
     setSubject('')
     setContent('')

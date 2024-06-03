@@ -3,6 +3,7 @@ import '../App.css'
 import { getMySentMessages, getMyReceivedMessages } from '../services/messageService'
 import SingleMessage from './SingleMessage'
 import AddMessage from './AddMessage'
+import { removeOld, createNew } from '../services/messageService'
 
 const Messages = (props) => {
   const [sentMessages, setSentMessages] = useState(null)
@@ -17,11 +18,11 @@ const Messages = (props) => {
     setReceivedMessages(await getMyReceivedMessages(props.user.company, props.user.username))
   }
 
-  const addMessage = (obj) => {
-    const employeeToAddMessage = props.employees.find(employee => employee.id === obj.receiver)
-    // employeeToAddMessage.messages = employeeToAddMessage.messages.concat(obj)
-    
-    setSentMessages(sentMessages.concat({...obj, sender: { name: props.user.name }, receiver: { name: employeeToAddMessage.name}}))
+  const addMessage = async (obj) => {
+    const newMessage = await createNew(obj)
+
+    const employeeToAddMessage = props.employees.find(employee => employee.id === newMessage.receiver)
+    setSentMessages(sentMessages.concat({...newMessage, sender: { name: props.user.name }, receiver: { name: employeeToAddMessage.name}}))
   }
 
   const deleteMessage = (id) => {
@@ -31,7 +32,7 @@ const Messages = (props) => {
     
     // employeeToDeleteMessage.messages = employeeToDeleteMessage.messages.filter(message => message.id !== id)
   }
-  console.log(props.user)
+  // console.log(props.user)
   if (sentMessages === null || receivedMessages === null) {
     return (<>Loading...</>)
   }

@@ -37,7 +37,7 @@ messagesRouter.post('/', async (request, response) => {
     receiver,
     company,
   })
-
+  
   const savedMessage = await message.save()
 
   const senderToUpdate = await User.findById(request.user._id)
