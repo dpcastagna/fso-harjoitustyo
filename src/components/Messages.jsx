@@ -29,6 +29,9 @@ const Messages = (props) => {
     // const employeeToDeleteMessageId = props.employees.find(message => message.id === id).employeeId.id
     // const employeeToDeleteMessage = employees.find(employee => employee.id === employeeToDeleteMessageId)
     setSentMessages(sentMessages.filter(message => message.id !== id))
+    setReceivedMessages(receivedMessages.filter(message => message.id !== id))
+    console.log('jaaa', id)
+    removeOld(id)
     
     // employeeToDeleteMessage.messages = employeeToDeleteMessage.messages.filter(message => message.id !== id)
   }
@@ -42,19 +45,21 @@ const Messages = (props) => {
       <div id="pysty">
         <AddMessage  user={props.user} employees={props.employees} addMessage={addMessage} />
         <div id="vaaka">
-          <div id="pysty" key="sentMessages">
-            <u>Sent messages</u>
+          <div><u>Sent messages</u></div>
+          <div><u>Received messages</u></div>
+        </div>
+        <div id="vaaka">
+          <div id="viestit" key="sentMessages">
             {
               sentMessages.length > 0
               ? sentMessages.map(message => <SingleMessage key={message.id} message={message} user={props.user} deleteMessage={deleteMessage} />)
               : <>No sent messages</>
             }
           </div>
-          <div id="pysty" key="receivedMessages">
-            <u>Received messages</u>
+          <div id="viestit" key="receivedMessages">
             {
               receivedMessages.length > 0
-              ? receivedMessages.map(message => <SingleMessage key={message.id} message={message} /* user={props.user} deleteMessage={deleteMessage} */ />)
+              ? receivedMessages.map(message => <SingleMessage key={message.id} message={message} user={props.user} deleteMessage={deleteMessage} />)
               : <>No received messages</>
             }
           </div>

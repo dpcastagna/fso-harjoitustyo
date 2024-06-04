@@ -7,7 +7,8 @@ const SingleMessage = (props) => {
   // console.log(message)
 
   const removeMessage = () => {
-
+    // console.log('jee', message.content)
+    props.deleteMessage(message.id)
   }
 
   if (!message) {
@@ -19,7 +20,12 @@ const SingleMessage = (props) => {
       Receiver: {message.receiver.name}<br/>
       Sent: {message.timeSent}<br/>
       Subject: {message.subject}<br/>
-      Message: {message.content}
+      Message: {message.content}<br/>
+      {
+        props.user.role === "boss"
+        ? <button onClick={removeMessage}>delete</button>
+        : <></>
+      }
     </div>
   )
 }

@@ -7,12 +7,24 @@ import Message from '../models/message.js'
 const messagesRouter = express.Router();
 
 messagesRouter.get('/', async (request, response) => {
-    const messages = await Message
-      .find({}).populate('sender', { id: 1, username: 1, name: 1 }).populate('receiver', { id: 1, username: 1, name: 1 })
-    response.json(messages)
+  if(!request.user) {
+    return response.status(400).json({
+      error: 'must be logged in to see messages'
+    })
+  }
+
+  const messages = await Message
+    .find({}).populate('sender', { id: 1, username: 1, name: 1 }).populate('receiver', { id: 1, username: 1, name: 1 })
+  response.json(messages)
 })
 
 messagesRouter.get('/:id', async (request, response) => {
+  if(!request.user) {
+    return response.status(400).json({
+      error: 'must be logged in to see messages'
+    })
+  }
+
   const message = await Message
     .findById(request.params.id)
   response.json(message)
@@ -87,20 +99,25 @@ messagesRouter.put('/:id', async (request, response, next) => {
 })
 
 messagesRouter.delete('/:id', async (request, response) => {
-  //const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  if(!request.user) {
+    return response.status(400).json({
+      error: 'must be logged in to see messages'
+    })
+  }
+  console.log('jee')
   const message = await Message.findById(request.params.id)
   const senderToDeleteMessageFrom = await User.findById(message.sender)
   const receiverToDeleteMessageFrom = await User.findById(message.receiver)
   senderToDeleteMessageFrom.messages = senderToDeleteMessageFrom.messages.filter(message => message._id != request.params.id)
   receiverToDeleteMessageFrom.messages = receiverToDeleteMessageFrom.messages.filter(message => message._id != request.params.id)
-  if (message) {
-    await Message.findByIdAndDelete(request.params.id)
-    await senderToDeleteMessageFrom.save()
-    await receiverToDeleteMessageFrom.save()
-    response.status(204).end()
-  } else {
-    response.status(401).json({ error: 'invalid message or token missing/invalid' })
-  }
+  // if (message) {
+  //   await Message.findByIdAndDelete(request.params.id)
+  //   await senderToDeleteMessageFrom.save()
+  //   await receiverToDeleteMessageFrom.save()
+  //   response.status(204).end()
+  // } else {
+  //   response.status(401).json({ error: 'invalid message or token missing/invalid' })
+  // }
 })
 
 export default messagesRouter
