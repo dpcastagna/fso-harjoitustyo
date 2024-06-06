@@ -14,7 +14,10 @@ messagesRouter.get('/', async (request, response) => {
   }
 
   const messages = await Message
-    .find({}).populate('sender', { id: 1, username: 1, name: 1 }).populate('receiver', { id: 1, username: 1, name: 1 })
+    .find({ $or: [{sender: request.user._id}, {receiver: request.user._id}] })
+    .populate('sender', { id: 1, username: 1, name: 1 })
+    .populate('receiver', { id: 1, username: 1, name: 1 })
+  
   response.json(messages)
 })
 

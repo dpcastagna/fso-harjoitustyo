@@ -8,15 +8,17 @@ export const getAll = async () => {
   return response.data
 }
 
-export const getMySentMessages = async ( companyId, username ) => {
-  const response = (await axios.get(baseUrl, axiosConfig)).data.filter(message => message.sender.username === username && message.company === companyId)
+export const getMyMessages = async () => {
+  const response = (await axios.get(baseUrl, axiosConfig)).data//.filter(message => message.sender.username === username && message.company === companyId)
+  
   return response
 }
 
-export const getMyReceivedMessages = async (companyId, username) => {
-  const response = (await axios.get(baseUrl, axiosConfig)).data.filter(message => message.receiver.username === username && message.company === companyId)
-  return response
-}
+// export const getMyReceivedMessages = async () => {
+//   const response = (await axios.get(baseUrl, axiosConfig)).data//.filter(message => message.receiver.username === username && message.company === companyId)
+//   // console.log(response)
+//   return response
+// }
 
 export const createNew = async (newObj) => {
   const object = { 
@@ -45,4 +47,4 @@ export const removeOld = async (id) => {
   }
 }
 
-export default { getAll, createNew, removeOld, getMySentMessages, getMyReceivedMessages }
+export default { getAll, createNew, removeOld, getMyMessages, /* getMyReceivedMessages */ }

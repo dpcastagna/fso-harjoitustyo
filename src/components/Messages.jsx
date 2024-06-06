@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import '../App.css'
-import { getMySentMessages, getMyReceivedMessages } from '../services/messageService'
+import { getMyMessages, /* getMyReceivedMessages */ } from '../services/messageService'
 import SingleMessage from './SingleMessage'
 import AddMessage from './AddMessage'
 import { removeOld, createNew } from '../services/messageService'
@@ -12,10 +12,10 @@ const Messages = (props) => {
   useEffect(() => {
     getMessages()
   },[])
-
+  
   const getMessages = async () => {
-    setSentMessages(await getMySentMessages(props.user.company, props.user.username))
-    setReceivedMessages(await getMyReceivedMessages(props.user.company, props.user.username))
+    setSentMessages((await getMyMessages()).filter(message => message.receiver.name !== props.user.name))
+    setReceivedMessages((await getMyMessages()).filter(message => message.receiver.name === props.user.name))
   }
 
   const addMessage = async (obj) => {
