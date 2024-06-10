@@ -107,20 +107,29 @@ messagesRouter.delete('/:id', async (request, response) => {
       error: 'must be logged in to see messages'
     })
   }
-  console.log('jee')
+
+  if(request.user.role !== 'boss') {
+    return response.status(400).json({
+      error: 'employees can\'t delete messages'
+    })
+  }
+  // console.log('jee', request.user.role)
   const message = await Message.findById(request.params.id)
+  // console.log(message)
   const senderToDeleteMessageFrom = await User.findById(message.sender)
   const receiverToDeleteMessageFrom = await User.findById(message.receiver)
+  // console.log(senderToDeleteMessageFrom.messages, receiverToDeleteMessageFrom.messages)
   senderToDeleteMessageFrom.messages = senderToDeleteMessageFrom.messages.filter(message => message._id != request.params.id)
   receiverToDeleteMessageFrom.messages = receiverToDeleteMessageFrom.messages.filter(message => message._id != request.params.id)
-  // if (message) {
-  //   await Message.findByIdAndDelete(request.params.id)
-  //   await senderToDeleteMessageFrom.save()
-  //   await receiverToDeleteMessageFrom.save()
-  //   response.status(204).end()
-  // } else {
-  //   response.status(401).json({ error: 'invalid message or token missing/invalid' })
-  // }
+  // console.log(senderToDeleteMessageFrom.messages, receiverToDeleteMessageFrom.messages)
+  if (message) {
+    await Message.findByIdAndDelete(request.params.id)
+    await senderToDeleteMessageFrom.save()
+    await receiverToDeleteMessageFrom.save()
+    response.status(204).end()
+  } else {
+    response.status(401).json({ error: 'invalid message or token missing/invalid' })
+  }
 })
 
 export default messagesRouter

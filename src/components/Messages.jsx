@@ -25,13 +25,22 @@ const Messages = (props) => {
     setSentMessages(sentMessages.concat({...newMessage, sender: { name: props.user.name }, receiver: { name: employeeToAddMessage.name}}))
   }
 
-  const deleteMessage = (id) => {
+  const deleteMessage = async (id) => {
     // const employeeToDeleteMessageId = props.employees.find(message => message.id === id).employeeId.id
     // const employeeToDeleteMessage = employees.find(employee => employee.id === employeeToDeleteMessageId)
-    setSentMessages(sentMessages.filter(message => message.id !== id))
-    setReceivedMessages(receivedMessages.filter(message => message.id !== id))
-    console.log('jaaa', id)
-    removeOld(id)
+    console.log('deleteMessage id: ', id)
+    try {
+      const response = await removeOld(id)
+      console.log(response)
+      if(response.error) {
+        console.log(response.error)
+      } else {
+        setSentMessages(sentMessages.filter(message => message.id !== id))
+        setReceivedMessages(receivedMessages.filter(message => message.id !== id))
+      }
+    } catch(error) {
+      console.log(error)
+    }
     
     // employeeToDeleteMessage.messages = employeeToDeleteMessage.messages.filter(message => message.id !== id)
   }
