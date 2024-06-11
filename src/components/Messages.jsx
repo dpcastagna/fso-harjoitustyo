@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
+import { connect } from "react-redux"
+
 import '../App.css'
-import { getMyMessages, /* getMyReceivedMessages */ } from '../services/messageService'
+// import { getMyMessages, /* getMyReceivedMessages */ } from '../services/messageService'
 import SingleMessage from './SingleMessage'
 import AddMessage from './AddMessage'
-import { removeOld, createNew } from '../services/messageService'
+import { getMyMessages, removeOld, createNew } from '../services/messageService'
+import { setNotification } from '../reducers/notificationReducer'
 
 const Messages = (props) => {
   const [sentMessages, setSentMessages] = useState(null)
@@ -28,18 +31,19 @@ const Messages = (props) => {
   const deleteMessage = async (id) => {
     // const employeeToDeleteMessageId = props.employees.find(message => message.id === id).employeeId.id
     // const employeeToDeleteMessage = employees.find(employee => employee.id === employeeToDeleteMessageId)
-    console.log('deleteMessage id: ', id)
+    // console.log('deleteMessage id: ', id)
     try {
       const response = await removeOld(id)
-      console.log(response)
-      if(response.error) {
-        console.log(response.error)
+      // console.log(response.response.data.error)
+      if(response.response.data.error) {
+        console.log(response.response.data.error)
+        setNotification(response.response.data.error)
       } else {
         setSentMessages(sentMessages.filter(message => message.id !== id))
         setReceivedMessages(receivedMessages.filter(message => message.id !== id))
       }
     } catch(error) {
-      console.log(error)
+      console.log(error.response)
     }
     
     // employeeToDeleteMessage.messages = employeeToDeleteMessage.messages.filter(message => message.id !== id)
@@ -78,4 +82,18 @@ const Messages = (props) => {
   )
 }
 
-export default Messages
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = {
+  setNotification,
+}
+
+const ConnectedMessages = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Messages)
+
+export default ConnectedMessages

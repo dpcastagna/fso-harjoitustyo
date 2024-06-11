@@ -7,7 +7,7 @@ import usersRouter from './controllers/users.js'
 import shiftsRouter from './controllers/shifts.js'
 import messagesRouter from './controllers/messages.js'
 import loginRouter from './controllers/login.js'
-import { tokenExtractor, userExtractor } from './utils/middleware.js'
+import { tokenExtractor, userExtractor, requestLogger, unknownEndpoint, errorHandler } from './utils/middleware.js'
 
 import mongoose from 'mongoose'
 
@@ -26,6 +26,7 @@ mongoose.connect(eval(DEV) === true ? process.env.MONGODB_URI_DEV : process.env.
 
 app.use(cors())
 app.use(express.json())
+app.use(requestLogger)
 app.use(express.static('dist'))
 app.use(tokenExtractor)
 app.use(userExtractor)
@@ -38,11 +39,13 @@ app.get('/health', (req, res) => {
   res.send('ok')
 })
 
-
 app.use('/api/users', usersRouter)
 app.use('/api/shifts', shiftsRouter)
 app.use('/api/messages', messagesRouter)
 app.use('/api/login', loginRouter)
+
+app.use(unknownEndpoint)
+app.use(errorHandler)
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

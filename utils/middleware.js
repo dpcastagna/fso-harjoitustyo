@@ -1,14 +1,14 @@
-// const logger = require('./logger')
+import logger from './logger.js'
 import jwt from 'jsonwebtoken'
 import User from '../models/user.js'
 
-// const requestLogger = (request, response, next) => {
-//   logger.info('Method:', request.method)
-//   logger.info('Path:  ', request.path)
-//   logger.info('Body:  ', request.body)
-//   logger.info('---')
-//   next()
-// }
+export const requestLogger = (request, response, next) => {
+  logger.info('Method:', request.method)
+  logger.info('Path:  ', request.path)
+  logger.info('Body:  ', request.body)
+  logger.info('---')
+  next()
+}
 
 export const tokenExtractor = (request, response, next) => {
   const authorization = request.get('authorization')

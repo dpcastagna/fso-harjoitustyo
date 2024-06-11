@@ -40,9 +40,10 @@ export const createNew = async (newObj) => {
 export const removeOld = async (id) => {
   try {
     const response = await axios.delete(`${baseUrl}/${id}`, axiosConfig)
+    console.log(response)
     return response.data
   } catch (error) {
-    console.log(error.message)
+    // console.log(error.response)
     return error
   }
 }
