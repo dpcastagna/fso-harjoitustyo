@@ -93,10 +93,10 @@ const BossBox = (props) => {
               ? <> 
                   <div id="vaaka" >
                     <AddUser role='employee' company={props.user.company} addEmployee={addEmployee} />
-                    <RemoveUser employees={employees} deleteEmployee={deleteEmployee} />
+                    {/* <RemoveUser employees={employees} deleteEmployee={deleteEmployee} /> */}
                     <AddShift company={props.user.company} employees={employees} addShift={addShift} />
                   </div>
-                  <SingleEmployee employees={employees} deleteShift={deleteShift} />
+                  <SingleEmployee employees={employees} deleteShift={deleteShift} deleteEmployee={deleteEmployee} />
                 </>
               : menuTab === 'All tabs'
                 ? <>

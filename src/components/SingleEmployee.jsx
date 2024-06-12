@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { removeOldShift } from "../services/shiftService"
+import RemoveUser from "./RemoveUser"
 
 const SingleEmployee = (props) => {
   const [employee, setEmployee] = useState(null)
@@ -34,23 +35,30 @@ const SingleEmployee = (props) => {
             employee === null
             ? <>Select employee</>
             : <div key={employee.id} id="palikka">
-                Name: {employee.name}<br/>
-                Messages: {employee.messages.length}<br/>
-                Securitylevel: {employee.securityLevel}<br/>
-                Shifts: {employee.shifts.length}<br/>
-                { employee.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> }
-                {
-                  employee.shifts.length > 0
-                  ? employee.shifts.map(shift => {
-                    return (
-                      <div key={shift.id}>
-                        {shift.start}-{shift.end} {shift.date} &nbsp;
-                        <button onClick={() => {removeShift(shift.id)}}>delete</button> <br/>
-                      </div>
-                    )
-                  })
-                  : <>No shifts</>
-                }
+                <div id="vaaka">
+                  <div>
+                  Name: {employee.name}<br/>
+                  Messages: {employee.messages.length}<br/>
+                  Securitylevel: {employee.securityLevel}<br/>
+                  Shifts: {employee.shifts.length}<br/>
+                  { employee.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> }
+                  </div>
+                  <RemoveUser employees={employees} deleteEmployee={props.deleteEmployee} />
+                  <div>
+                  {
+                    employee.shifts.length > 0
+                    ? employee.shifts.map(shift => {
+                      return (
+                        <div key={shift.id}>
+                          {shift.start}-{shift.end} {shift.date} &nbsp;
+                          <button onClick={() => {removeShift(shift.id)}}>delete</button> <br/>
+                        </div>
+                      )
+                    })
+                    : <>No shifts</>
+                  }
+                  </div>
+                </div>
               </div>
           }
         </div>

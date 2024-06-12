@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
 import { connect } from "react-redux"
+import { useEffect, useState } from 'react'
 
 import '../App.css'
-// import { getMyMessages, /* getMyReceivedMessages */ } from '../services/messageService'
 import SingleMessage from './SingleMessage'
 import AddMessage from './AddMessage'
 import { getMyMessages, removeOld, createNew } from '../services/messageService'
@@ -14,7 +13,7 @@ const Messages = (props) => {
 
   useEffect(() => {
     getMessages()
-  },[])
+  }, [])
   
   const getMessages = async () => {
     setSentMessages((await getMyMessages()).filter(message => message.receiver.name !== props.user.name))
@@ -29,15 +28,10 @@ const Messages = (props) => {
   }
 
   const deleteMessage = async (id) => {
-    // const employeeToDeleteMessageId = props.employees.find(message => message.id === id).employeeId.id
-    // const employeeToDeleteMessage = employees.find(employee => employee.id === employeeToDeleteMessageId)
-    // console.log('deleteMessage id: ', id)
     try {
       const response = await removeOld(id)
-      // console.log(response.response.data.error)
       if(response.response.data.error) {
-        console.log(response.response.data.error)
-        setNotification(response.response.data.error)
+        props.setNotification(response.response.data.error, 5)
       } else {
         setSentMessages(sentMessages.filter(message => message.id !== id))
         setReceivedMessages(receivedMessages.filter(message => message.id !== id))
@@ -45,10 +39,8 @@ const Messages = (props) => {
     } catch(error) {
       console.log(error.response)
     }
-    
-    // employeeToDeleteMessage.messages = employeeToDeleteMessage.messages.filter(message => message.id !== id)
   }
-  // console.log(props.user)
+  
   if (sentMessages === null || receivedMessages === null) {
     return (<>Loading...</>)
   }
