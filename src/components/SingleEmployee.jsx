@@ -33,31 +33,35 @@ const SingleEmployee = (props) => {
         <div id="singleEmpRight">
           {
             employee === null
-            ? <>Select employee</>
+            ? <div id="palikka">Select employee</div>
             : <div key={employee.id} id="palikka">
                 <div id="vaaka">
                   <div>
-                  Name: {employee.name}<br/>
-                  Messages: {employee.messages.length}<br/>
-                  Securitylevel: {employee.securityLevel}<br/>
-                  Shifts: {employee.shifts.length}<br/>
-                  { employee.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> }
+                    Name: {employee.name}<br/>
+                    Messages: {employee.messages.length}<br/>
+                    Securitylevel: {employee.securityLevel}<br/>
+                    Shifts: {employee.shifts.length}<br/>
+                    { employee.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> }
                   </div>
-                  <RemoveUser employees={employees} deleteEmployee={props.deleteEmployee} />
                   <div>
-                  {
-                    employee.shifts.length > 0
-                    ? employee.shifts.map(shift => {
-                      return (
-                        <div key={shift.id}>
-                          {shift.start}-{shift.end} {shift.date} &nbsp;
-                          <button onClick={() => {removeShift(shift.id)}}>delete</button> <br/>
-                        </div>
-                      )
-                    })
-                    : <>No shifts</>
-                  }
+                    {
+                      employee.shifts.length > 0
+                      ? employee.shifts.map(shift => {
+                        return (
+                          <div key={shift.id}>
+                            {shift.start}-{shift.end} {shift.date} &nbsp;
+                            <button onClick={() => {removeShift(shift.id)}}>delete</button> <br/>
+                          </div>
+                        )
+                        })
+                        : <>No shifts</>
+                    }
                   </div>
+                  {
+                    props.user.role === 'boss'
+                    ? <RemoveUser employee={employee} employees={employees} deleteEmployee={props.deleteEmployee} />
+                    : null
+                  }
                 </div>
               </div>
           }

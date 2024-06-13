@@ -96,7 +96,7 @@ const BossBox = (props) => {
                     {/* <RemoveUser employees={employees} deleteEmployee={deleteEmployee} /> */}
                     <AddShift company={props.user.company} employees={employees} addShift={addShift} />
                   </div>
-                  <SingleEmployee employees={employees} deleteShift={deleteShift} deleteEmployee={deleteEmployee} />
+                  <SingleEmployee user={props.user} employees={employees} deleteShift={deleteShift} deleteEmployee={deleteEmployee} />
                 </>
               : menuTab === 'All tabs'
                 ? <>
@@ -106,7 +106,7 @@ const BossBox = (props) => {
                       <AddShift company={props.user.company} employees={employees} addShift={addShift} />
                     </div>
                     <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />
-                    <SingleEmployee employees={employees} deleteShift={deleteShift} />
+                    <SingleEmployee user={props.user} employees={employees} deleteShift={deleteShift} deleteEmployee={deleteEmployee} />
                     <ShiftsMonth employees={employees} shifts={shifts} />
                     <Messages user={props.user} employees={employees} />
                   </>
