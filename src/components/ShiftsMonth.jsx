@@ -76,13 +76,21 @@ const ShiftsMonth = (props) => {
               const monthIndex = months.indexOf(month)
               const d = new Date(year, monthIndex, day)
               const date = dayjs(d)
+              // console.log(day, date.format())
               return (
                 <tr key={day}>
                   <td>{`${month} ${day}`}</td>
                   {
                     employees.map(emp => {
-                      const shiftFound = shifts.find(shift => shift.employeeId.id === emp.id && shift.date.split('T')[0] === date.format().split('T')[0])
-                      
+                      // console.log(emp)
+                      const shiftFound = shifts.find(shift => {
+                        // console.log(shift)
+                        if(shift.employeeId === null) {
+                          return null
+                        }
+                        return shift.employeeId.id === emp.id && shift.date.split('T')[0] === date.format().split('T')[0]
+                      })
+                      // console.log(shiftFound)
                       return (
                         <td key={emp.id}>
                         { shiftFound === undefined

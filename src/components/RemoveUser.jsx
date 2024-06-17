@@ -23,7 +23,7 @@ const RemoveUser = (props) => {
       console.log(error)
     }
   }
-  console.log(props.employee.id)
+  // console.log(props.employee.id)
   return (
     <div id='palikka'>
       <form onSubmit={deleteUser}>

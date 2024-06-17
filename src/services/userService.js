@@ -40,7 +40,6 @@ export const createNew = async (newObj) => {
 export const removeOld = async (id) => {
   try {
     const response = await axios.delete(`${baseUrl}/${id}`)
-    
     return response.data
   } catch (error) {
     console.log(error.message)
