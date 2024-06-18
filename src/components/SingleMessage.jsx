@@ -16,8 +16,8 @@ const SingleMessage = (props) => {
   }
   return (
     <div id="palikka">
-      Sender: {message.sender.name}<br/>
-      Receiver: {message.receiver.name}<br/>
+      Sender: {message.sender !== null ? message.sender.name : 'unknown'}<br/>
+      Receiver: {message.receiver !== null ? message.receiver.name : 'unknown'}<br/>
       Sent: {message.timeSent}<br/>
       Subject: {message.subject}<br/>
       Message: {message.content}<br/>

@@ -16,8 +16,8 @@ const Messages = (props) => {
   }, [])
   
   const getMessages = async () => {
-    setSentMessages((await getMyMessages()).filter(message => message.receiver.name !== props.user.name))
-    setReceivedMessages((await getMyMessages()).filter(message => message.receiver.name === props.user.name))
+    setSentMessages((await getMyMessages()))//.filter(message => message.receiver.name !== props.user.name))
+    setReceivedMessages((await getMyMessages()))//.filter(message => message.receiver.name === props.user.name))
   }
 
   const addMessage = async (obj) => {

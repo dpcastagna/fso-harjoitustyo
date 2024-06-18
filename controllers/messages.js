@@ -13,10 +13,19 @@ messagesRouter.get('/', async (request, response) => {
     })
   }
 
-  const messages = await Message
-    .find({ $or: [{sender: request.user._id}, {receiver: request.user._id}] })
+  const messages = (await Message
+    .find({
+      $and: [
+        { company: { $eq: request.user.company } },
+        // { $or: [ { sender: request.user._id }, { receiver: request.user._id } ] },
+        { sender: { $ne: null } },
+        { receiver: { $ne: null } }
+      ]
+    })
     .populate('sender', { id: 1, username: 1, name: 1 })
-    .populate('receiver', { id: 1, username: 1, name: 1 })
+    .populate('receiver', { id: 1, username: 1, name: 1 }))
+    // .filter(message => message.sender !== null && message.receiver !== null)
+  console.log(messages/* .filter(message => message.sender !== null && message.receiver !== null) */)
   
   response.json(messages)
 })
