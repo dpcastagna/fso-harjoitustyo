@@ -1,5 +1,3 @@
-// import bcrypt from 'bcrypt'
-// import jwt from 'jsonwebtoken'
 import express from 'express'
 import User from '../models/user.js'
 import Message from '../models/message.js'
@@ -14,18 +12,21 @@ messagesRouter.get('/', async (request, response) => {
   }
 
   const messages = (await Message
-    .find({
+    .find({ 
       $and: [
         { company: { $eq: request.user.company } },
-        // { $or: [ { sender: request.user._id }, { receiver: request.user._id } ] },
-        { sender: { $ne: null } },
-        { receiver: { $ne: null } }
+        { $or: [
+          { sender: request.user._id },
+          { receiver: request.user._id }
+        ]
+        },
       ]
     })
     .populate('sender', { id: 1, username: 1, name: 1 })
-    .populate('receiver', { id: 1, username: 1, name: 1 }))
-    // .filter(message => message.sender !== null && message.receiver !== null)
-  console.log(messages/* .filter(message => message.sender !== null && message.receiver !== null) */)
+    .populate('receiver', { id: 1, username: 1, name: 1 })
+  )
+  .filter(message => message.sender !== null && message.receiver !== null)
+  // console.log(messages)
   
   response.json(messages)
 })
