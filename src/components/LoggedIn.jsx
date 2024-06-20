@@ -23,7 +23,7 @@ const LoggedIn = (props) => {
       ? <AdminBox user={props.user} />
       : props.user.role === 'boss'
         ? <BossBox user={props.user} />
-        : <UserBox user={props.user} shifts={[]} />
+        : <UserBox user={props.user} />
     }
     </>
   )

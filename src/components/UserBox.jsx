@@ -4,16 +4,16 @@ import '../App.css'
 const UserBox = (props) => {
   const [shifts, setShifts] = useState([])
 
-  useEffect(() => {
-    setShifts(props.shifts.filter(shift => {
-      // console.log(shift)
-      return(
-        shift.employeeId === props.userId)
-      }
-    )
-    )
-  }, [props])
-  
+  // useEffect(() => {
+  //   setShifts(props.shifts.filter(shift => {
+  //     // console.log(shift)
+  //     return(
+  //       shift.employeeId === props.userId)
+  //     }
+  //   )
+  //   )
+  // }, [props])
+  console.log(props)
   return(
     <div id='palikka'>
       <div /* style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'}} */ >

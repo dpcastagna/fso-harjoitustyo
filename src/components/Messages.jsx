@@ -17,7 +17,8 @@ const Messages = (props) => {
   
   const getMessages = async () => {
     const messages = await getMyMessages()
-    
+    // setSentMessages(messages)
+    // setReceivedMessages(messages)
     setSentMessages(messages.filter(message => message.receiver.name !== props.user.name))
     setReceivedMessages(messages.filter(message => message.receiver.name === props.user.name))
   }

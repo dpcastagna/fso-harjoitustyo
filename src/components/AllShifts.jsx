@@ -1,5 +1,6 @@
 import '../App.css'
 import { useState, useEffect } from 'react'
+import { removeOldShift } from '../services/shiftService'
 
 const AllShifts = (props) => {
   const [employeeList, setEmployeeList] = useState([])
@@ -11,7 +12,6 @@ const AllShifts = (props) => {
   }, [props.users, props.shifts])
   // console.log(props)
   return (
-    // <>jee</>
     <div id='palikka'>
       <div style={{ paddingBottom: 3, borderBottom: 'solid', borderBottomWidth: 3 }}>All shifts <br/></div>
       <div id='pysty' >
@@ -28,6 +28,7 @@ const AllShifts = (props) => {
                     ? shift.employeeId.id 
                     : 'unknown'
                   }
+                  <button onClick={() => {removeOldShift(shift.id)}} >delete</button>
                   <br/>
                 </div>
                 {/* {user.name} { user.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> } <br/>

@@ -82,7 +82,7 @@ const RegisterCompany = (props) => {
             type='test'
             value={businessId}
             onChange={handleBusinessIdChange}
-            placeholder='business id'
+            placeholder='business id (ex. 1234567)'
           /> <br/>
         <button id='create' type="submit">create account</button>
       </form>
