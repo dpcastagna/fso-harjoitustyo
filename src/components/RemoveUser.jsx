@@ -51,7 +51,7 @@ const RemoveUser = (props) => {
         {
           confirmation.toLowerCase() === 'yes'
           ? <button id='delete' type="submit">delete employee</button>
-          : <button id='delete' type="submit" disabled>delete employee</button>
+          : <><button id='delete' type="submit" disabled>delete employee</button> (type yes to enable button)</>
         }
         
       </form>

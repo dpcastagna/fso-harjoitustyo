@@ -10,6 +10,15 @@ const AllShifts = (props) => {
     setEmployeeList(props.employees.filter(user => user.role === 'employee'))
     setShifts(props.shifts)
   }, [props.users, props.shifts])
+  
+  const removeShift = async (id) => {
+    try {
+      await removeOldShift(id)
+      props.deleteShift(id)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
   // console.log(props)
   return (
     <div id='palikka'>
@@ -22,13 +31,15 @@ const AllShifts = (props) => {
             return (
               <div key={shift.id}>
                 <div key={shift.shiftId }>
-                  {shift.start}-{shift.end} {shift.date} &nbsp;
+                  {shift.start}-{shift.end} {shift.date} {shift.employeeId.name}
+                  &nbsp;
                   {
                     shift.employeeId !== null
                     ? shift.employeeId.id 
                     : 'unknown'
                   }
-                  <button onClick={() => {removeOldShift(shift.id)}} >delete</button>
+                  &nbsp;
+                  <button onClick={() => {removeShift(shift.id)}} >delete</button>
                   <br/>
                 </div>
                 {/* {user.name} { user.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> } <br/>

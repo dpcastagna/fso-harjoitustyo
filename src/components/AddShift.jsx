@@ -46,6 +46,7 @@ const AddShift = (props) => {
     }
     
     const newShift = await createNewShift(shiftObject)
+    // console.log(newShift.response)
     props.addShift(newShift)
 
     setNewDate('')

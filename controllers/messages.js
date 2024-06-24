@@ -1,34 +1,40 @@
 import express from 'express'
 import User from '../models/user.js'
 import Message from '../models/message.js'
+import { userCheck } from '../utils/helperFunctions.js';
 
 const messagesRouter = express.Router();
 
 messagesRouter.get('/', async (request, response) => {
-  if(!request.user) {
-    return response.status(400).json({
-      error: 'must be logged in to see messages'
-    })
-  }
+  // if(!request.user) {
+  //   return response.status(400).json({
+  //     error: 'must be logged in to see messages'
+  //   })
+  // }
+  await userCheck(request, response, 'must be logged in to see messages')
 
-  const messages = (await Message
-    .find({ 
-      $and: [
-        { company: { $eq: request.user.company } },
-        { $or: [
-          { sender: request.user._id },
-          { receiver: request.user._id }
+  try {
+    const messages = (await Message
+      .find({ 
+        $and: [
+          { company: { $eq: request.user.company } },
+          { $or: [
+            { sender: request.user._id },
+            { receiver: request.user._id }
+          ]
+          },
         ]
-        },
-      ]
-    })
-    .populate('sender', { id: 1, username: 1, name: 1 })
-    .populate('receiver', { id: 1, username: 1, name: 1 })
-  )
-  // .filter(message => message.sender !== null && message.receiver !== null)
-  // console.log(messages)
-  
-  response.json(messages)
+      })
+      .populate('sender', { id: 1, username: 1, name: 1 })
+      .populate('receiver', { id: 1, username: 1, name: 1 })
+    )
+    // .filter(message => message.sender !== null && message.receiver !== null)
+    // console.log(messages)
+    
+    response.json(messages)
+  } catch(error) {
+    // console.log(error)
+  }
 })
 
 messagesRouter.get('/:id', async (request, response) => {

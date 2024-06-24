@@ -43,6 +43,7 @@ const BossBox = (props) => {
 
   const addShift = (obj) => {
     const employeeToAddShift = employees.find(employee => employee.id === obj.employeeId)
+    
     employeeToAddShift.shifts = employeeToAddShift.shifts.concat(obj)
     
     setShifts(shifts.concat({...obj, employeeId: { name: employeeToAddShift.name, id: employeeToAddShift.id }}))
@@ -98,7 +99,7 @@ const BossBox = (props) => {
                     <AddShift company={props.user.company} employees={employees} addShift={addShift} />
                   </div>
                   <SingleEmployee user={props.user} employees={employees} deleteShift={deleteShift} deleteEmployee={deleteEmployee} />
-                  <AllShifts employees={employees} shifts={shifts} />
+                  <AllShifts employees={employees} shifts={shifts} deleteShift={deleteShift} />
                 </>
               : menuTab === 'All tabs'
                 ? <>

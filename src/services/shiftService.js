@@ -22,8 +22,9 @@ export const createNewShift = async (newObj) => {
     employeeId: newObj.employeeId,
     company: newObj.company
   }
+  
   try {
-    const response = await axios.post(baseUrl, object)
+    const response = await axios.post(baseUrl, object, axiosConfig)
     return response.data
   } catch (error) {
     console.log(error.message)

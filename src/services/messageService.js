@@ -9,16 +9,10 @@ export const getAll = async () => {
 }
 
 export const getMyMessages = async () => {
-  const response = (await axios.get(baseUrl, axiosConfig)).data//.filter(message => message.sender.username === username && message.company === companyId)
+  const response = (await axios.get(baseUrl, axiosConfig))
   
-  return response
+  return response.data
 }
-
-// export const getMyReceivedMessages = async () => {
-//   const response = (await axios.get(baseUrl, axiosConfig)).data//.filter(message => message.receiver.username === username && message.company === companyId)
-//   // console.log(response)
-//   return response
-// }
 
 export const createNew = async (newObj) => {
   const object = { 

@@ -1,7 +1,4 @@
-// import bcrypt from 'bcrypt'
 import express from 'express'
-// import jwt from 'jsonwebtoken'
-// import Company from '../models/company.js'
 import User from '../models/user.js'
 import Shift from '../models/shift.js'
 
@@ -22,7 +19,7 @@ shiftsRouter.get('/', async (request, response) => {
 shiftsRouter.get('/:id', async (request, response) => {
   if(!request.user) {
     return response.status(400).json({
-      error: 'must be logged in to see messages'
+      error: 'must be logged in to see shifts'
     })
   }
 
@@ -34,7 +31,7 @@ shiftsRouter.get('/:id', async (request, response) => {
 shiftsRouter.post('/', async (request, response) => {
   if(!request.user) {
     return response.status(400).json({
-      error: 'must be logged in to create new messages'
+      error: 'must be logged in to create new shifts'
     })
   }
 
@@ -55,16 +52,17 @@ shiftsRouter.post('/', async (request, response) => {
     userToUpdate.shifts = userToUpdate.shifts.concat(savedShift._id)
     
     await userToUpdate.save()
+    response.status(201).json(savedShift)
   }
   catch(error) {
+    console.log(error)
   }
-  response.status(201).json(savedShift)
 })
 
 shiftsRouter.put('/:id', async (request, response, next) => {
   if(!request.user) {
     return response.status(400).json({
-      error: 'must be logged in to edit messages'
+      error: 'must be logged in to edit shifts'
     })
   }
   // const body = request.body
@@ -103,7 +101,7 @@ shiftsRouter.put('/:id', async (request, response, next) => {
 shiftsRouter.delete('/:id', async (request, response) => {
   if(!request.user) {
     return response.status(400).json({
-      error: 'must be logged in to delete messages'
+      error: 'must be logged in to delete shifts'
     })
   }
   
