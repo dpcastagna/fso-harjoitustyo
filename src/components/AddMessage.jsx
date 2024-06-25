@@ -60,7 +60,7 @@ const AddMessage = (props) => {
       <center>
         <h2>New Message</h2>
         <form onSubmit={newMessage}>
-          subject:
+          subject: &nbsp;
             <input
               id='subject'
               type='text'
@@ -68,15 +68,15 @@ const AddMessage = (props) => {
               onChange={handleSubjectChange}
               // placeholder='8'
             /> <br/>
-          message:
+          message: &nbsp;
             <input
-              id='content'
+              id='messageContent'
               type='text'
               value={content}
               onChange={handleContentChange}
               // placeholder='16'
             /> <br/>
-          To employee:
+          To employee: &nbsp;
             <select name="employeeSelect" id="employeeSelectMessage" onChange={handleEmployeeChange}>
               <option value="default">Select...</option>
               {

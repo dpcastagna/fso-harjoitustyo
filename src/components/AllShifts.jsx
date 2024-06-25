@@ -19,19 +19,22 @@ const AllShifts = (props) => {
       console.log(error.message)
     }
   }
-  // console.log(props)
+  
   return (
     <div id='palikka'>
       <div style={{ paddingBottom: 3, borderBottom: 'solid', borderBottomWidth: 3 }}>All shifts <br/></div>
       <div id='pysty' >
         {
           shifts.map(shift => {
-            // const employeeShifts = user.shifts
-            // console.log(shift.employeeId)
             return (
               <div key={shift.id}>
                 <div key={shift.shiftId }>
-                  {shift.start}-{shift.end} {shift.date} {shift.employeeId.name}
+                  {shift.start}-{shift.end} {shift.date} &nbsp;
+                  {
+                    shift.employeeId !== null
+                    ? shift.employeeId.name
+                    : 'unknown'
+                  }
                   &nbsp;
                   {
                     shift.employeeId !== null
@@ -42,12 +45,6 @@ const AllShifts = (props) => {
                   <button onClick={() => {removeShift(shift.id)}} >delete</button>
                   <br/>
                 </div>
-                {/* {user.name} { user.working ? <div id='working'>Working</div> : <div id='notWorking'>Not working</div> } <br/>
-                {
-                  employeeShifts.length > 0
-                  ? employeeShifts.map(shift => <div key={shift.shiftId }>{shift.start}-{shift.end} {shift.date} <br/></div>)
-                  : <>No shifts</>
-                } */}
               </div>
             )
           })

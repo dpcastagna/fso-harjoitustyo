@@ -45,6 +45,12 @@ const AddUser = (props) => {
       console.log(e)
     }
   }
+
+  const checkValid = () => {
+    return newName.length > 4 && newUsername.length > 4 && newPassword.length > 2
+    ? <button id='createUser' type="submit">add employee</button>
+    : <button id='createUser' type="submit" disabled>add employee</button>
+  }
   
   return (
     <div id='palikka'>
@@ -74,7 +80,7 @@ const AddUser = (props) => {
             onChange={handlePasswordChange}
             placeholder='password'
           /> <br/>
-        <button id='createUser' type="submit">add employee</button>
+        { checkValid() }
       </form>
     </div>
   )

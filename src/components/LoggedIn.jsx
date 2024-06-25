@@ -18,7 +18,7 @@ const LoggedIn = (props) => {
       }}>
         logout
       </button>
-          
+    
     { props.user.role === 'admin'
       ? <AdminBox user={props.user} />
       : props.user.role === 'boss'

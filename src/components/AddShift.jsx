@@ -110,7 +110,7 @@ const AddShift = (props) => {
             }
           </select> <br/>
         { checkValid() } <br/>
-        {shiftWarning}
+        { shiftWarning }
       </form>
     </div>
   )

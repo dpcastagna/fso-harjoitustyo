@@ -61,6 +61,10 @@
   /* justify-content: space-evenly; */
 }
 
+#messageContent {
+  height: 100px;
+}
+
 table, th, td {
   border: 1px solid black;
 }

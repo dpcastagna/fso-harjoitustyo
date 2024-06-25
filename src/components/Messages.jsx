@@ -47,6 +47,12 @@ const Messages = (props) => {
   if (sentMessages === null || receivedMessages === null) {
     return (<>Loading...</>)
   }
+
+  if(props.user.role === 'employee') {
+    return (
+      <>Jee messages</>
+    )
+  }
   
   return (
     <div id="palikka">
