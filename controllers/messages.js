@@ -25,8 +25,8 @@ messagesRouter.get('/', async (request, response) => {
           },
         ]
       })
-      .populate('sender', { id: 1, username: 1, name: 1 })
-      .populate('receiver', { id: 1, username: 1, name: 1 })
+      .populate('sender', { id: 1, /* username: 1, */ name: 1 })
+      .populate('receiver', { id: 1, /* username: 1, */ name: 1 })
     )
     // .filter(message => message.sender !== null && message.receiver !== null)
     // console.log(messages)

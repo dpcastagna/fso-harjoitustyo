@@ -60,21 +60,21 @@ const AddMessage = (props) => {
       <center>
         <h2>New Message</h2>
         <form onSubmit={newMessage}>
-          subject: &nbsp;
-            <input
-              id='subject'
-              type='text'
-              value={subject}
-              onChange={handleSubjectChange}
-              // placeholder='8'
-            /> <br/>
-          message: &nbsp;
-            <input
-              id='messageContent'
-              type='text'
+          subject:<br/>
+          <input
+            id='addMessageSubject'
+            type='text'
+            value={subject}
+            onChange={handleSubjectChange}
+            placeholder='...'
+          /> <br/>
+          message:<br/>
+            <textarea
+              id='addMessageContent'
+              // type='text'
               value={content}
               onChange={handleContentChange}
-              // placeholder='16'
+              placeholder='...'
             /> <br/>
           To employee: &nbsp;
             <select name="employeeSelect" id="employeeSelectMessage" onChange={handleEmployeeChange}>

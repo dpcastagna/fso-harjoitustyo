@@ -27,7 +27,7 @@ const UserBox = (props) => {
   return(
     <div id='palikka'>
       <TopMenu items={menuItems} changeMenuTab={changeMenuTab} currentTab={menuTab} />
-      <Messages user={props.user} />
+      <Messages user={props.user} employees={[]} />
       <div /* style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'}} */ >
         Next shifts:<br/>
         {

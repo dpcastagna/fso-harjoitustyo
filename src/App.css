@@ -61,7 +61,12 @@
   /* justify-content: space-evenly; */
 }
 
-#messageContent {
+#addMessageSubject {
+  width: 50%;
+}
+
+#addMessageContent {
+  width: 50%;
   height: 100px;
 }
 

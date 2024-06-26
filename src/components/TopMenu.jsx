@@ -16,15 +16,20 @@ const TopMenu = (props) => {
             return (
               item === props.currentTab
               ? <div key={item}>
-                  <button onClick={() => {
-                    props.changeMenuTab(item)}}
-                  id="palikka">
+                  <button 
+                    onClick={() => {
+                      props.changeMenuTab(item)}
+                    }
+                    id="palikka"
+                  >
                     {item}
                   </button>
                 </div>
               : <div key={item}>
-                  <button onClick={() => {
-                    props.changeMenuTab(item)}}
+                  <button 
+                    onClick={() => {
+                      props.changeMenuTab(item)}
+                    }
                   >
                     {item}
                   </button>
