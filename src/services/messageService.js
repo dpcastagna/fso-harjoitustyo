@@ -42,4 +42,4 @@ export const removeOld = async (id) => {
   }
 }
 
-export default { getAll, createNew, removeOld, getMyMessages, /* getMyReceivedMessages */ }
+export default { getAll, createNew, removeOld, getMyMessages }

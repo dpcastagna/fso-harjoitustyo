@@ -50,7 +50,9 @@ const AddMessage = (props) => {
   }
 
   const checkValid = () => {
-    return subject !== '' && content !== '' && messageFor !== ''
+    const valid = props.user.role === 'employee' && subject !== '' && content !== ''
+                  || subject !== '' && content !== '' && messageFor !== ''
+    return valid
     ? <button id='createMessage' type="submit">send message</button>
     : <button id='createMessage' type="submit" disabled>send message</button>
   }

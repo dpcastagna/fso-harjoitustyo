@@ -56,6 +56,13 @@ messagesRouter.post('/', async (request, response) => {
     })
   }
 
+  if(request.user.role === 'employee') {
+    const findBoss = await User.find({$and: [
+    { company: { $eq: request.user.company } },
+    { role: { $eq: 'boss' } }
+    ]})
+  }
+
   const { subject, content, receiver, company } = request.body
 
   const message = new Message({
@@ -67,19 +74,20 @@ messagesRouter.post('/', async (request, response) => {
     receiver,
     company,
   })
+  console.log(findBoss, message)
   
-  const savedMessage = await message.save()
+  // const savedMessage = await message.save()
 
-  const senderToUpdate = await User.findById(request.user._id)
-  const receiverToUpdate = await User.findById(receiver)
+  // const senderToUpdate = await User.findById(request.user._id)
+  // const receiverToUpdate = await User.findById(receiver)
   
-  senderToUpdate.messages = senderToUpdate.messages.concat(savedMessage._id)
-  receiverToUpdate.messages = receiverToUpdate.messages.concat(savedMessage._id)
+  // senderToUpdate.messages = senderToUpdate.messages.concat(savedMessage._id)
+  // receiverToUpdate.messages = receiverToUpdate.messages.concat(savedMessage._id)
   
-  await senderToUpdate.save()
-  await receiverToUpdate.save()
+  // await senderToUpdate.save()
+  // await receiverToUpdate.save()
 
-  response.status(201).json(savedMessage)
+  // response.status(201).json(savedMessage)
 })
 
 messagesRouter.put('/:id', async (request, response) => {
@@ -143,7 +151,9 @@ messagesRouter.delete('/:id', async (request, response) => {
     }
     response.status(204).end()
   } else {
-    response.status(401).json({ error: 'invalid message or token missing/invalid' })
+    response.status(401).json({
+      error: 'invalid message or token missing/invalid'
+    })
   }
 })
 

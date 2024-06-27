@@ -34,8 +34,6 @@ const App = () => {
             <Login user={user} setUser={setUser} />
             <br/>
             or
-            <br/>
-            <br/>
             <RegisterCompany />
           </div>
       }
