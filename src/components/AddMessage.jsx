@@ -51,7 +51,7 @@ const AddMessage = (props) => {
 
   const checkValid = () => {
     const valid = props.user.role === 'employee' && subject !== '' && content !== ''
-                  || subject !== '' && content !== '' && messageFor !== ''
+                  || props.user.role === 'boss' && subject !== '' && content !== '' && messageFor !== ''
     return valid
     ? <button id='createMessage' type="submit">send message</button>
     : <button id='createMessage' type="submit" disabled>send message</button>
@@ -78,19 +78,22 @@ const AddMessage = (props) => {
               onChange={handleContentChange}
               placeholder='...'
             /> <br/>
-          To employee: &nbsp;
-            <select name="employeeSelect" id="employeeSelectMessage" onChange={handleEmployeeChange}>
-              <option value="default">Select...</option>
-              {
-                employeeList.map(employee => {
-                  
-                  return (
-                    <option key={employee.id} value={employee.id}>{employee.name}</option>
-                  )
-                }
-                )
-              }
-            </select> <br/>
+          { props.user.role === 'boss'
+            ? <>
+                To employee: &nbsp;
+                <select name="employeeSelect" id="employeeSelectMessage" onChange={handleEmployeeChange}>
+                  <option value="default">Select...</option>
+                  {
+                    employeeList.map(employee => {
+                      return (
+                        <option key={employee.id} value={employee.id}>{employee.name}</option>
+                      )
+                    })
+                  }
+                </select> <br/>
+              </>
+            : null
+          }
           { checkValid() } <br/>
         </form>
       </center>

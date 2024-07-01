@@ -9,8 +9,9 @@ export const getAll = async () => {
 }
 
 export const getMyMessages = async () => {
-  const response = (await axios.get(baseUrl, axiosConfig))
-  
+  console.log(axiosConfig)
+  const response = await axios.get(baseUrl, axiosConfig)
+  console.log(response)
   return response.data
 }
 

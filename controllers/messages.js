@@ -6,12 +6,12 @@ import { userCheck } from '../utils/helperFunctions.js';
 const messagesRouter = express.Router();
 
 messagesRouter.get('/', async (request, response) => {
-  // if(!request.user) {
-  //   return response.status(400).json({
-  //     error: 'must be logged in to see messages'
-  //   })
-  // }
-  await userCheck(request, response, 'must be logged in to see messages')
+  if(!request.user) {
+    return response.status(400).json({
+      error: 'must be logged in to see messages'
+    })
+  }
+  // await userCheck(request, response, 'must be logged in to see messages')
 
   try {
     const messages = (await Message
@@ -33,7 +33,7 @@ messagesRouter.get('/', async (request, response) => {
     
     response.json(messages)
   } catch(error) {
-    // console.log(error)
+    console.log(error)
   }
 })
 

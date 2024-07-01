@@ -8,20 +8,19 @@ import { getMyMessages, removeOld, createNew } from '../services/messageService'
 import { setNotification } from '../reducers/notificationReducer'
 
 const Messages = (props) => {
-  const [sentMessages, setSentMessages] = useState(null)
-  const [receivedMessages, setReceivedMessages] = useState(null)
+  const [sentMessages, setSentMessages] = useState([])
+  const [receivedMessages, setReceivedMessages] = useState([])
 
-  useEffect(() => {
+  useEffect( () => {
+    const getMessages = async () => {
+      const messages = await getMyMessages()
+      setSentMessages(messages.filter(message => message.receiver.name !== props.user.name))
+      setReceivedMessages(messages.filter(message => message.receiver.name === props.user.name))
+    }
+    console.log(sentMessages)
     getMessages()
-  }, [])
-  
-  const getMessages = async () => {
-    const messages = await getMyMessages()
-    // setSentMessages(messages)
-    // setReceivedMessages(messages)
-    setSentMessages(messages.filter(message => message.receiver.name !== props.user.name))
-    setReceivedMessages(messages.filter(message => message.receiver.name === props.user.name))
-  }
+    console.log(sentMessages)
+  }, [props.user])
 
   const addMessage = async (obj) => {
     const newMessage = await createNew(obj)
@@ -43,11 +42,10 @@ const Messages = (props) => {
       console.log(error.response)
     }
   }
-  
-  if (sentMessages === null || receivedMessages === null) {
-    return (<>Loading...</>)
-  }
-  console.log(sentMessages, receivedMessages)
+  console.log(sentMessages, receivedMessages, props)
+  // if (sentMessages === null || receivedMessages === null) {
+  //   return (<>Loading...</>)
+  // }
   // if(props.user.role === 'employee') {
   //   return (
   //     <>Jee messages</>
