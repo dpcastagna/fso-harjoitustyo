@@ -74,20 +74,20 @@ messagesRouter.post('/', async (request, response) => {
     receiver,
     company,
   })
-  console.log(findBoss, message)
+  // console.log(findBoss, message)
   
-  // const savedMessage = await message.save()
+  const savedMessage = await message.save()
 
-  // const senderToUpdate = await User.findById(request.user._id)
-  // const receiverToUpdate = await User.findById(receiver)
+  const senderToUpdate = await User.findById(request.user._id)
+  const receiverToUpdate = await User.findById(receiver)
   
-  // senderToUpdate.messages = senderToUpdate.messages.concat(savedMessage._id)
-  // receiverToUpdate.messages = receiverToUpdate.messages.concat(savedMessage._id)
+  senderToUpdate.messages = senderToUpdate.messages.concat(savedMessage._id)
+  receiverToUpdate.messages = receiverToUpdate.messages.concat(savedMessage._id)
   
-  // await senderToUpdate.save()
-  // await receiverToUpdate.save()
+  await senderToUpdate.save()
+  await receiverToUpdate.save()
 
-  // response.status(201).json(savedMessage)
+  response.status(201).json(savedMessage)
 })
 
 messagesRouter.put('/:id', async (request, response) => {
@@ -119,7 +119,7 @@ messagesRouter.put('/:id', async (request, response) => {
 messagesRouter.delete('/:id', async (request, response) => {
   if(!request.user) {
     response.status(400).json({
-      error: 'must be logged in to see messages'
+      error: 'must be logged in to delete messages'
     })
   }
 
@@ -135,21 +135,22 @@ messagesRouter.delete('/:id', async (request, response) => {
     try {
       const senderToDeleteMessageFrom = await User.findById(message.sender)
       const receiverToDeleteMessageFrom = await User.findById(message.receiver)
-      console.log(receiverToDeleteMessageFrom)
+      // console.log(senderToDeleteMessageFrom, receiverToDeleteMessageFrom)
     
       senderToDeleteMessageFrom.messages = senderToDeleteMessageFrom.messages.filter(message => message._id != request.params.id)
       receiverToDeleteMessageFrom.messages = receiverToDeleteMessageFrom.messages.filter(message => message._id != request.params.id)
-    } catch(error) {
-      console.log(error)
-    }
-    try {
+    // } catch(error) {
+    //   console.log(error)
+    // }
+    // try {
       await Message.findByIdAndDelete(request.params.id)
       await senderToDeleteMessageFrom.save()
       await receiverToDeleteMessageFrom.save()
+
+      response.status(204).end()
     } catch(error) {
       console.log(error)
     }
-    response.status(204).end()
   } else {
     response.status(401).json({
       error: 'invalid message or token missing/invalid'

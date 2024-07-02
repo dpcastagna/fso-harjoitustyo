@@ -17,9 +17,8 @@ const Messages = (props) => {
       setSentMessages(messages.filter(message => message.receiver.name !== props.user.name))
       setReceivedMessages(messages.filter(message => message.receiver.name === props.user.name))
     }
-    console.log(sentMessages)
+    
     getMessages()
-    console.log(sentMessages)
   }, [props.user])
 
   const addMessage = async (obj) => {
@@ -32,6 +31,7 @@ const Messages = (props) => {
   const deleteMessage = async (id) => {
     try {
       const response = await removeOld(id)
+      console.log(response)
       if(response.response.data.error) {
         props.setNotification(response.response.data.error, 5)
       } else {
@@ -42,15 +42,6 @@ const Messages = (props) => {
       console.log(error.response)
     }
   }
-  console.log(sentMessages, receivedMessages, props)
-  // if (sentMessages === null || receivedMessages === null) {
-  //   return (<>Loading...</>)
-  // }
-  // if(props.user.role === 'employee') {
-  //   return (
-  //     <>Jee messages</>
-  //   )
-  // }
   
   return (
     <div id="palikka">

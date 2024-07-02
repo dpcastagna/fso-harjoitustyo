@@ -1,4 +1,6 @@
 import axios from 'axios'
+import axiosConfig from '../utils/axiosConfig'
+
 const baseUrl = eval(import.meta.env.VITE_DEV) ? 'http://localhost:5000/api/users' : '/api/users'
 
 export const getAll = async () => {
@@ -7,17 +9,17 @@ export const getAll = async () => {
 }
 
 export const getMyEmployees = async (companyId) => {
-  const token = `Bearer ${JSON.parse(localStorage.loggedInUser).token}`
-  // console.log(JSON.parse(localStorage.loggedInUser).token)
-  // console.log(token)
+  // const token = `Bearer ${JSON.parse(localStorage.loggedInUser).token}`
+  // // console.log(JSON.parse(localStorage.loggedInUser).token)
+  // // console.log(token)
 
-  const config = {
-    headers: { Authorization: token },
-  }
+  // const config = {
+  //   headers: { Authorization: token },
+  // }
 
-  const response = (await axios.get(baseUrl, config)).data//.filter(employee => employee.role === 'employee' && employee.company === companyId)
+  const response = await axios.get(baseUrl, axiosConfig())//.filter(employee => employee.role === 'employee' && employee.company === companyId)
   
-  return response
+  return response.data
 }
 
 export const createNew = async (newObj) => {
@@ -29,7 +31,7 @@ export const createNew = async (newObj) => {
     company: newObj.company
   }
   try {
-    const response = await axios.post(baseUrl, object)
+    const response = await axios.post(baseUrl, object, axiosConfig())
     return response.data
   } catch (error) {
     console.log(error.message)
@@ -39,7 +41,7 @@ export const createNew = async (newObj) => {
 
 export const removeOld = async (id) => {
   try {
-    const response = await axios.delete(`${baseUrl}/${id}`)
+    const response = await axios.delete(`${baseUrl}/${id}`, axiosConfig())
     return response.data
   } catch (error) {
     console.log(error.message)

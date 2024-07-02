@@ -4,14 +4,12 @@ import axiosConfig from '../utils/axiosConfig'
 const baseUrl = eval(import.meta.env.VITE_DEV) ? 'http://localhost:5000/api/messages' : '/api/messages'
 
 export const getAll = async () => {
-  const response = await axios.get(baseUrl, axiosConfig)
+  const response = await axios.get(baseUrl, axiosConfig())
   return response.data
 }
 
 export const getMyMessages = async () => {
-  console.log(axiosConfig)
-  const response = await axios.get(baseUrl, axiosConfig)
-  console.log(response)
+  const response = await axios.get(baseUrl, axiosConfig())
   return response.data
 }
 
@@ -24,7 +22,7 @@ export const createNew = async (newObj) => {
   }
   
   try {
-    const response = await axios.post(baseUrl, object, axiosConfig)
+    const response = await axios.post(baseUrl, object, axiosConfig())
     return response.data
   } catch (error) {
     console.log(error.message)
@@ -34,11 +32,11 @@ export const createNew = async (newObj) => {
 
 export const removeOld = async (id) => {
   try {
-    const response = await axios.delete(`${baseUrl}/${id}`, axiosConfig)
-    console.log(response)
+    const response = await axios.delete(`${baseUrl}/${id}`, axiosConfig())
+    // console.log(response)
     return response.data
   } catch (error) {
-    // console.log(error.response)
+    console.log(error.response)
     return error
   }
 }

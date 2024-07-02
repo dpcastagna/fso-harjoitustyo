@@ -21,13 +21,17 @@ const BossBox = (props) => {
   const [menuTab, setMenuTab] = useState(menuItems[0])
 
   useEffect(() => {
+    const getEmployees = async () => {
+      setEmployees(await getMyEmployees(props.user.company))
+    }
+
+    const getShifts = async () => {
+      setShifts(await getMyCompanyShifts(props.user.company))
+    }
+
     getEmployees()
     getShifts()
   }, [])
-
-  const getEmployees = async () => {
-    setEmployees(await getMyEmployees(props.user.company))
-  }
 
   const addEmployee = (obj) => {
     setEmployees(employees.concat(obj))
@@ -35,10 +39,6 @@ const BossBox = (props) => {
 
   const deleteEmployee = (id) => {
     setEmployees(employees.filter(employee => employee.id !== id))
-  }
-
-  const getShifts = async () => {
-    setShifts(await getMyCompanyShifts(props.user.company))
   }
 
   const addShift = (obj) => {
@@ -105,7 +105,7 @@ const BossBox = (props) => {
                 ? <>
                     <div id="vaaka" >
                       <AddUser role='employee' company={props.user.company} addEmployee={addEmployee} />
-                      <RemoveUser employees={employees} deleteEmployee={deleteEmployee} />
+                      {/* <RemoveUser employees={employees} deleteEmployee={deleteEmployee} /> */}
                       <AddShift company={props.user.company} employees={employees} addShift={addShift} />
                     </div>
                     <AllEmployees companyId={props.user.company} employees={employees} shifts={shifts} />

@@ -9,7 +9,7 @@ export const getAll = async () => {
 }
 
 export const getMyCompanyShifts = async (companyId) => {
-  const response = (await axios.get(baseUrl, axiosConfig)).data.filter(shift => shift.company === companyId)
+  const response = (await axios.get(baseUrl, axiosConfig())).data.filter(shift => shift.company === companyId)
   
   return response
 }
@@ -24,7 +24,7 @@ export const createNewShift = async (newObj) => {
   }
   
   try {
-    const response = await axios.post(baseUrl, object, axiosConfig)
+    const response = await axios.post(baseUrl, object, axiosConfig())
     return response.data
   } catch (error) {
     console.log(error.message)
@@ -34,7 +34,7 @@ export const createNewShift = async (newObj) => {
 
 export const removeOldShift = async (id) => {
   try {
-    const response = await axios.delete(`${baseUrl}/${id}`, axiosConfig)
+    const response = await axios.delete(`${baseUrl}/${id}`, axiosConfig())
     return response.data
   } catch (error) {
     console.log(error.message)
