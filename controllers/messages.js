@@ -56,14 +56,11 @@ messagesRouter.post('/', async (request, response) => {
     })
   }
 
-  if(request.user.role === 'employee') {
-    const findBoss = await User.find({$and: [
-    { company: { $eq: request.user.company } },
-    { role: { $eq: 'boss' } }
-    ]})
-  }
-
   const { subject, content, receiver, company } = request.body
+
+  const findReceiver = request.user.role === 'employee'
+    ? (await User.find({$and: [ { company: { $eq: request.user.company } }, { role: { $eq: 'boss' } } ]}))[0]._id
+    : receiver
 
   const message = new Message({
     subject,
@@ -71,15 +68,14 @@ messagesRouter.post('/', async (request, response) => {
     timeSent: new Date(),
     read: false,
     sender: request.user._id,
-    receiver,
+    receiver: findReceiver,
     company,
   })
-  // console.log(findBoss, message)
   
   const savedMessage = await message.save()
 
   const senderToUpdate = await User.findById(request.user._id)
-  const receiverToUpdate = await User.findById(receiver)
+  const receiverToUpdate = await User.findById(findReceiver)
   
   senderToUpdate.messages = senderToUpdate.messages.concat(savedMessage._id)
   receiverToUpdate.messages = receiverToUpdate.messages.concat(savedMessage._id)
@@ -106,7 +102,7 @@ messagesRouter.put('/:id', async (request, response) => {
   // userToAddShift.shifts = userToAddShift.shifts.concat(request.params.id)
   // console.log(userToDeleteShift, userToAddShift)
   try {
-    await shiftToUpdate.save()
+    await messageToUpdate.save()
     // await userToDeleteShift.save()
     // await userToAddShift.save()
   } catch (error) {

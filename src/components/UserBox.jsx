@@ -22,7 +22,7 @@ const UserBox = (props) => {
   const changeMenuTab = (tabName) => {
     setMenuTab(tabName)
   }
-  console.log(props, menuTab)
+  // console.log(props, menuTab)
   return(
     <div id='palikka'>
       <TopMenu items={menuItems} changeMenuTab={changeMenuTab} currentTab={menuTab} />

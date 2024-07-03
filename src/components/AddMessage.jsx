@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import '../App.css'
 // import { createNewShift } from "../services/shiftService"
-import { createNew } from "../services/messageService"
+import { createMessage } from "../services/messageService"
 
 const AddMessage = (props) => {
   const [subject, setSubject] = useState('')
@@ -40,13 +40,19 @@ const AddMessage = (props) => {
       receiver: messageFor,
     }
     
-    props.addMessage(messageObject)
+    try {
+      props.addMessage(messageObject)
 
-    setSubject('')
-    setContent('')
-    setMessageFor('')
-    const element = document.getElementById("employeeSelectMessage")
-    element.value = "default"
+      setSubject('')
+      setContent('')
+      setMessageFor('')
+      if(props.user.role === 'boss') {
+        const element = document.getElementById("employeeSelectMessage")
+        element.value = "default"
+      }
+    } catch(error) {
+      console.log(error)
+    }
   }
 
   const checkValid = () => {

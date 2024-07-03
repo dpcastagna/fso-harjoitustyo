@@ -13,7 +13,7 @@ export const getMyMessages = async () => {
   return response.data
 }
 
-export const createNew = async (newObj) => {
+export const createMessage = async (newObj) => {
   const object = { 
     subject: newObj.subject,
     content: newObj.content,
@@ -30,7 +30,7 @@ export const createNew = async (newObj) => {
   }
 }
 
-export const removeOld = async (id) => {
+export const removeMessage = async (id) => {
   try {
     const response = await axios.delete(`${baseUrl}/${id}`, axiosConfig())
     // console.log(response)
@@ -41,4 +41,4 @@ export const removeOld = async (id) => {
   }
 }
 
-export default { getAll, createNew, removeOld, getMyMessages }
+export default { getAll, createMessage, removeMessage, getMyMessages }

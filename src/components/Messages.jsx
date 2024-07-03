@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import '../App.css'
 import SingleMessage from './SingleMessage'
 import AddMessage from './AddMessage'
-import { getMyMessages, removeOld, createNew } from '../services/messageService'
+import { getMyMessages, removeMessage, createMessage } from '../services/messageService'
 import { setNotification } from '../reducers/notificationReducer'
 
 const Messages = (props) => {
@@ -22,7 +22,8 @@ const Messages = (props) => {
   }, [props.user])
 
   const addMessage = async (obj) => {
-    const newMessage = await createNew(obj)
+    const newMessage = await createMessage(obj)
+    console.log(newMessage)
 
     const employeeToAddMessage = props.employees.find(employee => employee.id === newMessage.receiver)
     setSentMessages(sentMessages.concat({...newMessage, sender: { name: props.user.name }, receiver: { name: employeeToAddMessage.name}}))
@@ -30,16 +31,16 @@ const Messages = (props) => {
 
   const deleteMessage = async (id) => {
     try {
-      const response = await removeOld(id)
+      const response = await removeMessage(id)
       console.log(response)
-      if(response.response.data.error) {
-        props.setNotification(response.response.data.error, 5)
-      } else {
+      // if(response.response.data.error) {
+      //   props.setNotification(response.response.data.error, 5)
+      // } else {
         setSentMessages(sentMessages.filter(message => message.id !== id))
         setReceivedMessages(receivedMessages.filter(message => message.id !== id))
-      }
+      // }
     } catch(error) {
-      console.log(error.response)
+      console.log(error)
     }
   }
   
