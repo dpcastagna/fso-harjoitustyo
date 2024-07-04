@@ -14,6 +14,12 @@ export const getMyCompanyShifts = async (companyId) => {
   return response
 }
 
+export const getMyShifts = async (companyId) => {
+  const response = (await axios.get(baseUrl, axiosConfig()))
+  
+  return response.data
+}
+
 export const createNewShift = async (newObj) => {
   const object = { 
     date: newObj.date,
@@ -42,4 +48,4 @@ export const removeOldShift = async (id) => {
   }
 }
 
-export default { getAll, createNewShift, getMyCompanyShifts, removeOldShift }
+export default { getAll, createNewShift, getMyCompanyShifts, getMyShifts, removeOldShift }

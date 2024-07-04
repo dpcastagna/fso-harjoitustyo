@@ -74,6 +74,8 @@ messagesRouter.post('/', async (request, response) => {
   
   const savedMessage = await message.save()
 
+  console.log(await User.find({$and: [ { company: { $eq: request.user.company } }, { role: { $eq: 'boss' } } ]}), savedMessage)
+
   const senderToUpdate = await User.findById(request.user._id)
   const receiverToUpdate = await User.findById(findReceiver)
   

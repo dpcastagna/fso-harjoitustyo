@@ -11,8 +11,9 @@ shiftsRouter.get('/', async (request, response) => {
     })
   }
 
-  const shifts = await Shift
-    .find({}).populate('employeeId', { id: 1, name: 1 })
+  const shifts = request.user.role === 'boss'
+  ? await Shift.find({}).populate('employeeId', { id: 1, name: 1 })
+  : await Shift.find({}).populate('employeeId', { id: 1, name: 1 })
   response.json(shifts)
 })
 

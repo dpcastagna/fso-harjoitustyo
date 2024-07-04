@@ -26,7 +26,9 @@ const Messages = (props) => {
     console.log(newMessage)
 
     const employeeToAddMessage = props.employees.find(employee => employee.id === newMessage.receiver)
-    setSentMessages(sentMessages.concat({...newMessage, sender: { name: props.user.name }, receiver: { name: employeeToAddMessage.name}}))
+    props.user.role === 'boss'
+    ? setSentMessages(sentMessages.concat({...newMessage, sender: { name: props.user.name }, receiver: { name: employeeToAddMessage.name}}))
+    : setSentMessages(sentMessages.concat({...newMessage, sender: { name: props.user.name }, receiver: { name: 'boss'}}))
   }
 
   const deleteMessage = async (id) => {

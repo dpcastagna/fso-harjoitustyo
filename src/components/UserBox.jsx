@@ -3,6 +3,7 @@ import '../App.css'
 
 import TopMenu from "./TopMenu"
 import Messages from "./Messages"
+import MyShifts from "./MyShifts"
 
 const UserBox = (props) => {
   const [shifts, setShifts] = useState([])
@@ -28,7 +29,7 @@ const UserBox = (props) => {
       <TopMenu items={menuItems} changeMenuTab={changeMenuTab} currentTab={menuTab} />
       {
         menuTab === menuItems[0]
-        ? <>shifts</>
+        ? <MyShifts user={props.user} />
         : <Messages user={props.user} employees={[]} />
       }
       {/* <div>

@@ -78,7 +78,7 @@ const BossBox = (props) => {
   const changeMenuTab = (tabName) => {
     setMenuTab(tabName)
   }
-
+  
   return (
     <div id='palikka'>
       Company name: {props.user.name} <br/>
