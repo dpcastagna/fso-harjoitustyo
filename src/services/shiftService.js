@@ -14,9 +14,9 @@ export const getMyCompanyShifts = async (companyId) => {
   return response
 }
 
-export const getMyShifts = async (companyId) => {
+export const getMyShifts = async () => {
   const response = (await axios.get(baseUrl, axiosConfig()))
-  
+  console.log(response)
   return response.data
 }
 

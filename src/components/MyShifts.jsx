@@ -6,13 +6,24 @@ const MyShifts = (props) => {
   const [shifts, setShifts] = useState([])
 
   useEffect(() => {
-    setShifts[getMyShifts()]
+    const getShifts = async () => {
+      await setShifts[getMyShifts()]
+    }
+    getShifts()
   })
 
   console.log(props, shifts)
   return (
     <>
-      jee shifts
+      {
+        shifts.map(shift => {
+          return (
+            <>
+              {shift.date} {shift.start} - {shift.end}
+            </>
+          )
+        })
+      }
     </>
   )
 }
