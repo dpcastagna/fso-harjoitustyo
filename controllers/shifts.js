@@ -58,6 +58,7 @@ shiftsRouter.post('/', async (request, response) => {
   }
   catch(error) {
     console.log(error)
+    response.status(401).json(error)
   }
 })
 

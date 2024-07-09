@@ -7,10 +7,12 @@ const MyShifts = (props) => {
 
   useEffect(() => {
     const getShifts = async () => {
-      await setShifts[getMyShifts()]
+      const myShifts = await getMyShifts()
+      setShifts(myShifts)
     }
+
     getShifts()
-  })
+  }, [props.user])
 
   console.log(props, shifts)
   return (

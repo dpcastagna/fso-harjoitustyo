@@ -1,13 +1,18 @@
 import mongoose from 'mongoose'
 
 const shiftSchema = mongoose.Schema({
-  date: {
+  startDate: {
     type: Date,
     min: '2024-01-01',
     max: '2100-01-01'
   },
-  start: Number,
-  end: Number,
+  startTime: String,
+  endDate: {
+    type: Date,
+    min: '2024-01-01',
+    max: '2100-01-01'
+  },
+  endTime: String,
   employeeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
