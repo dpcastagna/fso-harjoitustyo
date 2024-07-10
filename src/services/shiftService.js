@@ -10,21 +10,20 @@ export const getAll = async () => {
 
 export const getMyCompanyShifts = async (companyId) => {
   const response = (await axios.get(baseUrl, axiosConfig())).data.filter(shift => shift.company === companyId)
-  
   return response
 }
 
 export const getMyShifts = async () => {
   const response = (await axios.get(baseUrl, axiosConfig()))
-  console.log(response)
   return response.data
 }
 
 export const createNewShift = async (newObj) => {
   const object = { 
-    date: newObj.date,
-    start: newObj.start,
-    end: newObj.end,
+    startDate: newObj.startDate,
+    startTime: newObj.startTime,
+    endDate: newObj.startDate,
+    endTime: newObj.endTime,
     employeeId: newObj.employeeId,
     company: newObj.company
   }

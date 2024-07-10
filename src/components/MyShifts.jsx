@@ -14,15 +14,14 @@ const MyShifts = (props) => {
     getShifts()
   }, [props.user])
 
-  console.log(props, shifts)
   return (
     <>
       {
         shifts.map(shift => {
           return (
-            <>
-              {shift.date} {shift.start} - {shift.end}
-            </>
+            <div key={shift.id}>
+              {shift.startDate} {shift.startTime} - {shift.endTime}
+            </div>
           )
         })
       }

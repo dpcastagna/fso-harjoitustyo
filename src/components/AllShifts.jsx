@@ -26,7 +26,6 @@ const AllShifts = (props) => {
       <div id='pysty' >
         {
           shifts.map(shift => {
-            console.log(shift)
             return (
               <div key={shift.id}>
                 <div key={shift.shiftId }>

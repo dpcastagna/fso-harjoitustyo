@@ -30,7 +30,7 @@ const ShiftsMonth = (props) => {
   const handleYearChange = (event) => {
     setYear(event.target.value)
   }
-  return <>Disabled</>
+  // return <>Disabled</>
   return (
     <div id="palikka">
       <select 
@@ -88,14 +88,14 @@ const ShiftsMonth = (props) => {
                         if(shift.employeeId === null) {
                           return null
                         }
-                        return shift.employeeId.id === emp.id && shift.date.split('T')[0] === date.format().split('T')[0]
+                        return shift.employeeId.id === emp.id && shift.startDate.split('T')[0] === date.format().split('T')[0]
                       })
                       // console.log(shiftFound)
                       return (
                         <td key={emp.id}>
                         { shiftFound === undefined
                           ? `Free`
-                          : <b>{`${shiftFound.start}-${shiftFound.end}`}</b>
+                          : <b>{`${shiftFound.startTime}-${shiftFound.endTime}`}</b>
                         }
                         </td>
                       )

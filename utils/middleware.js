@@ -5,7 +5,9 @@ import User from '../models/user.js'
 export const requestLogger = (request, response, next) => {
   logger.info('Method:', request.method)
   logger.info('Path:  ', request.path)
-  logger.info('Body:  ', request.body)
+  request.path === '/api/login'
+  ? logger.info('Body:  username: ', request.body.username)
+  : logger.info('Body:  ', request.body)
   logger.info('---')
   next()
 }
