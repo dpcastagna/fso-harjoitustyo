@@ -25,7 +25,7 @@ const AddShift = (props) => {
 
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value)
-    setEndDate(event.target.value)
+    // setEndDate(event.target.value)
   }
   const handleStartTimeChange = (event) => {
     setStartTime(event.target.value)
@@ -67,7 +67,6 @@ const AddShift = (props) => {
     } catch(error) {
       console.log(error)
     }
-    
   }
   
   const checkValid = () => {
@@ -80,12 +79,26 @@ const AddShift = (props) => {
     ? <button id='createShift' type="submit">add shift</button>
     : <button id='createShift' type="submit" disabled>add shift</button>
   }
-  
+  console.log(startDate, endDate, new Date(startDate), new Date(endDate), new Date(startDate) > new Date(endDate))
   return (
     <div id='palikka'>
       <form onSubmit={addShift}>
         New shift<br/>
         start:
+        <input
+            id='StartDate1'
+            type='datetime-local'
+            value={startDate}
+            onChange={handleStartDateChange}
+          /> <br/>
+        end:
+        <input
+            id='endDate1'
+            type='datetime-local'
+            value={endDate}
+            onChange={handleEndDateChange}
+          /> <br/>
+        {/* start:
           <input
             id='StartDate'
             type='date'
@@ -110,7 +123,7 @@ const AddShift = (props) => {
             type='time'
             value={endTime}
             onChange={handleEndTimeChange}
-          /> <br/>
+          /> <br/> */}
         employee:
           <select name="employeeSelect" id="employeeSelect" onChange={handleEmployeeChange}>
             <option value="default">Select...</option>

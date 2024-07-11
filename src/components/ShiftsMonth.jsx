@@ -30,7 +30,7 @@ const ShiftsMonth = (props) => {
   const handleYearChange = (event) => {
     setYear(event.target.value)
   }
-  // return <>Disabled</>
+  
   return (
     <div id="palikka">
       <select 

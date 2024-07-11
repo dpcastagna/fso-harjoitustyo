@@ -31,9 +31,9 @@ shiftsRouter.get('/:id', async (request, response) => {
 })
 
 shiftsRouter.post('/', async (request, response) => {
-  if(!request.user) {
+  if(!request.user || request.user.role !== 'boss') {
     return response.status(400).json({
-      error: 'must be logged in to create new shifts'
+      error: 'must be logged in as boss to create new shifts'
     })
   }
 
