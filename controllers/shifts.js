@@ -37,13 +37,13 @@ shiftsRouter.post('/', async (request, response) => {
     })
   }
 
-  const { startDate, startTime, endDate, endTime, employeeId, company } = request.body
+  const { startDate, /* startTime, */ endDate, /* endTime, */ employeeId, company } = request.body
 
   const shift = new Shift({
     startDate,
-    startTime,
+    // startTime,
     endDate,
-    endTime,
+    // endTime,
     employeeId,
     company,
   })

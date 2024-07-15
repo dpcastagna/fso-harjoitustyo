@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import User from '../models/user.js'
 
 export const requestLogger = (request, response, next) => {
+  logger.info('Time:  ', new Date())
   logger.info('Method:', request.method)
   logger.info('Path:  ', request.path)
   request.path === '/api/login'

@@ -26,10 +26,17 @@ const AllShifts = (props) => {
       <div id='pysty' >
         {
           shifts.map(shift => {
+            console.log(shift.startDate, typeof new Date(shift.endDate), new Date(shift.endDate).getTime())
+            console.log(new Date(shift.endDate) - new Date(shift.startDate))
+            const startDate = shift.startDate.split('T')[0]
+            const startHours = shift.startDate.split('T')[1]
+            const endDate = shift.endDate.split('T')[0]
+            const endHours = shift.endDate.split('T')[1]
+
             return (
               <div key={shift.id}>
-                <div key={shift.shiftId }>
-                  {shift.startTime}-{shift.endTime} {shift.startDate} &nbsp;
+                <div key={shift.shiftId}>
+                  {startDate} {startHours} - {endHours} {endDate} &nbsp;
                   {
                     shift.employeeId !== null
                     ? shift.employeeId.name

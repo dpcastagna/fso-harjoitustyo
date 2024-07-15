@@ -21,9 +21,9 @@ export const getMyShifts = async () => {
 export const createNewShift = async (newObj) => {
   const object = { 
     startDate: newObj.startDate,
-    startTime: newObj.startTime,
-    endDate: newObj.startDate,
-    endTime: newObj.endTime,
+    // startTime: newObj.startTime,
+    endDate: newObj.endDate,
+    // endTime: newObj.endTime,
     employeeId: newObj.employeeId,
     company: newObj.company
   }

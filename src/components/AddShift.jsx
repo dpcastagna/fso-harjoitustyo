@@ -4,9 +4,9 @@ import { createNewShift } from "../services/shiftService"
 
 const AddShift = (props) => {
   const [startDate, setStartDate] = useState('')
-  const [startTime, setStartTime] = useState('')
+  // const [startTime, setStartTime] = useState('')
   const [endDate, setEndDate] = useState('')
-  const [endTime, setEndTime] = useState('')
+  // const [endTime, setEndTime] = useState('')
   const [newShiftFor, setNewShiftFor] = useState('')
   const [employeeList, setEmployeeList] = useState([])
   const [shiftWarning, setShiftWarning] = useState('')
@@ -27,15 +27,15 @@ const AddShift = (props) => {
     setStartDate(event.target.value)
     // setEndDate(event.target.value)
   }
-  const handleStartTimeChange = (event) => {
-    setStartTime(event.target.value)
-  }
+  // const handleStartTimeChange = (event) => {
+  //   setStartTime(event.target.value)
+  // }
   const handleEndDateChange = (event) => {
     setEndDate(event.target.value)
   }
-  const handleEndTimeChange = (event) => {
-    setEndTime(event.target.value)
-  }
+  // const handleEndTimeChange = (event) => {
+  //   setEndTime(event.target.value)
+  // }
   const handleEmployeeChange = (event) => {
     setNewShiftFor(event.target.value)
   }
@@ -44,9 +44,9 @@ const AddShift = (props) => {
     event.preventDefault()
     const shiftObject = {
       startDate: startDate,
-      startTime: startTime,
+      // startTime: startTime,
       endDate: endDate,
-      endTime: endTime,
+      // endTime: endTime,
       company: props.company,
       employeeId: newShiftFor,
     }
@@ -57,9 +57,9 @@ const AddShift = (props) => {
       props.addShift(newShift)
 
       setStartDate('')
-      setStartTime('')
+      // setStartTime('')
       setEndDate('')
-      setEndTime('')
+      // setEndTime('')
       setNewShiftFor('')
       const element = document.getElementById("employeeSelect")
       element.value = "default"
@@ -71,29 +71,30 @@ const AddShift = (props) => {
   
   const checkValid = () => {
     return  startDate !== '' &&
-            startTime !== '' &&
+            // startTime !== '' &&
             endDate !== '' &&
-            endTime !== '' &&
+            // endTime !== '' &&
             newShiftFor !== '' &&
-            shiftWarning === ''
+            shiftWarning === '' &&
+            new Date(startDate) < new Date(endDate)
     ? <button id='createShift' type="submit">add shift</button>
     : <button id='createShift' type="submit" disabled>add shift</button>
   }
-  console.log(startDate, endDate, new Date(startDate), new Date(endDate), new Date(startDate) > new Date(endDate))
+  console.log(/* startDate, endDate, */ new Date(startDate), new Date(endDate), new Date(startDate) < new Date(endDate))
   return (
     <div id='palikka'>
       <form onSubmit={addShift}>
         New shift<br/>
         start:
         <input
-            id='StartDate1'
+            id='StartDate'
             type='datetime-local'
             value={startDate}
             onChange={handleStartDateChange}
           /> <br/>
         end:
         <input
-            id='endDate1'
+            id='endDate'
             type='datetime-local'
             value={endDate}
             onChange={handleEndDateChange}

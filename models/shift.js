@@ -6,13 +6,13 @@ const shiftSchema = mongoose.Schema({
     min: '2024-01-01',
     max: '2100-01-01'
   },
-  startTime: String,
+  // startTime: String,
   endDate: {
     type: Date,
     min: '2024-01-01',
     max: '2100-01-01'
   },
-  endTime: String,
+  // endTime: String,
   employeeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
