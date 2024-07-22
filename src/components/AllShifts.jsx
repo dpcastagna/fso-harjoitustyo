@@ -29,14 +29,14 @@ const AllShifts = (props) => {
             console.log(shift.startDate, typeof new Date(shift.endDate), new Date(shift.endDate).getTime())
             console.log(new Date(shift.endDate) - new Date(shift.startDate))
             const startDate = shift.startDate.split('T')[0]
-            const startHours = shift.startDate.split('T')[1]
+            const startHours = shift.startDate.split(/(\d{2}:\d{2})/)[1]
             const endDate = shift.endDate.split('T')[0]
-            const endHours = shift.endDate.split('T')[1]
+            const endHours = shift.endDate.split(/(\d{2}:\d{2})/)[1]
 
             return (
               <div key={shift.id}>
                 <div key={shift.shiftId}>
-                  {startDate} {startHours} - {endHours} {endDate} &nbsp;
+                  {startDate} <b>{startHours} - {endHours}</b> {endDate} &nbsp;
                   {
                     shift.employeeId !== null
                     ? shift.employeeId.name

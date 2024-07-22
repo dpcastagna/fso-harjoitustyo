@@ -49,7 +49,7 @@ const SingleEmployee = (props) => {
                       ? employee.shifts.map(shift => {
                         return (
                           <div key={shift.id}>
-                            {shift.startTime}-{shift.endTime} {shift.startDate} &nbsp;
+                            {shift.startDate.split('T')[0]} {shift.startDate.split(/(\d{2}:\d{2})/)[1]} - {shift.endDate.split(/(\d{2}:\d{2})/)[1]} &nbsp;
                             <button onClick={() => {removeShift(shift.id)}}>delete</button> <br/>
                           </div>
                         )

@@ -91,11 +91,14 @@ const ShiftsMonth = (props) => {
                         return shift.employeeId.id === emp.id && shift.startDate.split('T')[0] === date.format().split('T')[0]
                       })
                       // console.log(shiftFound)
+                      const startTime = shiftFound?.startDate.split(/(\d{2}:\d{2})/)[1]
+                      const endTime = shiftFound?.endDate.split(/(\d{2}:\d{2})/)[1]
+                      console.log(startTime, endTime)
                       return (
                         <td key={emp.id}>
                         { shiftFound === undefined
                           ? `Free`
-                          : <b>{`${shiftFound.startTime}-${shiftFound.endTime}`}</b>
+                          : <b>{`${startTime}-${endTime}`}</b>
                         }
                         </td>
                       )
