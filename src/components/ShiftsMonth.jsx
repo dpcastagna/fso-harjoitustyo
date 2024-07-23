@@ -33,6 +33,7 @@ const ShiftsMonth = (props) => {
   
   return (
     <div id="palikka">
+      <div id="vaaka">
       <select 
         name="months"
         id="monthSelect"
@@ -61,6 +62,10 @@ const ShiftsMonth = (props) => {
           })
         }
       </select>
+      <div>
+        jee
+      </div>
+      </div>
       <table id="monthTable">
         <thead>
           <tr>
@@ -93,9 +98,8 @@ const ShiftsMonth = (props) => {
                       // console.log(shiftFound)
                       const startTime = shiftFound?.startDate.split(/(\d{2}:\d{2})/)[1]
                       const endTime = shiftFound?.endDate.split(/(\d{2}:\d{2})/)[1]
-                      console.log(startTime, endTime)
                       return (
-                        <td key={emp.id}>
+                        <td key={emp.id} onClick={() => {console.log('jee', emp.id, date.format())}}>
                         { shiftFound === undefined
                           ? `Free`
                           : <b>{`${startTime}-${endTime}`}</b>

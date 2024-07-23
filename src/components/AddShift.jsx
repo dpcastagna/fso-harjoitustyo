@@ -3,11 +3,11 @@ import '../App.css'
 import { createNewShift } from "../services/shiftService"
 
 const AddShift = (props) => {
-  const [startDate, setStartDate] = useState('')
+  const [startDate, setStartDate] = useState(props.startDate || '')
   // const [startTime, setStartTime] = useState('')
-  const [endDate, setEndDate] = useState('')
+  const [endDate, setEndDate] = useState(props.endDate || '')
   // const [endTime, setEndTime] = useState('')
-  const [newShiftFor, setNewShiftFor] = useState('')
+  const [newShiftFor, setNewShiftFor] = useState(props.employee || '')
   const [employeeList, setEmployeeList] = useState([])
   const [shiftWarning, setShiftWarning] = useState('')
 
